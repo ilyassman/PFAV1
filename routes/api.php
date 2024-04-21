@@ -83,6 +83,7 @@ Route::get('commentaires/{idformation}',[CommentaireController::class,'findbyfor
 Route::get('membrecommentaires/{idmembre}',[MembreController::class,'commentaire_membre']);
 Route::get('formateursession/{idformateur}',[FormateurController::class,'sessionform']);
 Route::get('sessionmembres/{idsession}',[SessionController::class,'sessionmembres']);
+Route::get('categories/{idcateg}',[CategorieController::class,'categoriebyid']);
 
 Route::get('sessionvotes/{idsession}',[SessionController::class,'sessionvotes']);
 Route::get('login/{email}/{pass}',[UtilisateurController::class,'login']);

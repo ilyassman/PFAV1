@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Models\Membre;
 use App\Models\utilisateur;
 use Auth;
 use DB;
@@ -30,7 +31,7 @@ class UtilisateurController extends Controller
       $user->num_tel=$request->num_tel;
       $user->type=$request->type;
       $user->save();
-      dd(Hash::make($request->password));
+      return $user->id;
     }
 
     /**
@@ -38,7 +39,9 @@ class UtilisateurController extends Controller
      */
     public function show(string $id)
     {
-     
+      $user = Utilisateur::where('email', $id)->first();
+      return  $user;
+    
     }
 
     /**
@@ -47,6 +50,7 @@ class UtilisateurController extends Controller
     public function update(Request $request, string $id)
     {
       $user=utilisateur::find($id);
+      $memb = Membre::where('iduser', $id)->first();
       if(!empty($request->email))
       $user->email=$request->email;
       if(!empty($request->password))
@@ -55,7 +59,14 @@ class UtilisateurController extends Controller
       $user->num_tel=$request->num_tel;
       if(!empty($request->type))
       $user->type=$request->type;
+      if(!empty($request->nom))
+      $memb->nom=$request->nom;
+      if(!empty($request->prenom))
+      $memb->prenom=$request->prenom;
+      if(!empty($request->iduser))
+      $memb->iduser=$request->iduser;
       $user->save();
+      $memb->save();
     }
 
     /**

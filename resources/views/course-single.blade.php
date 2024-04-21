@@ -124,11 +124,11 @@
               </div>
               <div class="col-lg-4 col-12 video">
                 <div class="mx-auto">
-                  <a href="vid.mp4" class="video-1 mb-4" data-fancybox="" data-ratio="2">
+                  <a href="Formationvideo/{{$formation->video}}" class="video-1 mb-4" data-fancybox="" data-ratio="2">
                     <span class="play">
                       <span class="icon-play"></span>
                     </span>
-                    <img src="{{ $formation->image }}" alt="Image" class="img-fluid rounded" style="max-width: 100%;" />
+                    <img src="Formationpic/{{$formation->image}}"  alt="Image" class="img-fluid rounded" style="max-width: 100%;" />
                   </a>
                 </div>
               </div>
@@ -153,54 +153,11 @@
     </h1>
     <p>{{$formation->prerequis}}</p>
 <h1>Objectifs <i class="fas fa-bullseye"></i></h1>
-<p> {{$formation->objectif}}
-  </p>
+{!! $formation->objectif !!}
+  
 
   <h1> Programme de la formation <i class="fas fa-list-ul"></i></h1>
-  <p> <h3><i class="fas fa-code"></i> Module 1 : Fondamentaux du Génie Civil</h3>
-    <ul>
-      <li>Introduction au Génie Civil et ses domaines d'application.</li>
-      <li>Mécanique des matériaux et résistance des structures.</li>
-      <li>Géotechnique et hydraulique.</li>
-      <li>Topographie et géomatique.</li>
-      <li>Mathématiques et informatique appliquées au Génie Civil.</li>
-    </ul>
-
-     <!-- Module 3 -->
-<h3><i class="fas fa-code-branch"></i> Module 3 : Conception et Dimensionnement</h3>
-<ul>
-  <li>Analyse et dimensionnement des structures.</li>
-  <li>Calcul des charges et des efforts.</li>
-  <li>Application des normes et réglementations.</li>
-  <li>Utilisation des logiciels de simulation et de calcul.</li>
-</ul>
-
-<!-- Module 4 -->
-<h3><i class="fas fa-tasks"></i> Module 4 : Management de Projet</h3>
-<ul>
-  <li>Gestion de projet et planification.</li>
-  <li>Suivi et contrôle des coûts.</li>
-  <li>Communication et coordination des équipes.</li>
-  <li>Sécurité et prévention des risques.</li>
-</ul>
-
-<!-- Module 5 -->
-<h3><i class="fas fa-leaf"></i> Module 5 : Développement Durable</h3>
-<ul>
-  <li>Enjeux du développement durable dans le Génie Civil.</li>
-  <li>Eco-conception et choix des matériaux durables.</li>
-  <li>Performance énergétique des bâtiments.</li>
-  <li>Gestion des déchets et des ressources naturelles.</li>
-</ul>
-
-<!-- Module 6 -->
-<h3><i class="fas fa-plus-circle"></i> Et plus encore...</h3>
-<ul>
-  <li>Projets pratiques et études de cas concrets.</li>
-  <li>Interventions de professionnels du Génie Civil.</li>
-  <li>Visites de chantiers et d'ouvrages d'art.</li>
-  <li>Possibilité de stage en entreprise.</li>
-</ul>
+  {!! $formation->programme !!}
 
 
   <button class="btn btn-primary">Demander des renseignements</button>

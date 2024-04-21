@@ -123,7 +123,7 @@
                 <div class="course-1-item">
                   <figure class="thumnail">
                     <a href="{{ route('course', ['id' => $form->id]) }}">
-                        <img src="{{ $form->image }}" alt="Ingénierie des ressources en eau" class="img-fluid">
+                        <img src="Formationpic/{{$form->image}}" alt="Ingénierie des ressources en eau" class="img-fluid">
                     </a>
                     <div class="price">{{$form->prix}}€</div>
                     <div class="category">
@@ -131,7 +131,6 @@
                     </div>
                   </figure>
                   <div class="course-1-content pb-4">
-                    <h2>{{$form->objectif}}</h2>
                     <div class="rating text-center mb-3">
                       @php
                       $i=$form->niveau_etoile;

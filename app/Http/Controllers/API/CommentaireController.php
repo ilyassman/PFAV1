@@ -14,7 +14,8 @@ class CommentaireController extends Controller
      */
     public function index()
     {
-        return response()->json(Commentaire::all());
+        $datas=DB::select("select commentaires.*,membres.nom,membres.prenom,formations.titre from commentaires,membres,formations where commentaires.membre_id=membres.id and commentaires.formation_id=formations.id");
+        return response()->json($datas);
     }
 
     /**

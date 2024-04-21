@@ -44,12 +44,12 @@ categs.forEach(function(checkbox) {
                 formations.innerHTML+=`
                 <div class="course-1-item">
                 <figure class="thumnail">
-                  <a href="course?id=`+element.id+`"><img src="`+element.image+`"alt="Civil Engineering Structures Course" class="img-fluid"></a>
+                  <a href="course?id=`+element.id+`"><img src="Formationpic/`+element.image+`"alt="Civil Engineering Structures Course" class="img-fluid"></a>
                   <div class="price">`+element.prix+` €</div>
                   <div class="category"><h3>`+element.titre +`</h3></div>
                 </figure>
                 <div class="course-1-content pb-4">
-                  <h2>`+element.objectif+`</h2>
+                
                   <div class="rating text-center mb-3">
                     `+etoile+
                     `
@@ -103,12 +103,12 @@ categs.forEach(function(checkbox) {
                 formations.innerHTML+=`
                 <div class="course-1-item">
                 <figure class="thumnail">
-                  <a href="course?id=`+element.id+`"><img src="`+element.image+`" alt="Civil Engineering Structures Course" class="img-fluid"></a>
+                  <a href="course?id=`+element.id+`"><img src="Formationpic/`+element.image+`" alt="Civil Engineering Structures Course" class="img-fluid"></a>
                   <div class="price">`+element.prix+` €</div>
                   <div class="category"><h3>`+element.titre +`</h3></div>
                 </figure>
                 <div class="course-1-content pb-4">
-                  <h2>`+element.objectif +`</h2>
+               
                   <div class="rating text-center mb-3">`+
                       etoile
                       +`
@@ -163,12 +163,12 @@ categs.forEach(categ => {
                 formations.innerHTML+=`
                 <div class="course-1-item">
                 <figure class="thumnail">
-                  <a href="course?id=`+element.id+`"><img src="`+element.image+`" alt="Civil Engineering Structures Course" class="img-fluid"></a>
+                  <a href="course?id=`+element.id+`"><img src="Formationpic/`+element.image+`" alt="Civil Engineering Structures Course" class="img-fluid"></a>
                   <div class="price">`+element.prix+` €</div>
                   <div class="category"><h3>`+element.titre +`</h3></div>
                 </figure>
                 <div class="course-1-content pb-4">
-                  <h2>`+element.objectif +`</h2>
+                
                   <div class="rating text-center mb-3">`+
                       etoile
                       +`

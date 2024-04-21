@@ -58,6 +58,10 @@ class CategorieController extends Controller
     /**
      * Remove the specified resource from storage.
      */
+    public function categoriebyid(string $id){
+        $datas=Categorie::find($id);
+        return response()->json($datas);
+    }
     public function destroy(string $id)
     {
         Categorie::find($id)->delete();

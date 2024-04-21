@@ -14,7 +14,8 @@ class SessionController extends Controller
      */
     public function index()
     {
-        $data=Session::all();
+        $data=DB::select("select sessions.*,formations.titre,formateurs.nom,formateurs.prenom
+        from sessions,formations,formateurs where sessions.id_formation=formations.id and formateurs.id=sessions.id_formateur");
         return response()->json($data);
     }
 
@@ -28,7 +29,7 @@ class SessionController extends Controller
         $data->date_fun=$request->date_fun; 
         $data->nbd_place=$request->nbd_place;
         $data->id_formation=$request->id_formation;
-        $data->id_formateur=$request->id_formation;
+        $data->id_formateur=$request->id_formateur;
         $data->save();
     }
 
@@ -37,8 +38,9 @@ class SessionController extends Controller
      */
     public function show(string $id)
     {
-        $session=Session::find($id);
-        return response()->json($session->formateur()->get());
+        $session=DB::select("select sessions.*,formations.titre,formateurs.nom,formateurs.prenom
+        from sessions,formations,formateurs where sessions.id_formation=formations.id and formateurs.id=sessions.id_formateur and sessions.id=$id");
+        return response()->json($session);
     }
 
     /**
@@ -56,7 +58,7 @@ class SessionController extends Controller
         if(!empty($request->id_formation))
         $data->id_formation=$request->id_formation;
         if(!empty($request->id_formateur))
-        $data->id_formateur=$request->id_formation;
+        $data->id_formateur=$request->id_formateur;
         $data->save();
     }
 

@@ -4,7 +4,9 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Models\Formateur;
+use App\Models\utilisateur;
 use Illuminate\Http\Request;
+use DB;
 
 class FormateurController extends Controller
 {
@@ -13,7 +15,9 @@ class FormateurController extends Controller
      */
     public function index()
     {
-        return response()->json(Formateur::all());
+        $datas=DB::select("select utilisateurs.*,nom,prenom,image,description from utilisateurs ,formateurs 
+        WHERE formateurs.iduser=utilisateurs.id");
+        return response()->json($datas);
     }
 
     /**
@@ -25,6 +29,20 @@ class FormateurController extends Controller
         $form->nom=$request->nom;
         $form->prenom=$request->prenom;
         $form->iduser=$request->iduser;
+        $form->description=$request->description;
+        if ($request->hasFile('image')) {
+            // Récupérer le fichier image
+            $image = $request->file('image');
+            
+            // Générer un nom de fichier unique pour l'image
+            $fileName = time() . '_' . $image->getClientOriginalName();
+            
+            // Enregistrer l'image dans le stockage (storage/app/public/images)
+            $image->move(public_path('/Formateurspic'), $fileName);
+            
+            // Enregistrer le chemin de l'image dans la base de données
+            $form->image = $fileName;
+        }
         $form->save();
     }
 
@@ -33,7 +51,9 @@ class FormateurController extends Controller
      */
     public function show(string $id)
     {
-        return response()->json(Formateur::find($id));
+        $datas=DB::select("select utilisateurs.*,nom,prenom,image,description from utilisateurs ,formateurs 
+        WHERE formateurs.iduser=utilisateurs.id and formateurs.iduser=$id");
+        return response()->json($datas);
     }
 
     /**
@@ -41,12 +61,26 @@ class FormateurController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $form=Formateur::find($id);
+        $user=utilisateur::find($id);
+        $memb = Formateur::where('iduser', $id)->first();
+        if(!empty($request->email))
+        $user->email=$request->email;
+        if(!empty($request->password))
+        $user->password=$request->password;
+        if(!empty($request->num_tel))
+        $user->num_tel=$request->num_tel;
+        if(!empty($request->type))
+        $user->type=$request->type;
         if(!empty($request->nom))
-        $form->nom=$request->nom;
+        $memb->nom=$request->nom;
         if(!empty($request->prenom))
-        $form->prenom=$request->prenom;
-        $form->save();
+        $memb->prenom=$request->prenom;
+        if(!empty($request->description))
+        $memb->description=$request->description;
+        if(!empty($request->iduser))
+        $memb->iduser=$request->iduser;
+        $user->save();
+        $memb->save();
     }
 
     /**

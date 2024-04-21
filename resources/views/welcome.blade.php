@@ -249,7 +249,9 @@
                 <div class="course-1-item">
                   <figure class="thumnail">
                     <a href="{{ route('course', ['id' => $form->id]) }}">
-                        <img src="{{ $form->image }}" alt="Ingénierie des ressources en eau" class="img-fluid">
+                        <img src="Formationpic/{{$form->image}}" alt="Ingénierie des ressources en eau" class="img-fluid"
+                        
+                        >
                     </a>
                     <div class="price">{{$form->prix}}€</div>
                     <div class="category">
@@ -257,7 +259,10 @@
                     </div>
                   </figure>
                   <div class="course-1-content pb-4">
-                    <h2>{{$form->objectif}}</h2>
+                    <p>LES PREREQUIS  </p>
+                    <h2>
+                      
+                      {{ $form->prerequis }}</h2>
                     <div class="rating text-center mb-3">
                       @php
                       $i=$form->niveau_etoile;
@@ -342,7 +347,7 @@
                 class="ftco-testimonial-vcard d-flex align-items-center mb-4"
               >
                 <img
-                  src={{$form->image}}
+                  src="/Formateurspic/{{$form->image}}"
                   alt="Image"
                   class="img-fluid mr-3"
                 />

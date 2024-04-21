@@ -35,13 +35,40 @@ class FormationController extends Controller
         $form->prix=$request->prix;
         $form->contenue=$request->contenue;
         $form->disponibilite=$request->disponibilite;
-        $form->date_publication=$request->date_publication;
         $form->langue=$request->langue;
         $form->image=$request->image;
         $form->niveau=$request->niveau;
         $form->prerequis=$request->prerequis;
         $form->objectif=$request->objectif;
         $form->categ_id=$request->categ_id;
+        $form->programme=$request->programme;
+        if ($request->hasFile('image')) {
+            // Récupérer le fichier image
+            $image = $request->file('image');
+            
+            // Générer un nom de fichier unique pour l'image
+            $fileName = time() . '_' . $image->getClientOriginalName();
+            
+            // Enregistrer l'image dans le stockage (storage/app/public/images)
+            $image->move(public_path('/Formationpic'), $fileName);
+            
+            // Enregistrer le chemin de l'image dans la base de données
+            $form->image = $fileName;
+        }
+        if ($request->hasFile('video')) {
+            // Récupérer le fichier image
+            $video = $request->file('video');
+            
+            // Générer un nom de fichier unique pour l'image
+            $fileName = time() . '_' . $video->getClientOriginalName();
+            
+            // Enregistrer l'image dans le stockage (storage/app/public/images)
+            $video->move(public_path('/Formationvideo'), $fileName);
+            
+            // Enregistrer le chemin de l'image dans la base de données
+            $form->video = $fileName;
+        }
+        
         $form->save();
         
     }
@@ -52,7 +79,7 @@ class FormationController extends Controller
     public function show(string $id)
     {
         $data=Formation::find($id);
-        return response()->json($data->session()->get());
+        return response()->json($data);
     }
 
     /**
@@ -61,16 +88,14 @@ class FormationController extends Controller
     public function update(Request $request, string $id)
     {
         $form=Formation::findOrFail($id);
+       
         if(!empty($request->titre))
         $form->titre=$request->titre;
         if(!empty($request->prix))
         $form->prix=$request->prix;
         if(!empty($request->contenue))
         $form->contenue=$request->contenue;
-        if(!empty($request->disponibilite))
-        $form->disponibilite=$request->disponibilite;
-        if(!empty($request->date_publication))
-        $form->date_publication=$request->date_publication;
+        $form->disponibilite=$request->disponibilite;    
         if(!empty($request->langue))
         $form->langue=$request->langue;
         if(!empty($request->image))
@@ -83,6 +108,9 @@ class FormationController extends Controller
         $form->objectif=$request->objectif;
         if(!empty($request->categ_id))
         $form->categ_id=$request->categ_id;
+        if(!empty($request->programme))
+        $form->programme=$request->programme;
+    
         $form->save();
     }
 

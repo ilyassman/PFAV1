@@ -22,4 +22,13 @@ Route::get('/login',[HomeController::class,'login'])->name('login');
 Route::get('/courses',[HomeController::class,'courses'])->name('courses');
 Route::get('/course',[HomeController::class,'course'])->name('course');
 Route::get('/course', [HomeController::class, 'showCourseSingle'])->name('course');
+Route::get('/admin', [HomeController::class, 'showdash'])->name('admin');
+Route::get('/membres', [HomeController::class, 'showmembre'])->name('membres');
+Route::get('/commentaires', [HomeController::class, 'showcomment'])->name('commentaires');
+Route::get('/formateurs', [HomeController::class, 'showformateurs'])->name('formateurs');
+Route::get('/formations', [HomeController::class, 'showformation'])->name('formations');
+Route::get('/sessions', [HomeController::class, 'showsession'])->name('sessions');
+Route::get('/support', [HomeController::class, 'showsupport'])->name('support');
+Route::get('/ecole', [HomeController::class, 'showecole'])->name('ecole');
+
 

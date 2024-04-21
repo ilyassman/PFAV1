@@ -5,7 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Models\Membre;
 use Illuminate\Http\Request;
-
+use DB;
 class MembreController extends Controller
 {
     /**
@@ -13,7 +13,9 @@ class MembreController extends Controller
      */
     public function index()
     {
-        return response()->json(Membre::all());
+        $datas=DB::select("select utilisateurs.*,nom,prenom,image from utilisateurs ,membres 
+        WHERE membres.iduser=utilisateurs.id");
+        return response()->json($datas);
     }
 
     /**
@@ -22,10 +24,28 @@ class MembreController extends Controller
     public function store(Request $request)
     {
         $memb=new Membre();
+        if(!empty($request->nom))
         $memb->nom=$request->nom;
+        if(!empty($request->prenom))
         $memb->prenom=$request->prenom;
-        $memb->image=$request->image;
+        if(!empty($request->image))
+        $memb->image=$request->image; 
+        if(!empty($request->iduser))
         $memb->iduser=$request->iduser;
+        if ($request->hasFile('image')) {
+            // Récupérer le fichier image
+            $image = $request->file('image');
+            
+            // Générer un nom de fichier unique pour l'image
+            $fileName = time() . '_' . $image->getClientOriginalName();
+            
+            // Enregistrer l'image dans le stockage (storage/app/public/images)
+            $image->move(public_path('/Membrespic'), $fileName);
+            
+            // Enregistrer le chemin de l'image dans la base de données
+            $memb->image = $fileName;
+        }
+    
         $memb->save();
     }
 
@@ -34,7 +54,9 @@ class MembreController extends Controller
      */
     public function show(string $id)
     {
-        return response()->json(Membre::find($id)->session()->get());
+        $datas=DB::select("select utilisateurs.*,nom,prenom,image from utilisateurs ,membres 
+        WHERE membres.iduser=utilisateurs.id and utilisateurs.id=$id");
+        return response()->json($datas);
     }
 
     /**
@@ -43,15 +65,33 @@ class MembreController extends Controller
     public function update(Request $request, string $id)
     {
         $memb=Membre::findOrFail($id);
-        if(!empty($request->nom))
-        $memb->nom=$request->nom;
+        if ($request->has('nom')) {
+            $memb->nom = $request->input('nom');
+            dd('yess');
+        }
+        else
+        dd("nooon");
         if(!empty($request->prenom))
         $memb->prenom=$request->prenom;
         if(!empty($request->image))
         $memb->image=$request->image;
         if(!empty($request->iduser))
         $memb->iduser=$request->iduser;
-        $memb->save();
+        if ($request->hasFile('image')) {
+            // Récupérer le fichier image
+            $image = $request->file('image');
+            
+            // Générer un nom de fichier unique pour l'image
+            $fileName = time() . '_' . $image->getClientOriginalName();
+            
+            // Enregistrer l'image dans le stockage (storage/app/public/images)
+            $image->move(public_path('/Membrespic'), $fileName);
+            
+            // Enregistrer le chemin de l'image dans la base de données
+            $memb->image = $fileName;
+        }
+        
+        // $memb->save();
     }
 
     /**
