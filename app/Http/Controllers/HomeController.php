@@ -14,12 +14,12 @@ class HomeController extends Controller
 {
     public function index(){
         $datas=Categorie::take(6)->get();
-        $formations=DB::select("SELECT f.*, case 
+        $formations=DB::select("SELECT f.*, case
         when v.niveau_etoile is null then 0
         else niveau_etoile
       end as  niveau_etoile
-              FROM formations f 
-              LEFT JOIN sessions s ON f.id = s.id_formation 
+              FROM formations f
+              LEFT JOIN sessions s ON f.id = s.id_formation
               LEFT JOIN votes v ON v.id_session = s.id;
         ");
         $formateurs=Formateur::take(6)->get();
@@ -32,12 +32,12 @@ class HomeController extends Controller
     }
     public function courses(){
         $datas=Categorie::take(6)->get();
-        $formations=DB::select("SELECT f.*, case 
+        $formations=DB::select("SELECT f.*, case
         when v.niveau_etoile is null then 0
         else niveau_etoile
       end as  niveau_etoile
-              FROM formations f 
-              LEFT JOIN sessions s ON f.id = s.id_formation 
+              FROM formations f
+              LEFT JOIN sessions s ON f.id = s.id_formation
               LEFT JOIN votes v ON v.id_session = s.id;
         ");
         return view("courses",compact('datas','formations'));
@@ -48,38 +48,38 @@ class HomeController extends Controller
         return view("course-single",compact('datas'));
     }
     public function showmembre(){
-        $datas=DB::select("select utilisateurs.*,nom,prenom,image from utilisateurs ,membres 
+        $datas=DB::select("select utilisateurs.*,nom,prenom,image from utilisateurs ,membres
         WHERE membres.iduser=utilisateurs.id");
-        return view("Admin/pages/tables/Membres",compact('datas')); 
+        return view("Admin/pages/tables/Membres",compact('datas'));
      }
      public function showcomment(){
         $datas=DB::select("select commentaires.*,membres.nom,membres.prenom,formations.titre from commentaires,membres,formations where commentaires.membre_id=membres.id and commentaires.formation_id=formations.id");
-        return view("Admin/pages/tables/Commentaires",compact('datas')); 
+        return view("Admin/pages/tables/Commentaires",compact('datas'));
      }
      public function showformateurs(){
-        $datas=DB::select("select utilisateurs.*,nom,prenom,image,description from utilisateurs ,formateurs 
+        $datas=DB::select("select utilisateurs.*,nom,prenom,image,description from utilisateurs ,formateurs
         WHERE formateurs.iduser=utilisateurs.id");
-        return view("Admin/pages/tables/Formateurs",compact('datas')); 
+        return view("Admin/pages/tables/Formateurs",compact('datas'));
      }
      public function showformation(){
         $datas=Formation::all();
         $categs=Categorie::all();
-        return view("Admin/pages/tables/Formations",compact('datas','categs')); 
+        return view("Admin/pages/tables/Formations",compact('datas','categs'));
      }
      public function showsession(){
         $datas=DB::select("select sessions.*,formations.titre,formateurs.nom,formateurs.prenom
         from sessions,formations,formateurs where sessions.id_formation=formations.id and formateurs.id=sessions.id_formateur");
         $formations=Formation::all();
         $formateurs=Formateur::all();
-        return view("Admin/pages/tables/Sessions",compact('datas','formations','formateurs')); 
+        return view("Admin/pages/tables/Sessions",compact('datas','formations','formateurs'));
      }
      public function showsupport(){
         $datas=Support::all();
-        return view("Admin/pages/tables/support",compact('datas')); 
+        return view("Admin/pages/tables/support",compact('datas'));
      }
      public function showecole(){
         // $datas=Support::all();
-        return view("Admin/pages/tables/ecole"); 
+        return view("Admin/pages/tables/ecole");
      }
      public function showdash(){
         $datas=DB::select("SELECT
@@ -88,7 +88,7 @@ class HomeController extends Controller
         (SELECT COUNT(id) FROM sessions) AS nbrsession,
         (SELECT COUNT(id) FROM formateurs) AS nbrformateur,
         (SELECT COUNT(id) FROM commentaires) AS nbrcomment;");
-        return view("Admin/admin",compact('datas')); 
+        return view("Admin/admin",compact('datas'));
      }
     public function showCourseSingle(Request $request)
     {
@@ -108,6 +108,11 @@ class HomeController extends Controller
         return view('course-single', compact('formation'));
     }
 
+    public function inscriformation()
+    {
+        // Ici, vous pouvez retourner la vue du formulaire d'inscription
+        return view('inscription_form');
+    }
 
 
 }

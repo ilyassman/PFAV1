@@ -30,5 +30,4 @@ Route::get('/formations', [HomeController::class, 'showformation'])->name('forma
 Route::get('/sessions', [HomeController::class, 'showsession'])->name('sessions');
 Route::get('/support', [HomeController::class, 'showsupport'])->name('support');
 Route::get('/ecole', [HomeController::class, 'showecole'])->name('ecole');
-
-
+Route::get('/inscription', [HomeController::class, 'inscriformation'])->name('inscription');

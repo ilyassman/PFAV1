@@ -115,11 +115,9 @@
               <a href="{{ route('login') }}" class="small btn btn-primary px-2 py-2 rounded-0"
                 ><span class="icon-unlock-alt"></span>Connexion</a
               >
-              <a
-                href="register.html"
-                class="small btn btn-primary px-2 py-2 rounded-0"
-                ><span class="icon-users"></span>S'inscrire</a
-              >
+              <a href="{{ route('inscription') }}" class="small btn btn-primary px-2 py-2 rounded-0">
+                <span class="icon-users"></span>S'inscrire
+            </a>
             </div>
           </div>
         </div>
@@ -250,7 +248,7 @@
                   <figure class="thumnail">
                     <a href="{{ route('course', ['id' => $form->id]) }}">
                         <img src="Formationpic/{{$form->image}}" alt="Ingénierie des ressources en eau" class="img-fluid"
-                        
+
                         >
                     </a>
                     <div class="price">{{$form->prix}}€</div>
@@ -261,7 +259,7 @@
                   <div class="course-1-content pb-4">
                     <p>LES PREREQUIS  </p>
                     <h2>
-                      
+
                       {{ $form->prerequis }}</h2>
                     <div class="rating text-center mb-3">
                       @php

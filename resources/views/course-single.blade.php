@@ -154,13 +154,16 @@
     <p>{{$formation->prerequis}}</p>
 <h1>Objectifs <i class="fas fa-bullseye"></i></h1>
 {!! $formation->objectif !!}
-  
+
 
   <h1> Programme de la formation <i class="fas fa-list-ul"></i></h1>
   {!! $formation->programme !!}
 
 
-  <button class="btn btn-primary">Demander des renseignements</button>
+  <a href="{{ route('inscription') }}" class="small btn btn-primary px-2 py-2 rounded-0">
+    <span class="icon-users"></span>S'inscrire
+</a>
+
 
   </div>
 
