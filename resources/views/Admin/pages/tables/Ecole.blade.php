@@ -318,30 +318,72 @@
                       <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#modifierEcoleModal">Modifier</button>
                     </div>
                     <div class="card-body">
+                     
                       <table id="configTable" class="table table-bordered table-striped">
                         <tbody>
-                          <tr>
-                            <th>Nom de l'école:</th>
-                            <td id="nomEcoleValue">Nom de l'école</td>
-                          </tr>
-                          <tr>
-                            <th>Logo:</th>
-                            <td><img src="/path/to/logo.jpg" alt="Logo" style="width: 50px; height: 50px;"></td>
-                          </tr>
-                          <tr>
-                            <th>Coordonnées de contact:</th>
-                            <td id="coordonneesValue">Coordonnées de contact</td>
-                          </tr>
-                          <tr>
-                            <th>Domaine:</th>
-                            <td id="domaineValue">Domaine</td>
-                          </tr>
-                          <tr>
-                            <th>Numéro WhatsApp:</th>
-                            <td id="numeroWhatsAppValue">Numéro WhatsApp</td>
-                          </tr>
+                            <tr>
+                                <th>Nom de l'école:</th>
+                                <td id="nomEcoleValue">{{ !empty($ecole->nom) ?$ecole->nom: 'Champ vide, veuillez le remplir' }}</td>
+                            </tr>
+                            <tr>
+                                <th>Logo:</th>
+                                <td>
+                                    @if(!empty($ecole->logo))
+                                        <img src="/Ecolelogo/{{ $ecole->logo }}" alt="Logo">
+                                    @else
+                                        <p>Logo non disponible, veuillez le télécharger</p>
+                                    @endif
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Propos:</th>
+                                <td id="proposValue">{{ !empty($ecole->propos) ?$ecole->propos: 'Champ vide, veuillez le remplir' }}</td>
+                            </tr>
+                            <tr>
+                                <th>Facebook:</th>
+                                <td id="facebookValue">
+                                    @if(!empty($ecole->facebook))
+                                        <a href="{{ $ecole->facebook }}" target="_blank">{{ $ecole->facebook }}</a>
+                                    @else
+                                        <p>Facebook non renseigné</p>
+                                    @endif
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Instagram:</th>
+                                <td id="instagramValue">
+                                    @if(!empty($ecole->instagram))
+                                        <a href="{{ $ecole->instagram }}" target="_blank">{{ $ecole->instagram }}</a>
+                                    @else
+                                        <p>Instagram non renseigné</p>
+                                    @endif
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Twitter:</th>
+                                <td id="twitterValue">
+                                    @if(!empty($ecole->twitter))
+                                        <a href="{{ $ecole->twitter }}" target="_blank">{{ $ecole->twitter }}</a>
+                                    @else
+                                        <p>Twitter non renseigné</p>
+                                    @endif
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Email:</th>
+                                <td id="emailValue">{{ !empty($ecole->email) ?$ecole->email: 'Champ vide, veuillez le remplir' }}</td>
+                            </tr>
+                            <tr>
+                                <th>Numéro WhatsApp:</th>
+                                <td id="numeroWhatsAppValue">{{ !empty($ecole->numero_whatsapp) ?$ecole->numero_whatsapp: 'Champ vide, veuillez le remplir' }}</td>
+                            </tr>
+                            <!-- Ajoutez d'autres attributs de l'école ici selon votre modèle de données -->
                         </tbody>
-                      </table>
+                    </table>
+                    
+                     
+                   
+                    
                     </div>
                   </div>
                 </div>
@@ -363,7 +405,7 @@
                   <form id="modifierEcoleForm" method="POST">
                     <div class="form-group">
                       <label for="nomEcole">Nom de l'école:</label>
-                      <input type="text" class="form-control" id="nomEcole" name="nomEcole" required>
+                      <input value="{{ !empty($ecole->nom) ?$ecole->nom: '' }}" type="text" class="form-control" id="nomEcole" name="nomEcole" required>
                     </div>
                     <div class="form-group">
                       <label for="logo">Logo:</label>
@@ -375,37 +417,33 @@
                     </div>
                     <div class="form-group">
                       <label for="coordonnees">À Propos de l'Université:</label>
-                      <textarea class="form-control" id="propos" name="propos" rows="3" required></textarea>
-                    </div>
-                    <div class="form-group">
-                      <label for="domaine">Domaine:</label>
-                      <input type="text" class="form-control" id="domaine" name="domaine" required>
+                      <textarea class="form-control" id="propos" name="propos" rows="3" required>{{ !empty($ecole->propos) ?$ecole->propos: '' }}</textarea>
                     </div>
                     <div class="form-group">
                       <label for="numeroWhatsApp">Numéro WhatsApp:</label>
-                      <input type="text" class="form-control" id="numeroWhatsApp" name="numeroWhatsApp" required>
+                      <input value="{{ !empty($ecole->numero_whatsapp) ?$ecole->numero_whatsapp: '' }}" type="text" class="form-control" id="numeroWhatsApp" name="numeroWhatsApp" required>
                     </div>
                     <!-- Champ Facebook -->
                     <div class="form-group">
                       <label for="facebook">Facebook:</label>
-                      <input type="url" class="form-control" id="facebook" name="facebook">
+                      <input value="{{ !empty($ecole->facebook) ?$ecole->facebook: '' }}" type="url" class="form-control" id="facebook" name="facebook">
                     </div>
                     <!-- Champ Instagram -->
                     <div class="form-group">
                       <label for="instagram">Instagram:</label>
-                      <input type="url" class="form-control" id="instagram" name="instagram">
+                      <input value="{{ !empty($ecole->instagram) ?$ecole->instagram: '' }}"  type="url" class="form-control" id="instagram" name="instagram">
                     </div>
                     <!-- Champ Twitter -->
                     <div class="form-group">
                       <label for="twitter">Twitter:</label>
-                      <input type="url" class="form-control" id="twitter" name="twitter">
+                      <input value="{{ !empty($ecole->twitter) ?$ecole->twitter: '' }}"  type="url" class="form-control" id="twitter" name="twitter">
                     </div>
                     <!-- Champ Email -->
                     <div class="form-group">
                       <label for="email">Email:</label>
-                      <input type="email" class="form-control" id="email" name="email">
+                      <input value="{{ !empty($ecole->email) ?$ecole->email: '' }}" type="email" class="form-control" id="email" name="email">
                     </div>
-                    <button type="submit" class="btn btn-primary">Enregistrer</button>
+                    <button id="btnecole" type="submit" class="btn btn-primary">Enregistrer</button>
                   </form>
                 </div>
               </div>
@@ -447,6 +485,7 @@
     <script src="../../plugins/jszip/jszip.min.js"></script>
     <script src="../../plugins/pdfmake/pdfmake.min.js"></script>
     <script src="../../plugins/pdfmake/vfs_fonts.js"></script>
+    <script src="js/ajaxjsadmin/ecoleajax.js"></script>
     <script src="../../plugins/datatables-buttons/js/buttons.html5.min.js"></script>
     <script src="../../plugins/datatables-buttons/js/buttons.print.min.js"></script>
     <script src="../../plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
