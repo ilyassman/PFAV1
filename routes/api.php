@@ -11,10 +11,9 @@ use App\Http\Controllers\API\PostController;
 use App\Http\Controllers\API\SessionController;
 use App\Http\Controllers\API\UtilisateurController;
 use App\Http\Controllers\API\VoteController;
-use App\Http\Controllers\API\CourseSingleController;
+use App\Http\Controllers\API\EcoleController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CourseController;
 
 
 
@@ -77,6 +76,10 @@ Route::prefix('v1')->group(function () {
 });
 Route::prefix('v1')->group(function () {
     Route::apiResource('categories',CategorieController::class
+    );
+});
+Route::prefix('v1')->group(function () {
+    Route::apiResource('ecole', EcoleController::class
     );
 });
 Route::get('commentaires/{idformation}',[CommentaireController::class,'findbyformation']);

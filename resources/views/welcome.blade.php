@@ -95,21 +95,30 @@
         <div class="container">
           <div class="row align-items-center">
             <div class="col-lg-9 d-none d-lg-block">
-              <a href="#" class="small mr-3"
+               @if (!empty($ecole->facebook))
+               <a href="{{ $ecole->facebook }}" class="small mr-3"
                 ><span class="icon-facebook mr-2"></span
-              ></a>
-              <a href="#" class="small mr-3"
-                ><span class="icon-instagram mr-2"></span
-              ></a>
-              <a href="#" class="small mr-3"
+              ></a>           
+               @endif
+               @if (!empty($ecole->twitter))
+               <a href="{{ $ecole->twitter }}" class="small mr-3"
                 ><span class="icon-twitter mr-2"></span
-              ></a>
+              ></a>           
+               @endif
+               @if (!empty($ecole->instagram))
+               <a href="{{ $ecole->instagram }}" class="small mr-3"
+                ><span class="icon-instagram mr-2"></span
+              ></a>           
+               @endif
+               @if (!empty($ecole->numero_whatsapp))
               <a href="#" class="small mr-3"
-                ><span class="icon-phone mr-2"></span> 10 20 123 456</a
+                ><span class="icon-phone mr-2"></span> {{ $ecole->numero_whatsapp }}</a
               >
-              <a href="#" class="small mr-3"
-                ><span class="icon-envelope-o mr-2"></span>Contact</a
-              >
+              @endif
+              @if (!empty($ecole->email))
+              <a href="mailto:{{ $ecole->email }}" class="small mr-3"><span class="icon-envelope-o mr-2"></span>Contact</a>
+           
+              @endif
             </div>
             <div class="col-lg-3 text-right">
               <a href="{{ route('login') }}" class="small btn btn-primary px-2 py-2 rounded-0"
@@ -124,7 +133,7 @@
           </div>
         </div>
       </div>
-      <x-header :categ="$datas"/>
+      <x-header :categ="$datas" :ecole="$ecole" />
       {{-- <div id="emplacement-entete"></div> --}}
 
       <div class="hero-slide owl-carousel site-blocks-cover">
@@ -472,7 +481,9 @@
           <div class="row">
             <div class="col-lg-3">
               <p class="mb-4">
-                <img src="images/logo.png" alt="Image" class="img-fluid" />
+                @if(!empty($ecole->logo))
+                <img src="/Ecolelogo/{{ $ecole->logo }}" alt="Image" class="img-fluid" />
+                @endif
               </p>
               <p>
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae

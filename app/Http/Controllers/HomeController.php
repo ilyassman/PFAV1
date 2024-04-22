@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Categorie;
 use App\Models\Commentaire;
+use App\Models\Ecole;
 use App\Models\Formateur;
 use App\Models\Session;
 use App\Models\Formation;
@@ -14,6 +15,7 @@ class HomeController extends Controller
 {
     public function index(){
         $datas=Categorie::take(6)->get();
+        $ecole=Ecole::first();
         $formations=DB::select("SELECT f.*, case 
         when v.niveau_etoile is null then 0
         else niveau_etoile
@@ -23,7 +25,7 @@ class HomeController extends Controller
               LEFT JOIN votes v ON v.id_session = s.id;
         ");
         $formateurs=Formateur::take(6)->get();
-        return view("welcome",compact('datas','formations','formateurs'));
+        return view("welcome",compact('datas','formations','formateurs','ecole'));
 
     }
     public function login(){
@@ -78,8 +80,8 @@ class HomeController extends Controller
         return view("Admin/pages/tables/support",compact('datas')); 
      }
      public function showecole(){
-        // $datas=Support::all();
-        return view("Admin/pages/tables/ecole"); 
+        $ecole=Ecole::first();
+        return view("Admin/pages/tables/ecole",compact('ecole')); 
      }
      public function showdash(){
         $datas=DB::select("SELECT

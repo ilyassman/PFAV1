@@ -1,4 +1,5 @@
-@props(['categ'])
+@props(['categ', 'ecole'])
+
 <div>
     <header class="site-navbar py-4 js-sticky-header site-navbar-target" role="banner">
 
@@ -6,7 +7,10 @@
           <div class="d-flex align-items-center">
             <div class="site-logo">
               <a href="{{ route('home') }}" class="d-block">
-                <img src="images/logo.jpg" alt="Image" class="img-fluid">
+                @if(!empty($ecole->logo))
+                <img src="/Ecolelogo/{{ $ecole->logo }}" alt="Image" class="img-fluid" />
+                @endif
+                
               </a>
             </div>
             <div class="mr-auto">
