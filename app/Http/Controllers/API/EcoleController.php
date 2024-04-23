@@ -12,7 +12,8 @@ class EcoleController extends Controller
      */
     public function index()
     {
-        dd("hi");
+        $data=Ecole::first();
+        return response()->json($data);
     }
 
     /**
@@ -25,6 +26,7 @@ class EcoleController extends Controller
 
     if ($existingEcole) {
         // Supprimer l'ancienne photo si elle existe
+        if(!empty($request->logo)){
         if ($existingEcole->logo) {
             // Supprimer l'ancienne photo du stockage
             $oldLogoPath = public_path('/Ecolelogo') . '/' . $existingEcole->logo;
@@ -32,8 +34,10 @@ class EcoleController extends Controller
                 unlink($oldLogoPath);
             }
         }
+    }
 
         // Supprimer l'ancienne vidéo si elle existe
+        if(!empty($request->video)){
         if ($existingEcole->video) {
             // Supprimer l'ancienne vidéo du stockage
             $oldVideoPath = public_path('/Ecolevideo') . '/' . $existingEcole->video;
@@ -41,6 +45,7 @@ class EcoleController extends Controller
                 unlink($oldVideoPath);
             }
         }
+    }
 
         // Mise à jour des valeurs existantes de l'école
         $existingEcole->nom = $request->nom;
@@ -51,6 +56,7 @@ class EcoleController extends Controller
         $existingEcole->twitter = $request->twitter;
         $existingEcole->email = $request->email;
 
+        if(!empty($request->logo)){
         if ($request->hasFile('logo')) {
            // Récupérer le fichier du logo
            $logo = $request->file('logo');
@@ -64,7 +70,8 @@ class EcoleController extends Controller
            // Enregistrer le chemin du logo dans la base de données
            $existingEcole->logo = $logoName;
         }
-
+    }
+    if(!empty($request->video)){
         if ($request->hasFile('video')) {
              // Récupérer le fichier vidéo
              $video = $request->file('video');
@@ -78,7 +85,7 @@ class EcoleController extends Controller
              // Enregistrer le chemin de la vidéo dans la base de données
              $existingEcole->video = $videoName;
         }
-
+    }
         // Enregistrer les modifications
         $existingEcole->save();
         return response()->json(['message' => 'École mise à jour avec succès'], 200);
@@ -93,7 +100,7 @@ class EcoleController extends Controller
         $ecole->twitter = $request->twitter;
         $ecole->email = $request->email;
 
-        
+        if(!empty($request->logo)){
         if ($request->hasFile('logo')) {
             // Récupérer le fichier du logo
             $logo = $request->file('logo');
@@ -107,7 +114,8 @@ class EcoleController extends Controller
             // Enregistrer le chemin du logo dans la base de données
             $ecole->logo = $logoName;
         }
-
+    }
+    if(!empty($request->video)){
         if ($request->hasFile('video')) {
             // Récupérer le fichier vidéo
             $video = $request->file('video');
@@ -121,7 +129,7 @@ class EcoleController extends Controller
             // Enregistrer le chemin de la vidéo dans la base de données
             $ecole->video = $videoName;
         }
-
+    }
         $ecole->save();
         return response()->json(['message' => 'École créée avec succès'], 201);
     }

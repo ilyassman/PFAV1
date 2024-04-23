@@ -43,7 +43,7 @@ image.addEventListener('change', function(event) {
         const modalElement = document.getElementById('ajouterFormateurModal');
         
         $(modalElement).modal('hide');
-        $('.modal-backdrop').remove(); // Supprimer le backdrop
+        $('.modal-backdrop').remove(); 
         fetchData(table);
      })
      .catch(error => {

@@ -318,9 +318,11 @@
                       <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#modifierEcoleModal">Modifier</button>
                     </div>
                     <div class="card-body">
-                     
+                      <div id="loading" style="display: none !important;">
+                        <img src="Animation - 1711828043942.gif" alt="Chargement..." />
+                    </div>
                       <table id="configTable" class="table table-bordered table-striped">
-                        <tbody>
+                        <tbody id="tbodyecole">
                             <tr>
                                 <th>Nom de l'école:</th>
                                 <td id="nomEcoleValue">{{ !empty($ecole->nom) ?$ecole->nom: 'Champ vide, veuillez le remplir' }}</td>
