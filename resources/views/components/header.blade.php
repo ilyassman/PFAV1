@@ -8,9 +8,9 @@
             <div class="site-logo">
               <a href="{{ route('home') }}" class="d-block">
                 @if(!empty($ecole->logo))
-                <img src="/Ecolelogo/{{ $ecole->logo }}" alt="Image" class="img-fluid" />
+                <img src="/Ecolelogo/{{ $ecole->logo }}" alt="Image" class="img-fluid" style="max-width: 140px; height: auto;"  />
                 @endif
-                
+
               </a>
             </div>
             <div class="mr-auto">

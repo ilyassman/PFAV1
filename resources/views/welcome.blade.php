@@ -98,17 +98,17 @@
                @if (!empty($ecole->facebook))
                <a href="{{ $ecole->facebook }}" class="small mr-3"
                 ><span class="icon-facebook mr-2"></span
-              ></a>           
+              ></a>
                @endif
                @if (!empty($ecole->twitter))
                <a href="{{ $ecole->twitter }}" class="small mr-3"
                 ><span class="icon-twitter mr-2"></span
-              ></a>           
+              ></a>
                @endif
                @if (!empty($ecole->instagram))
                <a href="{{ $ecole->instagram }}" class="small mr-3"
                 ><span class="icon-instagram mr-2"></span
-              ></a>           
+              ></a>
                @endif
                @if (!empty($ecole->numero_whatsapp))
               <a href="#" class="small mr-3"
@@ -117,7 +117,7 @@
               @endif
               @if (!empty($ecole->email))
               <a href="mailto:{{ $ecole->email }}" class="small mr-3"><span class="icon-envelope-o mr-2"></span>Contact</a>
-           
+
               @endif
             </div>
             <div class="col-lg-3 text-right">
@@ -242,10 +242,7 @@
               <h2 class="section-title-underline mb-3">
                 <span>Cours populaires</span>
               </h2>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Officia, id?
-              </p>
+              <p>Explorez nos cours les plus populaires dès aujourd'hui !</p>
             </div>
           </div>
 
@@ -257,7 +254,6 @@
                   <figure class="thumnail">
                     <a href="{{ route('course', ['id' => $form->id]) }}">
                         <img src="Formationpic/{{$form->image}}" alt="Ingénierie des ressources en eau" class="img-fluid"
-
                         >
                     </a>
                     <div class="price">{{$form->prix}}€</div>
@@ -268,12 +264,10 @@
                   <div class="course-1-content pb-4">
                     <p>LES PREREQUIS  </p>
                     <h2>
-
                       {{ $form->prerequis }}</h2>
                     <div class="rating text-center mb-3">
                       @php
                       $i=$form->niveau_etoile;
-
                       @endphp
                       @for($j=1;$j<=5;$j++)
                       @if($i!=0)

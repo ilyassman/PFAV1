@@ -41,6 +41,48 @@
 #supp:hover {
     cursor: pointer;
 }
+
+/* styles.css */
+
+/* Rendre le tableau réactif */
+.table-responsive {
+    overflow-x: auto;
+}
+
+/* Style pour le logo */
+.site-logo img {
+    max-width: 200px;
+    height: auto;
+    opacity: 0.8;
+}
+
+/* Style pour rendre le tableau lisible sur les petits écrans */
+@media screen and (max-width: 767px) {
+    .table-responsive {
+        overflow-x: auto;
+    }
+    .table-responsive table {
+        width: 100%;
+    }
+    .table-responsive table thead {
+        display: none;
+    }
+    .table-responsive table tbody tr {
+        display: block;
+        width: 100%;
+        margin-bottom: 15px;
+    }
+    .table-responsive table tbody td {
+        display: block;
+        text-align: left;
+        width: 100%;
+        word-wrap: break-word;
+        padding: 10px;
+        border: none;
+    }
+}
+
+
     </style>
   </head>
   <body class="hold-transition sidebar-mini">
@@ -243,7 +285,6 @@
             src="../../dist/img/AdminLTELogo.png"
             alt="AdminLTE Logo"
             class="brand-image img-circle elevation-3"
-            style="opacity: 0.8"
           />
           <span class="brand-text font-weight-light">AdminLTE 3</span>
         </a>
@@ -331,7 +372,8 @@
                                 <th>Logo:</th>
                                 <td>
                                     @if(!empty($ecole->logo))
-                                        <img src="/Ecolelogo/{{ $ecole->logo }}" alt="Logo">
+                                        <img src="/Ecolelogo/{{ $ecole->logo }}" alt="Logo"
+                                        style="opacity: 0.8;max-width: 200px; height: auto;">
                                     @else
                                         <p>Logo non disponible, veuillez le télécharger</p>
                                     @endif
@@ -382,10 +424,10 @@
                             <!-- Ajoutez d'autres attributs de l'école ici selon votre modèle de données -->
                         </tbody>
                     </table>
-                    
-                     
-                   
-                    
+
+
+
+
                     </div>
                   </div>
                 </div>
@@ -451,7 +493,7 @@
               </div>
             </div>
           </div>
-          
+
 
         <!-- /.content -->
       </div>
@@ -495,9 +537,9 @@
     <script src="../../dist/js/adminlte.min.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="../../dist/js/demo.js"></script>
-   
+
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Page specific script -->
-    
+
   </body>
 </html>
