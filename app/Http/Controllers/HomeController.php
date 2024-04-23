@@ -11,6 +11,7 @@ use App\Models\Formation;
 use App\Models\Support;
 use Illuminate\Http\Request;
 use DB;
+use LaravelDaily\LaravelCharts\Classes\LaravelChart;
 class HomeController extends Controller
 {
     public function index(){
@@ -90,7 +91,16 @@ class HomeController extends Controller
         (SELECT COUNT(id) FROM sessions) AS nbrsession,
         (SELECT COUNT(id) FROM formateurs) AS nbrformateur,
         (SELECT COUNT(id) FROM commentaires) AS nbrcomment;");
-        return view("Admin/admin",compact('datas'));
+        $chart_options = [
+            'chart_title' => 'Les clients inscrits par mois',
+            'report_type' => 'group_by_date',
+            'model' => 'App\Models\Membre',
+            'group_by_field' => 'created_at',
+            'group_by_period' => 'month',
+            'chart_type' => 'bar',
+        ];
+        $chart1 = new LaravelChart($chart_options);
+        return view("Admin/admin",compact('datas','chart1'));
      }
     public function showCourseSingle(Request $request)
     {
