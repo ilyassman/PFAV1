@@ -76,7 +76,12 @@
                   <p>Supports</p>
                 </a>
               </li>
-           
+              <li class="nav-item">
+                <a href="{{ route('gererSessions') }}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Gérer les sessions</p>
+                </a>
+            </li>
             </ul>
           </li>
       </nav>
