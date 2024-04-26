@@ -125,6 +125,10 @@ class HomeController extends Controller
         // Ici, vous pouvez retourner la vue du formulaire d'inscription
         return view('inscription_form');
     }
+    public function showgererSessions()
+    {
+        return view('Admin/pages/tables/gererSessions');
+    }
 
 
 }
