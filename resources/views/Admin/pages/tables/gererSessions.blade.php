@@ -351,12 +351,10 @@
              <div class="form-group mt-4">
                 <label for="sessionList"><i class="fas fa-calendar-alt"></i> Sélectionner une session de formation :</label>
                 <select class="form-control" id="sessionList">
-                    <!-- Remplacez les options suivantes par les sessions de votre site -->
-                    <option>Session 1</option>
-                    <option>Session 2</option>
-                    <option>Session 3</option>
-                    <!-- Ajoutez plus d'options si nécessaire -->
-                </select>
+                  @foreach ($sessions as $session)
+                      <option value="{{ $session->id }}">{{ $session->date_debut }} - {{ $session->titre }}</option>
+                  @endforeach
+              </select>
             </div>
 
 
@@ -370,9 +368,8 @@
                 </div>
                 <select multiple class="form-control mt-2" id="memberList" onclick="ajouterMembre()">
                     <!-- Remplacez les options suivantes par les membres de votre site -->
-                    <option value="membre1@example.com">Membre 1 (membre1@example.com)</option>
-                    <option value="membre2@example.com">Membre 2 (membre2@example.com)</option>
-                    <option value="membre3@example.com">Membre 3 (membre3@example.com)</option>
+                    
+                    
                     <!-- Ajoutez plus d'options si nécessaire -->
                 </select>
             </div>
@@ -432,7 +429,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Page specific script -->
     <<!-- script ajax -->
-    <script src="js/ajaxjsadmin/commentcrud.js"></script>
+    <script src="js/ajaxjsadmin/gerersession.js"></script>
     <<!--------------------->
     <script>
       $(function () {

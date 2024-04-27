@@ -127,7 +127,8 @@ class HomeController extends Controller
     }
     public function showgererSessions()
     {
-        return view('Admin/pages/tables/gererSessions');
+        $sessions=DB::select("select sessions.*,formations.titre from sessions,formations WHERE sessions.id_formation=formations.id");
+        return view('Admin/pages/tables/gererSessions',compact('sessions'));
     }
 
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Models\Membre;
 use DB;
 use Illuminate\Http\Request;
 use App\Models\Session;
@@ -70,7 +71,12 @@ class SessionController extends Controller
         Session::find($id)->delete();
     }
     public function sessionmembres(string $id){
-        return response()->json(Session::find($id)->membre()->get());
+        $membres = Membre::where('id_session', $id)
+                ->join('utilisateurs', 'membres.iduser', '=', 'utilisateurs.id')
+                ->join('inscriptions', 'membres.id', '=', 'inscriptions.id_membre')
+                ->get(['membres.*', 'utilisateurs.email']);
+
+    return response()->json($membres);
     }
     public function sessionvotes(string $id){
         $data=DB::select("select * from votes where id_session ={$id}");
