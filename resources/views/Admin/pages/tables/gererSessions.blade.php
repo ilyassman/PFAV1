@@ -346,7 +346,21 @@
     <div class="card-body">
         <form>
             <!-- Liste des membres avec barre de recherche -->
-            <div class="form-group">
+
+             <!-- Liste des sessions de formation -->
+             <div class="form-group mt-4">
+                <label for="sessionList"><i class="fas fa-calendar-alt"></i> Sélectionner une session de formation :</label>
+                <select class="form-control" id="sessionList">
+                    <!-- Remplacez les options suivantes par les sessions de votre site -->
+                    <option>Session 1</option>
+                    <option>Session 2</option>
+                    <option>Session 3</option>
+                    <!-- Ajoutez plus d'options si nécessaire -->
+                </select>
+            </div>
+
+
+            <div class="form-group" style="margin-top: 20px;">
                 <label for="memberSearch"><i class="fas fa-search"></i> Rechercher un membre :</label>
                 <div class="input-group">
                     <input type="text" class="form-control" id="memberSearch" placeholder="Rechercher...">
@@ -366,19 +380,7 @@
             <!-- Conteneur pour afficher les membres sélectionnés -->
             <div id="selectedMembersContainer"></div>
 
-            <!-- Liste des sessions de formation -->
-            <div class="form-group mt-4">
-                <label for="sessionList"><i class="fas fa-calendar-alt"></i> Sélectionner une session de formation :</label>
-                <select class="form-control" id="sessionList">
-                    <!-- Remplacez les options suivantes par les sessions de votre site -->
-                    <option>Session 1</option>
-                    <option>Session 2</option>
-                    <option>Session 3</option>
-                    <!-- Ajoutez plus d'options si nécessaire -->
-                </select>
-            </div>
 
-            <button type="button" class="btn btn-primary mt-4">Ajouter</button>
         </form>
     </div>
 </div>
@@ -457,27 +459,38 @@
 
 
      // Fonction pour ajouter un membre sélectionné
-  function ajouterMembre() {
-    // Récupérer la liste des membres sélectionnés
+function ajouterMembre() {
+
     var selectedMembers = document.getElementById("memberList").selectedOptions;
 
-    // Récupérer le conteneur où afficher les membres sélectionnés
+
     var selectedMembersContainer = document.getElementById("selectedMembersContainer");
 
-    // Parcourir les membres sélectionnés et les ajouter au conteneur
+
     for (var i = 0; i < selectedMembers.length; i++) {
-      var memberName = selectedMembers[i].text;
-      var memberEmail = selectedMembers[i].value;
+        var memberName = selectedMembers[i].text;
+        var memberEmail = selectedMembers[i].value;
 
-      // Créer un élément de membre avec un bouton d'annulation
-      var memberElement = document.createElement("div");
-      memberElement.classList.add("selected-member");
-      memberElement.innerHTML = '<i class="fas fa-user membre-user"></i> ' + memberName + ' <i class="fas fa-times-circle membre-delete" onclick="supprimerMembre(this)"></i>';
+        var existingMembers = selectedMembersContainer.getElementsByClassName("selected-member");
+        var alreadyAdded = false;
+        for (var j = 0; j < existingMembers.length; j++) {
+            if (existingMembers[j].innerText.includes(memberName)) {
+                alreadyAdded = true;
+                break;
+            }
+        }
 
-      // Ajouter le membre au conteneur
-      selectedMembersContainer.appendChild(memberElement);
+        if (!alreadyAdded) {
+
+            var memberElement = document.createElement("div");
+            memberElement.classList.add("selected-member");
+            memberElement.innerHTML = '<i class="fas fa-user membre-user"></i> ' + memberName + ' <i class="fas fa-times-circle membre-delete" onclick="supprimerMembre(this)"></i>';
+
+            selectedMembersContainer.appendChild(memberElement);
+        }
     }
-  }
+}
+
 
   // Fonction pour supprimer un membre sélectionné
   function supprimerMembre(element) {
