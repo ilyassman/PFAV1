@@ -373,7 +373,6 @@
                     <!-- Ajoutez plus d'options si nécessaire -->
                 </select>
             </div>
-
             <!-- Conteneur pour afficher les membres sélectionnés -->
             <div id="selectedMembersContainer"></div>
 
@@ -455,21 +454,18 @@
       });
 
 
-     // Fonction pour ajouter un membre sélectionné
-function ajouterMembre() {
-
+      function ajouterMembre() {
     var selectedMembers = document.getElementById("memberList").selectedOptions;
-
-
     var selectedMembersContainer = document.getElementById("selectedMembersContainer");
 
-
     for (var i = 0; i < selectedMembers.length; i++) {
-        var memberName = selectedMembers[i].text;
-        var memberEmail = selectedMembers[i].value;
+        var memberOption = selectedMembers[i];
+        var memberName = memberOption.text;
+        var memberEmail = memberOption.value;
 
         var existingMembers = selectedMembersContainer.getElementsByClassName("selected-member");
         var alreadyAdded = false;
+
         for (var j = 0; j < existingMembers.length; j++) {
             if (existingMembers[j].innerText.includes(memberName)) {
                 alreadyAdded = true;
@@ -478,22 +474,31 @@ function ajouterMembre() {
         }
 
         if (!alreadyAdded) {
-
             var memberElement = document.createElement("div");
             memberElement.classList.add("selected-member");
             memberElement.innerHTML = '<i class="fas fa-user membre-user"></i> ' + memberName + ' <i class="fas fa-times-circle membre-delete" onclick="supprimerMembre(this)"></i>';
 
             selectedMembersContainer.appendChild(memberElement);
+            // Supprimer l'option de membre de la liste déroulante
+            memberOption.remove();
         }
     }
 }
 
-
-  // Fonction pour supprimer un membre sélectionné
-  function supprimerMembre(element) {
-    // Supprimer l'élément de membre parent
+function supprimerMembre(element) {
+    var memberName = element.parentElement.innerText.trim();
+    var memberValue = "";
     element.parentElement.remove();
-  }
+
+    var selectElement = document.getElementById("memberList");
+    var newOption = document.createElement("option");
+    newOption.text = memberName;
+    newOption.value = memberValue;
+
+    selectElement.add(newOption);
+}
+
+
     </script>
   </body>
 </html>
