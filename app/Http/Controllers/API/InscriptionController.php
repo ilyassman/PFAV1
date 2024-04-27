@@ -22,7 +22,6 @@ class InscriptionController extends Controller
     public function store(Request $request)
     {
         $data=new Inscription();
-        $data->date_inscription=$request->date_inscription;
         $data->etat=$request->etat;
         $data->id_membre=$request->id_membre;
         $data->id_session=$request->id_session;
@@ -43,8 +42,6 @@ class InscriptionController extends Controller
     public function update(Request $request, string $id)
     {
         $data=Inscription::find($id);
-        if(!empty($request->date_inscription))
-        $data->date_inscription=$request->date_inscription;
         if(!empty($request->etat))
         $data->etat=$request->etat;
         if(!empty($request->id_membre))
@@ -60,5 +57,10 @@ class InscriptionController extends Controller
     public function destroy(string $id)
     {
         Inscription::find($id)->delete();
+    }
+    public function removemembre(string $id)
+    {
+        $inscription = Inscription::where('id_membre', $id)->first();
+        $inscription->delete();
     }
 }

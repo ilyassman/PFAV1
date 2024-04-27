@@ -368,13 +368,18 @@
                 </div>
                 <select multiple class="form-control mt-2" id="memberList" onclick="ajouterMembre()">
                     <!-- Remplacez les options suivantes par les membres de votre site -->
+                    @foreach ($membres as $membre)
+                    <option value="{{$membre->idmembre}}">{{$membre->nom}} {{$membre->prenom}} ({{$membre->email}})</option>
                     
+                    @endforeach
                     
                     <!-- Ajoutez plus d'options si nécessaire -->
                 </select>
             </div>
+
             <!-- Conteneur pour afficher les membres sélectionnés -->
-            <div id="selectedMembersContainer"></div>
+            <div id="selectedMembersContainer">
+            </div>
 
 
         </form>
@@ -454,18 +459,21 @@
       });
 
 
-      function ajouterMembre() {
+     // Fonction pour ajouter un membre sélectionné
+function ajouterMembre() {
+
     var selectedMembers = document.getElementById("memberList").selectedOptions;
+
+
     var selectedMembersContainer = document.getElementById("selectedMembersContainer");
 
+
     for (var i = 0; i < selectedMembers.length; i++) {
-        var memberOption = selectedMembers[i];
-        var memberName = memberOption.text;
-        var memberEmail = memberOption.value;
+        var memberName = selectedMembers[i].text;
+        var memberEmail = selectedMembers[i].value;
 
         var existingMembers = selectedMembersContainer.getElementsByClassName("selected-member");
         var alreadyAdded = false;
-
         for (var j = 0; j < existingMembers.length; j++) {
             if (existingMembers[j].innerText.includes(memberName)) {
                 alreadyAdded = true;
@@ -474,31 +482,20 @@
         }
 
         if (!alreadyAdded) {
+            addmembre(1,selectedMembers[i].value,sessions.value)
             var memberElement = document.createElement("div");
             memberElement.classList.add("selected-member");
+            memberElement.setAttribute("value", selectedMembers[i].value);
             memberElement.innerHTML = '<i class="fas fa-user membre-user"></i> ' + memberName + ' <i class="fas fa-times-circle membre-delete" onclick="supprimerMembre(this)"></i>';
 
             selectedMembersContainer.appendChild(memberElement);
-            // Supprimer l'option de membre de la liste déroulante
-            memberOption.remove();
         }
     }
 }
 
-function supprimerMembre(element) {
-    var memberName = element.parentElement.innerText.trim();
-    var memberValue = "";
-    element.parentElement.remove();
 
-    var selectElement = document.getElementById("memberList");
-    var newOption = document.createElement("option");
-    newOption.text = memberName;
-    newOption.value = memberValue;
-
-    selectElement.add(newOption);
-}
-
-
+  // Fonction pour supprimer un membre sélectionné
+  
     </script>
   </body>
 </html>

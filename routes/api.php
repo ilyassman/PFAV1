@@ -84,6 +84,7 @@ Route::prefix('v1')->group(function () {
 });
 Route::get('commentaires/{idformation}',[CommentaireController::class,'findbyformation']);
 Route::get('membrecommentaires/{idmembre}',[MembreController::class,'commentaire_membre']);
+Route::delete('inscriptiondeletemembre/{idmembre}',[InscriptionController::class,'removemembre']);
 Route::get('formateursession/{idformateur}',[FormateurController::class,'sessionform']);
 Route::get('sessionmembres/{idsession}',[SessionController::class,'sessionmembres']);
 Route::get('categories/{idcateg}',[CategorieController::class,'categoriebyid']);
