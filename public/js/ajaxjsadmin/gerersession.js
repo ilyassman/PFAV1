@@ -74,6 +74,9 @@ async function fetchData() {
 
 async function changerEtat(badge, memberId) {
     var newStatus = badge.innerText.trim() === "En cours" ? 1 : 0;
+    // Mettre à jour l'état dans la base de données ou via une autre méthode appropriée
+    // Exemple : var updated = await mettreAJourEtatDansAPI(memberId, newStatus);
+    // Si la mise à jour est réussie, mettre à jour l'affichage
     if (true /* remplacez true par la condition de réussite de la mise à jour */) {
         badge.innerText = newStatus === 0 ? "En cours" : "Validé";
         badge.classList.toggle("badge-danger");

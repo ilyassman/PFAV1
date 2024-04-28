@@ -371,6 +371,8 @@
                     @foreach ($membres as $membre)
                     <option value="{{$membre->idmembre}}">{{$membre->nom}} {{$membre->prenom}} ({{$membre->email}})</option>
                     @endforeach
+
+                    <!-- Ajoutez plus d'options si nécessaire -->
                 </select>
             </div>
 
@@ -455,15 +457,10 @@
         });
       });
 
-
-     // Fonction pour ajouter un membre sélectionné
+// Fonction pour ajouter un membre sélectionné
 function ajouterMembre() {
-
     var selectedMembers = document.getElementById("memberList").selectedOptions;
-
-
     var selectedMembersContainer = document.getElementById("selectedMembersContainer");
-
 
     for (var i = 0; i < selectedMembers.length; i++) {
         var memberName = selectedMembers[i].text;
@@ -479,16 +476,26 @@ function ajouterMembre() {
         }
 
         if (!alreadyAdded) {
-            addmembre(1,selectedMembers[i].value,sessions.value)
+            addmembre(1,selectedMembers[i].value,sessions.value);
             var memberElement = document.createElement("div");
             memberElement.classList.add("selected-member");
             memberElement.setAttribute("value", selectedMembers[i].value);
-            memberElement.innerHTML = '<i class="fas fa-user membre-user"></i> ' + memberName + ' <i class="fas fa-times-circle membre-delete" onclick="supprimerMembre(this)"></i>';
+            memberElement.innerHTML = `<i class="fas fa-user membre-user"></i> ${memberName} <span class="badge badge-success" onclick="toggleEtat(this)" style="cursor: pointer;">Validé</span> <i class="fas fa-times-circle membre-delete" onclick="supprimerMembre(this)" style="cursor: pointer;"></i>`;
 
             selectedMembersContainer.appendChild(memberElement);
         }
     }
 }
+
+// Fonction pour basculer entre les états "En cours" et "Validé"
+function toggleEtat(badge) {
+    var newStatus = badge.innerText.trim() === "En cours" ? "Validé" : "En cours";
+    badge.innerText = newStatus;
+    badge.classList.toggle("badge-danger");
+    badge.classList.toggle("badge-success");
+}
+
+
 
 
 
