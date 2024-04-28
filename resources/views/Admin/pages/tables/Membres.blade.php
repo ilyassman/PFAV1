@@ -35,11 +35,11 @@
     position: relative; /* Positionner la div de chargement de manière fixe par rapport à la fenêtre du navigateur */
     top: 0; /* Aligner la div en haut de la fenêtre */
     left: 40%; /* Aligner la div à gauche de la fenêtre */
-   
-  
+
+
 }
 #supp:hover {
-    cursor: pointer; 
+    cursor: pointer;
 }
 
 
@@ -80,7 +80,7 @@
               <form class="form-inline">
                 <div class="input-group input-group-sm">
                   <input
-                   
+
                     class="form-control form-control-navbar"
                     type="search"
                     placeholder="Search"
@@ -329,9 +329,9 @@
                     </button>
                   </div>
                   <!-- /.card-header -->
-                  
+
                   <div class="card-body">
-                 
+
                     <table
                       id="example1"
                       class="table table-bordered table-striped"
@@ -342,9 +342,10 @@
                           <th>Prénom</th>
                           <th>Email</th>
                           <th>Numéro de téléphone</th>
-                          
+
                           <th>Image</th>
                           <th>Action</th>
+                          <th>État</th>
                         </tr>
                       </thead>
                       <tbody id="tablebody">
@@ -357,7 +358,7 @@
                           <td>{{$data->prenom}}</td>
                           <td>{{$data->email}}</td>
                           <td>{{$data->num_tel}}</td>
-                          
+
                           <td>
                             <img
                               src="/Membrespic/{{$data->image}}"
@@ -366,18 +367,19 @@
                             />
                           </td>
                           <td>
+                          <td>
                             <i id="supp" onclick="suppdialog({{$data->id}})" class="fas fa-trash-alt text-danger"></i>
                             <!-- Icône de suppression -->
                             <i
-                            onclick="updatedialog({{$data->id}})" 
+                            onclick="updatedialog({{$data->id}})"
                             data-toggle="modal"
                             data-target="#modifierMembreModal"
                             id="supp" class="fas fa-edit text-primary ml-2"></i>
                             <!-- Icône de modification -->
                           </td>
-                        </tr> 
+                        </tr>
                         @endforeach
-                        
+
 
                         <!-- Ajouter d'autres lignes pour chaque membre du site -->
                       </tbody>
@@ -480,6 +482,13 @@
                       name="image"
                     />
                   </div>
+                  <div class="form-group">
+                    <label for="etat">État:</label>
+                    <select class="form-control" id="etat" name="etat" required>
+                        <option value="En cours">En cours</option>
+                        <option value="Validé">Validé</option>
+                    </select>
+                  </div>
                   <button id="postmem" type="submit" class="btn btn-primary">Ajouter</button>
                 </form>
               </div>
@@ -571,6 +580,13 @@
                       name="image"
                     />
                   </div>
+                  <div class="form-group">
+                    <label for="etat">État:</label>
+                    <select class="form-control" id="etat" name="etat" required>
+                        <option value="En cours">En cours</option>
+                        <option value="Validé">Validé</option>
+                    </select>
+                </div>
                   <button id="butmodifier" type="submit" class="btn btn-primary">Modifier</button>
                 </form>
               </div>
