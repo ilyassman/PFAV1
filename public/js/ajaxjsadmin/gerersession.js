@@ -33,7 +33,7 @@ async function lireAPI(url) {
       return null;
     }
   }
-  async function fetchData() {
+async function fetchData() {
     selectedMembersContainer.innerHTML = '';
     const urlAPI = 'http://127.0.0.1:8000/api/sessionmembres/' + sessions.value;
     const loading = document.getElementById("loading");
@@ -44,7 +44,7 @@ async function lireAPI(url) {
                 var memberName = membre.nom;
                 var memberEmail = membre.email;
                 var memberStatus = membre.etat === 0 ? "En cours" : "Validé";
-                var statusBadge = membre.etat === 0 ? "<span class='badge badge-danger'>En cours</span>" : "<span class='badge badge-success'>Validé</span>";
+                var statusBadge = membre.etat === 0 ? "<span class='badge badge-danger' onclick='changerEtat(this, " + membre.id + ")'>En cours</span>" : "<span class='badge badge-success' onclick='changerEtat(this, " + membre.id + ")'>Validé</span>";
                 var statusIcon = membre.etat === 0 ? "<i class='fas fa-exclamation-circle text-danger'></i>" : "<i class='fas fa-check-circle text-success'></i>";
 
                 var existingMembers = selectedMembersContainer.getElementsByClassName("selected-member");
@@ -60,7 +60,7 @@ async function lireAPI(url) {
                     var memberElement = document.createElement("div");
                     memberElement.classList.add("selected-member");
                     memberElement.setAttribute("value", membre.id);
-                    memberElement.innerHTML = `<i value=${membre.id} class="fas fa-user membre-user"></i> ${membre.nom}  ${membre.prenom} (${membre.email}) ${statusBadge} ${statusIcon} <i class="fas fa-times-circle membre-delete" onclick="supprimerMembre(this)"></i>`;
+                    memberElement.innerHTML = `<i value=${membre.id} class="fas fa-user membre-user"></i> ${membre.nom}  ${membre.prenom} (${membre.email}) ${statusBadge} <i class="fas fa-times-circle membre-delete" onclick="supprimerMembre(this)"></i>`;
                     selectedMembersContainer.appendChild(memberElement);
                 }
             });
@@ -71,6 +71,19 @@ async function lireAPI(url) {
 
     }
 }
+
+async function changerEtat(badge, memberId) {
+    var newStatus = badge.innerText.trim() === "En cours" ? 1 : 0;
+    if (true /* remplacez true par la condition de réussite de la mise à jour */) {
+        badge.innerText = newStatus === 0 ? "En cours" : "Validé";
+        badge.classList.toggle("badge-danger");
+        badge.classList.toggle("badge-success");
+        badge.setAttribute("onclick", "changerEtat(this, " + memberId + ")");
+    } else {
+        alert("Erreur lors de la mise à jour de l'état.");
+    }
+}
+
 
 
 

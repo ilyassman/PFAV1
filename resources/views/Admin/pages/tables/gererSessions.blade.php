@@ -370,10 +370,7 @@
                     <!-- Remplacez les options suivantes par les membres de votre site -->
                     @foreach ($membres as $membre)
                     <option value="{{$membre->idmembre}}">{{$membre->nom}} {{$membre->prenom}} ({{$membre->email}})</option>
-
                     @endforeach
-
-                    <!-- Ajoutez plus d'options si nécessaire -->
                 </select>
             </div>
 
