@@ -34,42 +34,45 @@ async function lireAPI(url) {
     }
   }
   async function fetchData() {
-    selectedMembersContainer.innerHTML='';
-    const urlAPI = 'http://127.0.0.1:8000/api/sessionmembres/'+sessions.value;
-    const loading=document.getElementById("loading");
-    try{var data = await lireAPI(urlAPI);
-    if (data) {
-      data.forEach(membre => {
-        var memberName = membre.nom;
-        var memberEmail =  membre.email;
+    selectedMembersContainer.innerHTML = '';
+    const urlAPI = 'http://127.0.0.1:8000/api/sessionmembres/' + sessions.value;
+    const loading = document.getElementById("loading");
+    try {
+        var data = await lireAPI(urlAPI);
+        if (data) {
+            data.forEach(membre => {
+                var memberName = membre.nom;
+                var memberEmail = membre.email;
+                var memberStatus = membre.etat === 0 ? "En cours" : "Validé";
+                var statusBadge = membre.etat === 0 ? "<span class='badge badge-danger'>En cours</span>" : "<span class='badge badge-success'>Validé</span>";
+                var statusIcon = membre.etat === 0 ? "<i class='fas fa-exclamation-circle text-danger'></i>" : "<i class='fas fa-check-circle text-success'></i>";
 
-        var existingMembers = selectedMembersContainer.getElementsByClassName("selected-member");
-        var alreadyAdded = false;
-        for (var j = 0; j < existingMembers.length; j++) {
-            if (existingMembers[j].innerText.includes(memberName)) {
-                alreadyAdded = true;
-                break;
-            }
+                var existingMembers = selectedMembersContainer.getElementsByClassName("selected-member");
+                var alreadyAdded = false;
+                for (var j = 0; j < existingMembers.length; j++) {
+                    if (existingMembers[j].innerText.includes(memberName)) {
+                        alreadyAdded = true;
+                        break;
+                    }
+                }
+
+                if (!alreadyAdded) {
+                    var memberElement = document.createElement("div");
+                    memberElement.classList.add("selected-member");
+                    memberElement.setAttribute("value", membre.id);
+                    memberElement.innerHTML = `<i value=${membre.id} class="fas fa-user membre-user"></i> ${membre.nom}  ${membre.prenom} (${membre.email}) ${statusBadge} ${statusIcon} <i class="fas fa-times-circle membre-delete" onclick="supprimerMembre(this)"></i>`;
+                    selectedMembersContainer.appendChild(memberElement);
+                }
+            });
+        } else {
+            alert("error loading data");
         }
+    } finally {
 
-        if (!alreadyAdded) {
-
-            var memberElement = document.createElement("div");
-            memberElement.classList.add("selected-member");
-            memberElement.setAttribute("value", membre.id);
-            memberElement.innerHTML = `<i value=${membre.id} class="fas fa-user membre-user"></i> ${membre.nom}  ${membre.prenom} (${membre.email}) <i class="fas fa-times-circle membre-delete" onclick="supprimerMembre(this)"></i>`;
-
-            selectedMembersContainer.appendChild(memberElement);
-        }
-      });  
-       
-    } else {
-     alert("error loading data");
     }
-}finally{
-    
 }
-  }
+
+
 
 fetchData();
 async function addmembre(etat, id_membre, id_session) {
