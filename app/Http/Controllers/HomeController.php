@@ -128,8 +128,8 @@ class HomeController extends Controller
     public function showgererSessions()
     {
         $sessions=DB::select("select sessions.*,formations.titre from sessions,formations WHERE sessions.id_formation=formations.id");
-        $membres=DB::select("select utilisateurs.*,membres.id as idmembre,nom,prenom,image from utilisateurs ,membres
-        WHERE membres.iduser=utilisateurs.id");
+        $membres=DB::select("select inscriptions.etat,utilisateurs.*,membres.id as idmembre,nom,prenom,image from utilisateurs ,membres,inscriptions
+        WHERE membres.iduser=utilisateurs.id and membres.id=inscriptions.id_membre");
         return view('Admin/pages/tables/gererSessions',compact('sessions','membres'));
     }
 
