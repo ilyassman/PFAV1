@@ -33,6 +33,7 @@ async function lireAPI(url) {
       return null;
     }
   }
+// Fonction pour récupérer les données
 async function fetchData() {
     selectedMembersContainer.innerHTML = '';
     const urlAPI = 'http://127.0.0.1:8000/api/sessionmembres/' + sessions.value;
@@ -44,7 +45,7 @@ async function fetchData() {
                 var memberName = membre.nom;
                 var memberEmail = membre.email;
                 var memberStatus = membre.etat === 0 ? "En cours" : "Validé";
-                var statusBadge = membre.etat === 0 ? "<span class='badge badge-danger' onclick='changerEtat(this, " + membre.id + ")'>En cours</span>" : "<span class='badge badge-success' onclick='changerEtat(this, " + membre.id + ")'>Validé</span>";
+                var statusBadge = membre.etat === 0 ? "<span class='badge badge-danger' onclick='changerEtat(this, " + membre.id + ")' style='cursor: pointer;'>En cours</span>" : "<span class='badge badge-success' onclick='changerEtat(this, " + membre.id + ")' style='cursor: pointer;'>Validé</span>";
                 var statusIcon = membre.etat === 0 ? "<i class='fas fa-exclamation-circle text-danger'></i>" : "<i class='fas fa-check-circle text-success'></i>";
 
                 var existingMembers = selectedMembersContainer.getElementsByClassName("selected-member");
@@ -60,15 +61,15 @@ async function fetchData() {
                     var memberElement = document.createElement("div");
                     memberElement.classList.add("selected-member");
                     memberElement.setAttribute("value", membre.id);
-                    memberElement.innerHTML = `<i value=${membre.id} class="fas fa-user membre-user"></i> ${membre.nom}  ${membre.prenom} (${membre.email}) ${statusBadge} <i class="fas fa-times-circle membre-delete" onclick="supprimerMembre(this)"></i>`;
+                    memberElement.innerHTML = `<i value=${membre.id} class="fas fa-user membre-user"></i> ${membre.nom}  ${membre.prenom} (${membre.email}) ${statusBadge} <i class="fas fa-times-circle membre-delete" onclick="supprimerMembre(this)" style='cursor: pointer;'></i>`;
                     selectedMembersContainer.appendChild(memberElement);
                 }
             });
         } else {
-            alert("error loading data");
+            alert("Erreur lors du chargement des données");
         }
     } finally {
-
+        // Le reste du code de votre fonction fetchData()
     }
 }
 
