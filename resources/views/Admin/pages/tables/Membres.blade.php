@@ -345,7 +345,7 @@
 
                           <th>Image</th>
                           <th>Action</th>
-                          <th>État</th>
+
                         </tr>
                       </thead>
                       <tbody id="tablebody">
@@ -366,7 +366,7 @@
                               style="width: 50px; height: 50px"
                             />
                           </td>
-                          <td>
+
                           <td>
                             <i id="supp" onclick="suppdialog({{$data->id}})" class="fas fa-trash-alt text-danger"></i>
                             <!-- Icône de suppression -->
@@ -482,13 +482,7 @@
                       name="image"
                     />
                   </div>
-                  <div class="form-group">
-                    <label for="etat">État:</label>
-                    <select class="form-control" id="etat" name="etat" required>
-                        <option value="En cours">En cours</option>
-                        <option value="Validé">Validé</option>
-                    </select>
-                  </div>
+
                   <button id="postmem" type="submit" class="btn btn-primary">Ajouter</button>
                 </form>
               </div>
@@ -580,13 +574,7 @@
                       name="image"
                     />
                   </div>
-                  <div class="form-group">
-                    <label for="etat">État:</label>
-                    <select class="form-control" id="etat" name="etat" required>
-                        <option value="En cours">En cours</option>
-                        <option value="Validé">Validé</option>
-                    </select>
-                </div>
+                 
                   <button id="butmodifier" type="submit" class="btn btn-primary">Modifier</button>
                 </form>
               </div>
