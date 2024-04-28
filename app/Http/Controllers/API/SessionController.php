@@ -74,7 +74,7 @@ class SessionController extends Controller
         $membres = Membre::where('id_session', $id)
                 ->join('utilisateurs', 'membres.iduser', '=', 'utilisateurs.id')
                 ->join('inscriptions', 'membres.id', '=', 'inscriptions.id_membre')
-                ->get(['membres.*','inscriptions.etat', 'utilisateurs.email']);
+                ->get(['membres.*','inscriptions.id as inscri_id','inscriptions.etat', 'utilisateurs.email']);
 
     return response()->json($membres);
     }

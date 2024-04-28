@@ -361,7 +361,7 @@
             <div class="form-group" style="margin-top: 20px;">
                 <label for="memberSearch"><i class="fas fa-search"></i> Rechercher un membre :</label>
                 <div class="input-group">
-                    <input type="text" class="form-control" id="memberSearch" placeholder="Rechercher...">
+                    <input type="text" onchange="filterMembers()" class="form-control" id="memberSearch" placeholder="Rechercher...">
                     <div class="input-group-append">
                         <button class="btn btn-primary" type="button"><i class="fas fa-search"></i></button>
                     </div>
@@ -425,6 +425,8 @@
     <script src="../../plugins/datatables-buttons/js/buttons.html5.min.js"></script>
     <script src="../../plugins/datatables-buttons/js/buttons.print.min.js"></script>
     <script src="../../plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <!-- AdminLTE App -->
     <script src="../../dist/js/adminlte.min.js"></script>
     <!-- AdminLTE for demo purposes -->
@@ -435,27 +437,22 @@
     <script src="js/ajaxjsadmin/gerersession.js"></script>
     <<!--------------------->
     <script>
-      $(function () {
-        $("#example1")
-          .DataTable({
-            responsive: true,
-            lengthChange: false,
-            autoWidth: false,
-            buttons: ["copy", "csv", "excel", "pdf", "print", "colvis"],
-          })
-          .buttons()
-          .container()
-          .appendTo("#example1_wrapper .col-md-6:eq(0)");
-        $("#example2").DataTable({
-          paging: true,
-          lengthChange: false,
-          searching: false,
-          ordering: true,
-          info: true,
-          autoWidth: false,
-          responsive: true,
-        });
-      });
+     function filterMembers() {
+    var input, filter, select, options, option, i, txtValue;
+    input = document.getElementById("memberSearch"); // Modifier ici
+    filter = input.value.toLowerCase();
+    select = document.getElementById("memberList");
+    options = select.getElementsByTagName("option");
+    for (i = 0; i < options.length; i++) {
+        option = options[i];
+        txtValue = option.textContent || option.innerText;
+        if (txtValue.toLowerCase().indexOf(filter) > -1) {
+            option.style.display = "";
+        } else {
+            option.style.display = "none";
+        }
+    }
+}
 
 // Fonction pour ajouter un membre sélectionné
 function ajouterMembre() {
@@ -480,20 +477,14 @@ function ajouterMembre() {
             var memberElement = document.createElement("div");
             memberElement.classList.add("selected-member");
             memberElement.setAttribute("value", selectedMembers[i].value);
-            memberElement.innerHTML = `<i class="fas fa-user membre-user"></i> ${memberName} <span class="badge badge-success" onclick="toggleEtat(this)" style="cursor: pointer;">Validé</span> <i class="fas fa-times-circle membre-delete" onclick="supprimerMembre(this)" style="cursor: pointer;"></i>`;
+            memberElement.innerHTML = `<i class="fas fa-user membre-user"></i> ${memberName} <span class="badge badge-success" onclick="changerEtat(this,${selectedMembers[i].value})" style="cursor: pointer;">Validé</span> <i class="fas fa-times-circle membre-delete" onclick="supprimerMembre(this)" style="cursor: pointer;"></i>`;
 
             selectedMembersContainer.appendChild(memberElement);
         }
     }
 }
 
-// Fonction pour basculer entre les états "En cours" et "Validé"
-function toggleEtat(badge) {
-    var newStatus = badge.innerText.trim() === "En cours" ? "Validé" : "En cours";
-    badge.innerText = newStatus;
-    badge.classList.toggle("badge-danger");
-    badge.classList.toggle("badge-success");
-}
+
 
 
 

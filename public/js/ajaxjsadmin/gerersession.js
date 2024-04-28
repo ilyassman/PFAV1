@@ -4,11 +4,11 @@ sessions.onchange=()=>{
 }
 function supprimerMembre(element) {
     const id = element.parentElement.getAttribute("value");
-    deleteMembre(id);
+    deleteMembre(id,sessions.value);
     element.parentElement.remove();
   }
-  async function deleteMembre(id) {
-    const urlAPI = `http://127.0.0.1:8000/api/inscriptiondeletemembre/${id}`;
+  async function deleteMembre(id,idsession) {
+    const urlAPI = `http://127.0.0.1:8000/api/inscriptiondeletemembre/${id}/${idsession}`;
     try {
         const response = await fetch(urlAPI, {
             method: 'DELETE',
@@ -75,10 +75,8 @@ async function fetchData() {
 
 async function changerEtat(badge, memberId) {
     var newStatus = badge.innerText.trim() === "En cours" ? 1 : 0;
-    // Mettre à jour l'état dans la base de données ou via une autre méthode appropriée
-    // Exemple : var updated = await mettreAJourEtatDansAPI(memberId, newStatus);
-    // Si la mise à jour est réussie, mettre à jour l'affichage
-    if (true /* remplacez true par la condition de réussite de la mise à jour */) {
+    updateEtat(memberId,sessions.value,newStatus);
+    if (true ) {
         badge.innerText = newStatus === 0 ? "En cours" : "Validé";
         badge.classList.toggle("badge-danger");
         badge.classList.toggle("badge-success");
@@ -92,6 +90,33 @@ async function changerEtat(badge, memberId) {
 
 
 fetchData();
+async function updateEtat(idmembre,idsession,etat) {
+    const urlAPI = `http://127.0.0.1:8000/api/inscriptionupdate/${idmembre}/${idsession}`;
+    try {
+        const response = await fetch(urlAPI, {
+            method: 'PUT',
+            body: JSON.stringify({ etat }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        // Utilisez response pour obtenir le contenu de la réponse
+        if (!response.ok) {
+            const errorMessage = await response.text();
+            throw new Error(errorMessage || 'Something went wrong');
+        }
+        
+        const updatedPost = await response.json();
+        // Vous pouvez traiter les données mises à jour ici si nécessaire
+        // console.log('Updated Post:', updatedPost);
+        
+    } catch (error) {
+        // console.error('Error updating post:', error);
+        // alert('Une erreur est survenue lors de la mise à jour du post.');
+    }
+}
+
 async function addmembre(etat, id_membre, id_session) {
     const urlAPI = `http://127.0.0.1:8000/api/v1/inscription`;
     try {

@@ -42,8 +42,9 @@ class InscriptionController extends Controller
     public function update(Request $request, string $id)
     {
         $data=Inscription::find($id);
-        if(!empty($request->etat))
-        $data->etat=$request->etat;
+        if($request->etat==0 || $request->etat==1){
+            $data->etat=$request->etat;
+        }
         if(!empty($request->id_membre))
         $data->id_membre=$request->id_membre;
         if(!empty($request->id_session))
@@ -58,9 +59,23 @@ class InscriptionController extends Controller
     {
         Inscription::find($id)->delete();
     }
-    public function removemembre(string $id)
+    public function removemembre(string $id,string $idsession)
     {
-        $inscription = Inscription::where('id_membre', $id)->first();
+        $inscription = Inscription::where([
+            'id_membre' => $id,
+            'id_session' => $idsession
+        ])->first();
         $inscription->delete();
+    }
+    public function update2(Request $request, string $id,string $idsession)
+    {
+        $inscription = Inscription::where([
+            'id_membre' => $id,
+            'id_session' => $idsession
+        ])->first();
+        if($request->etat==0 || $request->etat==1){
+            $inscription->etat=$request->etat;
+        }
+        $inscription->save();
     }
 }
