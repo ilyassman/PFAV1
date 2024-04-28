@@ -344,7 +344,7 @@
         <h3 class="card-title">Sélectionner des membres</h3>
     </div>
     <div class="card-body">
-        <form>
+       
             <!-- Liste des membres avec barre de recherche -->
 
              <!-- Liste des sessions de formation -->
@@ -381,7 +381,7 @@
             </div>
 
 
-        </form>
+        
     </div>
 </div>
 
