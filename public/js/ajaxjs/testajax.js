@@ -25,7 +25,7 @@ categs.forEach(function(checkbox) {
     var req=new XMLHttpRequest();
     req.onreadystatechange=function(){
         if(req.readyState===req.DONE){
-            loading.style.display = 'none';
+           
             
             var result=JSON.parse(req.response);
             fomtionlen+=result.length;
@@ -57,6 +57,7 @@ categs.forEach(function(checkbox) {
                                   </div>
                               </div>
                           `;
+                          loading.style.display = 'none';
                       })
                       .catch(error => console.error(error));
             });}
@@ -84,7 +85,7 @@ categs.forEach(function(checkbox) {
     var req=new XMLHttpRequest();
     req.onreadystatechange=function(){
         if(req.readyState===req.DONE){
-            loading.style.display = 'none';
+            
             
             var result=JSON.parse(req.response);
             console.log(result);
@@ -114,6 +115,7 @@ categs.forEach(function(checkbox) {
                                   </div>
                               </div>
                           `;
+                          loading.style.display = 'none';
                       })
                       .catch(error => console.error(error));
             });
@@ -140,7 +142,7 @@ but1.onclick = function (e) {
   var req = new XMLHttpRequest();
   req.onreadystatechange = function () {
       if (req.readyState === req.DONE) {
-          loading.style.display = 'none';
+          
 
           var result = JSON.parse(req.response);
 
@@ -171,6 +173,7 @@ but1.onclick = function (e) {
                               </div>
                           </div>
                       `;
+                      loading.style.display = 'none';
                   })
                   .catch(error => console.error(error));
           });
