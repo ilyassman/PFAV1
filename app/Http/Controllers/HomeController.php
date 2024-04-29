@@ -78,8 +78,9 @@ class HomeController extends Controller
         return view("Admin/pages/tables/Sessions",compact('datas','formations','formateurs'));
      }
      public function showsupport(){
-        $datas=Support::all();
-        return view("Admin/pages/tables/support",compact('datas'));
+        $datas=DB::select("select supports.*,formations.titre as formation from supports,formations where supports.id_formation=formations.id");
+        $formations=Formation::all();
+        return view("Admin/pages/tables/support",compact('datas','formations'));
      }
      public function showecole(){
         $ecole=Ecole::first();

@@ -28,7 +28,7 @@ Route::get('/commentaires', [HomeController::class, 'showcomment'])->name('comme
 Route::get('/formateurs', [HomeController::class, 'showformateurs'])->name('formateurs');
 Route::get('/formations', [HomeController::class, 'showformation'])->name('formations');
 Route::get('/sessions', [HomeController::class, 'showsession'])->name('sessions');
-Route::get('/support', [HomeController::class, 'showsupport'])->name('support');
+Route::get('/supports', [HomeController::class, 'showsupport'])->name('support');
 Route::get('/ecole', [HomeController::class, 'showecole'])->name('ecole');
 Route::get('/inscription', [HomeController::class, 'inscriformation'])->name('inscription');
 Route::get('/gererSessions', [HomeController::class, 'showgererSessions'])->name('gererSessions');

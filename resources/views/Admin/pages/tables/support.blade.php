@@ -4,7 +4,18 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>AdminLTE 3 | DataTables</title>
-
+ <style>
+   #loading {
+    position: relative; /* Positionner la div de chargement de manière fixe par rapport à la fenêtre du navigateur */
+    top: 0; /* Aligner la div en haut de la fenêtre */
+    left: 40%; /* Aligner la div à gauche de la fenêtre */
+   
+  
+}
+#supp:hover {
+    cursor: pointer; 
+}
+ </style>
     <!-- Google Font: Source Sans Pro -->
     <link
       rel="stylesheet"
@@ -325,28 +336,22 @@
                 </tr>
               </thead>
               <tbody>
+                <div id="loading" style="display: none !important;">
+                  <img src="Animation - 1711828043942.gif" alt="Chargement..." />
+              </div>
+                @foreach ($datas as $support)
                 <tr>
-                  <td>Support 1</td>
-                  <td id="typeFichier1"><a href="Formateurspic/1712529312_refrigerateur-samsung-2-portes-490l-silver.jpg" download="nom-du-fichier">image1.jpg</a></td>
-                  <td>Formation A</td>
+                  <td>{{$support->titre}}</td>
+                  <td><a href="Support/{{$support->fichier}}" download="{{$support->fichier}}">{{$support->fichier}}</a></td>
+                  <td>{{$support->formation}}</td>
                   <td>
-                    <i class="fas fa-trash-alt text-danger"></i>
+                    <i id="supp" onclick="suppdialog({{$support->id}})" class="fas fa-trash-alt text-danger"></i>
                     <!-- Icône de suppression -->
-                    <i class="fas fa-edit text-primary ml-2"></i>
-                    <!-- Icône de modification -->
+                    
                   </td>
-                </tr>
-                <tr>
-                  <td>Support 2</td>
-                  <td id="typeFichier2">dossier1.zip</td>
-                  <td>Formation B</td>
-                  <td>
-                    <i class="fas fa-trash-alt text-danger"></i>
-                    <!-- Icône de suppression -->
-                    <i class="fas fa-edit text-primary ml-2"></i>
-                    <!-- Icône de modification -->
-                  </td>
-                </tr>
+                </tr>  
+                @endforeach
+                
                 <!-- Ajouter d'autres lignes pour chaque support -->
               </tbody>
             </table>
@@ -410,15 +415,14 @@
           </div>
           <div class="form-group">
             <label for="titreFormation">Titre de la formation:</label>
-            <input
-              type="text"
-              class="form-control"
-              id="titreFormation"
-              name="titreFormation"
-              required
-            />
+            <select class="form-control" name="titreFormation" id="titreFormation">
+              @foreach ($formations as $formation)
+              <option value="{{$formation->id}}">{{$formation->titre}}</option>
+              @endforeach
+              
+            </select>
           </div>
-          <button type="submit" class="btn btn-primary">Ajouter</button>
+          <button id="addsupport" type="submit" class="btn btn-primary">Ajouter</button>
         </form>
       </div>
     </div>
@@ -467,6 +471,8 @@
     <script src="../../dist/js/adminlte.min.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="../../dist/js/demo.js"></script>
+    <script src="js/ajaxjsadmin/supportcrud.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Page specific script -->
     <script>
       $(function () {

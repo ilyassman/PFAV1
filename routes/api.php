@@ -9,6 +9,7 @@ use App\Http\Controllers\API\InscriptionController;
 use App\Http\Controllers\API\MembreController;
 use App\Http\Controllers\API\PostController;
 use App\Http\Controllers\API\SessionController;
+use App\Http\Controllers\API\SupportController;
 use App\Http\Controllers\API\UtilisateurController;
 use App\Http\Controllers\API\VoteController;
 use App\Http\Controllers\API\EcoleController;
@@ -80,6 +81,10 @@ Route::prefix('v1')->group(function () {
 });
 Route::prefix('v1')->group(function () {
     Route::apiResource('ecole', EcoleController::class
+    );
+});
+Route::prefix('v1')->group(function () {
+    Route::apiResource('supports', SupportController::class
     );
 });
 Route::get('commentaires/{idformation}',[CommentaireController::class,'findbyformation']);
