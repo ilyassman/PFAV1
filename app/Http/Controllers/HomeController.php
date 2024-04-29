@@ -11,6 +11,7 @@ use App\Models\Formation;
 use App\Models\Support;
 use Illuminate\Http\Request;
 use DB;
+use Illuminate\Support\Facades\Crypt;
 use LaravelDaily\LaravelCharts\Classes\LaravelChart;
 class HomeController extends Controller
 {
@@ -105,7 +106,7 @@ class HomeController extends Controller
     public function showCourseSingle(Request $request)
     {
         // Récupérer l'ID de la formation à partir de la requête
-        $formationId = $request->input('id');
+        $formationId = Crypt::decrypt($request->input('id'));
 
         // Récupérer la formation correspondante depuis la base de données
         $formation = Formation::find($formationId);

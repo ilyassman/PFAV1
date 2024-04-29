@@ -41,26 +41,24 @@ categs.forEach(function(checkbox) {
                       k--;
                       }
                       }
-                formations.innerHTML+=`
-                <div class="course-1-item">
-                <figure class="thumnail">
-                  <a href="course?id=`+element.id+`"><img src="Formationpic/`+element.image+`"alt="Civil Engineering Structures Course" class="img-fluid"></a>
-                  <div class="price">`+element.prix+` €</div>
-                  <div class="category"><h3>`+element.titre +`</h3></div>
-                </figure>
-                <div class="course-1-content pb-4">
-                
-                  <div class="rating text-center mb-3">
-                    `+etoile+
-                    `
-                  </div>
-                  <p class="desc mb-4">`+element.contenue+`</p>
-                  <p><a href="course?id=`+element.id+`" class="btn btn-primary rounded-0 px-4">S'inscrire à ce cours</a></p>
-                </div>
-              </div>
-                
-                
-                `;
+                      encryptId(element.id)
+                      .then(encryptedId => {
+                          formations.innerHTML += `
+                              <div class="course-1-item">
+                                  <figure class="thumnail">
+                                      <a href="course?id=${encryptedId}"><img src="Formationpic/${element.image}" alt="Civil Engineering Structures Course" class="img-fluid"></a>
+                                      <div class="price">${element.prix} €</div>
+                                      <div class="category"><h3>${element.titre}</h3></div>
+                                  </figure>
+                                  <div class="course-1-content pb-4">
+                                      <div class="rating text-center mb-3">${etoile}</div>
+                                      <p class="desc mb-4">${element.contenue}</p>
+                                      <p><a href="course?id=${encryptedId}" class="btn btn-primary rounded-0 px-4">S'inscrire à ce cours</a></p>
+                                  </div>
+                              </div>
+                          `;
+                      })
+                      .catch(error => console.error(error));
             });}
             else{
                
@@ -100,26 +98,24 @@ categs.forEach(function(checkbox) {
                       i--;
                       }
                       }
-                formations.innerHTML+=`
-                <div class="course-1-item">
-                <figure class="thumnail">
-                  <a href="course?id=`+element.id+`"><img src="Formationpic/`+element.image+`" alt="Civil Engineering Structures Course" class="img-fluid"></a>
-                  <div class="price">`+element.prix+` €</div>
-                  <div class="category"><h3>`+element.titre +`</h3></div>
-                </figure>
-                <div class="course-1-content pb-4">
-               
-                  <div class="rating text-center mb-3">`+
-                      etoile
-                      +`
-                  </div>
-                  <p class="desc mb-4">`+element.contenue +`</p>
-                  <p><a href="course?id=`+element.id+`" class="btn btn-primary rounded-0 px-4">S'inscrire à ce cours</a></p>
-                </div>
-              </div>
-                
-                
-                `;
+                      encryptId(element.id)
+                      .then(encryptedId => {
+                          formations.innerHTML += `
+                              <div class="course-1-item">
+                                  <figure class="thumnail">
+                                      <a href="course?id=${encryptedId}"><img src="Formationpic/${element.image}" alt="Civil Engineering Structures Course" class="img-fluid"></a>
+                                      <div class="price">${element.prix} €</div>
+                                      <div class="category"><h3>${element.titre}</h3></div>
+                                  </figure>
+                                  <div class="course-1-content pb-4">
+                                      <div class="rating text-center mb-3">${etoile}</div>
+                                      <p class="desc mb-4">${element.contenue}</p>
+                                      <p><a href="course?id=${encryptedId}" class="btn btn-primary rounded-0 px-4">S'inscrire à ce cours</a></p>
+                                  </div>
+                              </div>
+                          `;
+                      })
+                      .catch(error => console.error(error));
             });
         }
 
@@ -133,63 +129,63 @@ categs.forEach(function(checkbox) {
   }
     }
 });
-but1.onclick=function(e){
-e.preventDefault();
-loading.style.display = 'block';
-formations.innerHTML='';
-categs.forEach(categ => {
-    categ.checked=false;
-    
-});
+but1.onclick = function (e) {
+  e.preventDefault();
+  loading.style.display = 'block';
+  formations.innerHTML = '';
+  categs.forEach(categ => {
+      categ.checked = false;
+  });
 
-    var req=new XMLHttpRequest();
-    req.onreadystatechange=function(){
-        if(req.readyState===req.DONE){
-            loading.style.display = 'none ';
-            
-            var result=JSON.parse(req.response);
-            
-            
-            result.forEach(element => {
-                var i=0;
-                var etoile='';
-                i=element.niveau_etoile;
-                      for(let j=1;j<=5;j++){
-                      if(i!=0){
-                     etoile+='<span class="icon-star2 text-warning"></span>'
+  var req = new XMLHttpRequest();
+  req.onreadystatechange = function () {
+      if (req.readyState === req.DONE) {
+          loading.style.display = 'none';
+
+          var result = JSON.parse(req.response);
+
+          result.forEach(element => {
+              var i = 0;
+              var etoile = '';
+              i = element.niveau_etoile;
+              for (let j = 1; j <= 5; j++) {
+                  if (i != 0) {
+                      etoile += '<span class="icon-star2 text-warning"></span>'
                       i--;
-                      }
-                      }
-                formations.innerHTML+=`
-                <div class="course-1-item">
-                <figure class="thumnail">
-                  <a href="course?id=`+element.id+`"><img src="Formationpic/`+element.image+`" alt="Civil Engineering Structures Course" class="img-fluid"></a>
-                  <div class="price">`+element.prix+` €</div>
-                  <div class="category"><h3>`+element.titre +`</h3></div>
-                </figure>
-                <div class="course-1-content pb-4">
-                
-                  <div class="rating text-center mb-3">`+
-                      etoile
-                      +`
-                  </div>
-                  <p class="desc mb-4">`+element.contenue +`</p>
-                  <p><a href="course?id=`+element.id+`" class="btn btn-primary rounded-0 px-4">S'inscrire à ce cours</a></p>
-                </div>
-              </div>
-                
-                
-                `;
-            });
-        }
+                  }
+              }
 
-    }
-    
-       
-        
-       
-       req.open('GET','http://127.0.0.1:8000/api/v1/formations');
-       req.send();
+              encryptId(element.id)
+                  .then(encryptedId => {
+                      formations.innerHTML += `
+                          <div class="course-1-item">
+                              <figure class="thumnail">
+                                  <a href="course?id=${encryptedId}"><img src="Formationpic/${element.image}" alt="Civil Engineering Structures Course" class="img-fluid"></a>
+                                  <div class="price">${element.prix} €</div>
+                                  <div class="category"><h3>${element.titre}</h3></div>
+                              </figure>
+                              <div class="course-1-content pb-4">
+                                  <div class="rating text-center mb-3">${etoile}</div>
+                                  <p class="desc mb-4">${element.contenue}</p>
+                                  <p><a href="course?id=${encryptedId}" class="btn btn-primary rounded-0 px-4">S'inscrire à ce cours</a></p>
+                              </div>
+                          </div>
+                      `;
+                  })
+                  .catch(error => console.error(error));
+          });
+      }
+  }
 
+  req.open('GET', 'http://127.0.0.1:8000/api/v1/formations');
+  req.send();
 }
 
+function encryptId(id) {
+  return new Promise((resolve, reject) => {
+      fetch(`http://127.0.0.1:8000/encrypt-id/${id}`)
+          .then(response => response.json())
+          .then(data => resolve(data.encrypted_id))
+          .catch(error => reject(error));
+  });
+}

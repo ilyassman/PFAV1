@@ -252,7 +252,7 @@
                 @foreach ($formations as $form)
                 <div class="course-1-item">
                   <figure class="thumnail">
-                    <a href="{{ route('course', ['id' => $form->id]) }}">
+                    <a href="{{ route('course', ['id' =>Crypt::encrypt($form->id)]) }}">
                         <img src="Formationpic/{{$form->image}}" alt="Ingénierie des ressources en eau" class="img-fluid"
                         >
                     </a>
@@ -284,7 +284,7 @@
                     </p>
                     <p>
 
-                      <a href="{{ route('course', ['id' => $form->id]) }}" class="btn btn-primary rounded-0 px-4">S'inscrire à ce cours</a>
+                      <a href="{{ route('course', ['id' => Crypt::encrypt($form->id)]) }}" class="btn btn-primary rounded-0 px-4">S'inscrire à ce cours</a>
 
                     </p>
                   </div>
