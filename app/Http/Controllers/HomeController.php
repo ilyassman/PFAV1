@@ -8,8 +8,10 @@ use App\Models\Ecole;
 use App\Models\Formateur;
 use App\Models\Session;
 use App\Models\Formation;
+use App\Models\Membre;
 use App\Models\Support;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use DB;
 use Illuminate\Support\Facades\Crypt;
 use LaravelDaily\LaravelCharts\Classes\LaravelChart;
@@ -134,6 +136,28 @@ class HomeController extends Controller
         WHERE membres.iduser=utilisateurs.id");
         return view('Admin/pages/tables/gererSessions',compact('sessions','membres'));
     }
+    public function registered()
+    {
+        $datas=Categorie::take(6)->get();
+        return view('register',compact('datas'));
+    }
 
 
+    public function profile()
+    {
+        $user = Auth::user();
+        if ($user) {
+            $membre = Membre::where('iduser', $user->id)->first(); // Récupérer le membre associé à l'utilisateur
+            $datas = Categorie::take(6)->get();
+            return view('profile', compact('user', 'membre', 'datas')); // Passer à la vue les informations de l'utilisateur et de son membre associé
+        } else {
+            return redirect('/login')->with('error', 'Veuillez vous connecter pour accéder à votre profil.');
+        }
+    }
+    public function logout(Request $request)
+    {
+        Auth::logout(); // Déconnexion de l'utilisateur
+        // Redirection vers la page de connexion avec un message de succès
+        return redirect('/login')->with('success', 'Vous avez été déconnecté avec succès.');
+    }
 }

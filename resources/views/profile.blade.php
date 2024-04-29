@@ -33,6 +33,11 @@
         left: 30%;
 
     }
+    .card {
+       margin-top: 140px ;
+       margin-bottom: 30px ;
+    }
+
 
 </style>
 
@@ -62,128 +67,50 @@
             <a href="#" class="small mr-3"><span class="icon-envelope-o mr-2"></span>Contact</a>
           </div>
           <div class="col-lg-3 text-right">
-            <a href="{{ route('login') }}" class="small btn btn-primary px-2 py-2 rounded-0"
-              ><span class="icon-unlock-alt"></span>Connexion</a
-            >
-            <a href="{{ route('register') }}" class="small btn btn-primary px-2 py-2 rounded-0">
-              <span class="icon-users"></span>S'inscrire
-          </a>
-          </div>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                @csrf
+                <button type="submit" class="small btn btn-primary px-2 py-2 rounded-0">
+                    <span class="icon-lock"></span> Déconnexion
+                </button>
+            </form>
+        </div>
+
         </div>
       </div>
     </div>
     <x-header :categ="$datas"/>
 
-    <div class="custom-breadcrumns border-bottom" style="margin-top: 120px;">
-      <div class="container">
-        <a href="{{ route('home') }}">Accueil</a>
-        <span class="mx-3 icon-keyboard_arrow_right"></span>
-        <a href="{{ route('courses') }}">Cours</a>
-        <span class="mx-3 icon-keyboard_arrow_right"></span>
-        <span class="current">Cours</span>
-      </div>
-    </div>
 
-    <div class="filter-section">
-        <div class="mejs__container-fullscreen">
+
+    <div class="container">
         <div class="row">
-            <div class="col-lg-3 col-12 filter">
-                <div class="card p-3 mb-2">
-                    <div class="d-flex justify-content-between">
-                        <div class="d-flex flex-row align-items-center">
-                            <div class="icon"> <i class="bx bxl-mailchimp"></i> </div>
-                            <div class="ms-2 c-details">
-                                <h5 class="mb-0">Catégorie :</h5>
-                            </div>
-                        </div>
-
+            <div class="col-md-6 offset-md-3">
+                <div class="card">
+                    <div class="card-header text-center">
+                        @if($membre && $membre->image)
+                            <img src="{{ asset($membre->image) }}" class="rounded-circle" style="width: 100px; height: 100px;" alt="Image de profil">
+                        @else
+                            <div class="bg-secondary rounded-circle" style="width: 100px; height: 100px;"></div>
+                        @endif
                     </div>
-                    <div class="mt-3">
-                      <form action="">
-                        @foreach($datas as $categ)
-                        <input type="checkbox" id="categ" name="domaine" value={{$categ['id']}}> {{$categ['nom']}}
-                        <br>
-                        @endforeach
-
-                        <div class="btn-container">
-                            <button id="ajaxbuton" class="btn btn-primary">Réinitialiser tout</button>
-                        </div>
-                    </form>
+                    <div class="card-body">
+                        <h5 class="card-title">Informations de l'utilisateur</h5>
+                        <p class="card-text" style="margin-top: 10px;">Email: {{ $user->email }}</p>
+                        <p class="card-text">Numéro de téléphone: {{ $user->num_tel }}</p>
+                        @if($membre)
+                            <p class="card-text">Nom: {{ $membre->nom }}</p>
+                            <p class="card-text">Prénom: {{ $membre->prenom }}</p>
+                        @else
+                            <p class="card-text">Membre non défini</p>
+                        @endif
                     </div>
                 </div>
             </div>
-
-              <div id="loading" style="display: none !important;">
-                <img src="Animation - 1711828043942.gif" alt="Chargement..." />
-            </div>
-            <div id="listeform" class="col-lg-9 col-12 cards">
-              @foreach ($formations as $form)
-                <div class="course-1-item">
-                  <figure class="thumnail">
-                    <a href="{{ route('course', ['id' => Crypt::encrypt($form->id)]) }}">
-                        <img src="Formationpic/{{$form->image}}" alt="Ingénierie des ressources en eau" class="img-fluid">
-                    </a>
-                    <div class="price">{{$form->prix}}€</div>
-                    <div class="category">
-                      <h3>{{$form->titre}}</h3>
-                    </div>
-                  </figure>
-                  <div class="course-1-content pb-4">
-                    <div class="rating text-center mb-3">
-                      @php
-                      $i=$form->niveau_etoile;
-
-                      @endphp
-                      @for($j=1;$j<=5;$j++)
-                      @if($i!=0)
-                      <span class="icon-star2 text-warning"></span>
-                      @php
-                      $i--;
-                      @endphp
-                      @endif
-                      @endfor
-
-                    </div>
-                    <p class="desc mb-4">
-                      {{$form->contenue}}
-                    </p>
-                    <p>
-                        <a href="{{ route('course', ['id' => Crypt::encrypt($form->id)]) }}" class="btn btn-primary rounded-0 px-4">S'inscrire à ce cours</a>
-
-                    </p>
-                  </div>
-                </div>
-                @endforeach
-            </div>
-        </div>
         </div>
     </div>
 
-    <div class="section-bg style-1" style="background-image: url('images/hero_1.jpg');">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-4 col-md-6 mb-5 mb-lg-0">
-              <span class="icon flaticon-mortarboard"></span>
-              <h3>Notre Philosophie
 
-              </h3>
-              <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Reiciendis recusandae, iure repellat quis delectus ea? Dolore, amet reprehenderit.</p>
-            </div>
-            <div class="col-lg-4 col-md-6 mb-5 mb-lg-0">
-              <span class="icon flaticon-school-material"></span>
-              <h3>Principe Académique</h3>
-              <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Reiciendis recusandae, iure repellat quis delectus ea?
-                Dolore, amet reprehenderit.</p>
-            </div>
-            <div class="col-lg-4 col-md-6 mb-5 mb-lg-0">
-              <span class="icon flaticon-library"></span>
-              <h3>Clé du Succès</h3>
-              <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Reiciendis recusandae, iure repellat quis delectus ea?
-                Dolore, amet reprehenderit.</p>
-            </div>
-          </div>
-        </div>
-      </div>
+
 
 
     <div class="footer">

@@ -4,6 +4,8 @@ use App\Http\Controllers\API\CommentaireController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Postcontroller;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Auth\LoginController;
 
 
 /*
@@ -19,6 +21,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/',[HomeController::class,'index'])->name('home');
 Route::get('/login',[HomeController::class,'login'])->name('login');
+Route::get('/register', [HomeController::class, 'registered'])->name('register');
 Route::get('/courses',[HomeController::class,'courses'])->name('courses');
 Route::get('/course',[HomeController::class,'course'])->name('course');
 Route::get('/course', [HomeController::class, 'showCourseSingle'])->name('course');
@@ -35,3 +38,8 @@ Route::get('/gererSessions', [HomeController::class, 'showgererSessions'])->name
 Route::get('/encrypt-id/{id}', function ($id) {
     return response()->json(['encrypted_id' => Crypt::encrypt($id)]);
 });
+
+Route::post('/register', [RegisterController::class, 'register']); // Pour soumettre le formulaire d'inscription
+Route::get('/profile', [HomeController::class, 'profile'])->name('profile')->middleware('auth');
+Route::post('/login', [LoginController::class, 'login'])->name('login');
+Route::post('/logout', [HomeController::class, 'logout'])->name('logout');

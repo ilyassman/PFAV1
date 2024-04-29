@@ -27,7 +27,15 @@
 
   <link rel="stylesheet" href="css/style.css">
 
+  <style>
+    .formulaire-card {
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Ajoute une ombre */
+    border-radius: 10px; /* Arrondit les coins */
+    padding: 20px; /* Ajoute un espace intérieur */
+    background-color: #fff; /* Couleur de fond */
+}
 
+ </style>
 
 </head>
 
@@ -48,29 +56,27 @@
       <div class="container">
         <div class="row align-items-center">
           <div class="col-lg-9 d-none d-lg-block">
-            <a href="#" class="small mr-3"><span class="icon-facebook mr-2"></span></a> 
-            <a href="#" class="small mr-3"><span class="icon-instagram mr-2"></span></a> 
-            <a href="#" class="small mr-3"><span class="icon-twitter mr-2"></span></a> 
-            <a href="#" class="small mr-3"><span class="icon-phone mr-2"></span> 10 20 123 456</a> 
-            <a href="#" class="small mr-3"><span class="icon-envelope-o mr-2"></span>Contact</a> 
+            <a href="#" class="small mr-3"><span class="icon-facebook mr-2"></span></a>
+            <a href="#" class="small mr-3"><span class="icon-instagram mr-2"></span></a>
+            <a href="#" class="small mr-3"><span class="icon-twitter mr-2"></span></a>
+            <a href="#" class="small mr-3"><span class="icon-phone mr-2"></span> 10 20 123 456</a>
+            <a href="#" class="small mr-3"><span class="icon-envelope-o mr-2"></span>Contact</a>
           </div>
           <div class="col-lg-3 text-right">
-            <a href="login.html" class="small btn btn-primary px-2 py-2 rounded-0"
+            <a href="{{ route('login') }}" class="small btn btn-primary px-2 py-2 rounded-0"
               ><span class="icon-unlock-alt"></span>Connexion</a
             >
-            <a
-              href="register.html"
-              class="small btn btn-primary px-2 py-2 rounded-0"
-              ><span class="icon-users"></span>S'inscrire</a
-            >
+            <a href="{{ route('register') }}" class="small btn btn-primary px-2 py-2 rounded-0">
+              <span class="icon-users"></span>S'inscrire
+          </a>
           </div>
         </div>
       </div>
     </div>
     <x-header :categ="$datas"/>
-    
-    
-    
+
+
+
 
     <div class="custom-breadcrumns border-bottom">
       <div class="container">
@@ -82,41 +88,40 @@
 
     <div class="site-section">
         <div class="container">
-
-
             <div class="row justify-content-center">
-                <div class="col-md-5">
-                    <div class="row">
-                        <div class="col-md-12 form-group">
-                            <label for="username">Username</label>
-                            <input type="text" id="username" class="form-control form-control-lg">
+                <div class="col-md-5 formulaire-card">
+                    <form method="POST" action="{{ route('login') }}">
+                        @csrf <!-- Ajoutez ceci pour protéger votre formulaire contre les attaques CSRF -->
+                        <div class="row">
+                            <div class="col-md-12 form-group">
+                                <label for="email">Email</label>
+                                <input type="text" id="email" name="email" class="form-control form-control-lg">
+                            </div>
+                            <div class="col-md-12 form-group">
+                                <label for="password">Password</label>
+                                <input type="password" id="password" name="password" class="form-control form-control-lg">
+                            </div>
                         </div>
-                        <div class="col-md-12 form-group">
-                            <label for="pword">Password</label>
-                            <input type="text" id="pword" class="form-control form-control-lg">
+                        <div class="row">
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-primary btn-lg px-5">Log In</button>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12">
-                            <input type="submit" value="Log In" class="btn btn-primary btn-lg px-5">
-                        </div>
-                    </div>
+                    </form>
                 </div>
             </div>
-            
-
-          
         </div>
     </div>
 
-    
+
+
 
     <div class="footer">
       <div class="container">
         <div class="row">
           <div class="col-lg-3">
             <p class="mb-4"><img src="images/logo.png" alt="Image" class="img-fluid"></p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae nemo minima qui dolor, iusto iure.</p>  
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae nemo minima qui dolor, iusto iure.</p>
             <p><a href="#">Learn More</a></p>
           </div>
           <div class="col-lg-3">
@@ -129,8 +134,8 @@
               <li><a href="#">Santé</a></li>
               <li><a href="#">Informatique</a></li>
             </ul>
-          </div> 
-        
+          </div>
+
           <div class="col-lg-3">
               <h3 class="footer-heading"><span>Contact</span></h3>
               <ul class="list-unstyled">
@@ -156,7 +161,7 @@
         </div>
       </div>
     </div>
-    
+
 
   </div>
   <!-- .site-wrap -->

@@ -186,11 +186,9 @@ input[type="submit"]:hover {
             <a href="{{ route('login') }}" class="small btn btn-primary px-2 py-2 rounded-0"
               ><span class="icon-unlock-alt"></span>Connexion</a
             >
-            <a
-              href="register.html"
-              class="small btn btn-primary px-2 py-2 rounded-0"
-              ><span class="icon-users"></span>S'inscrire</a
-            >
+            <a href="{{ route('register') }}" class="small btn btn-primary px-2 py-2 rounded-0">
+              <span class="icon-users"></span>S'inscrire
+          </a>
           </div>
         </div>
       </div>
