@@ -80,18 +80,21 @@ image.addEventListener('change', function(event) {
 butmemb.onclick=function(e){
     e.preventDefault(); 
     Swal.fire({
-        title: "Opération réussie !",
-        text: "Le membre a été ajouté avec succès.",
-        icon: "success"
-    });
-    adduser(email.value,password.value,tele.value,2) .then(id => {
-        addmembre(namee.value,prenom.value,id,fichier).then(()=>{
-            const modalElement = document.getElementById('ajouterMembreModal');
-            $(modalElement).modal('hide');
-            $('.modal-backdrop').remove(); // Supprimer le backdrop
-            // Réinitialiser le formulaire si nécessaire
-            document.getElementById('ajouterMembreForm').reset();
-        })
+        title: "Ajout de membre en cours...",
+        html: "Veuillez patienter un peu.",
+        showConfirmButton: false,
+        didOpen: () => {
+          Swal.showLoading();
+          adduser(email.value, password.value, tele.value, 2).then(id => {
+            addmembre(namee.value, prenom.value, id, fichier).then(() => {
+              Swal.close();
+              const modalElement = document.getElementById('ajouterMembreModal');
+              $(modalElement).modal('hide');
+              $('.modal-backdrop').remove(); 
+              document.getElementById('ajouterMembreForm').reset();
+            });
+          });
+        }
         
        
         

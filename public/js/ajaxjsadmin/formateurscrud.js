@@ -39,17 +39,23 @@ image.addEventListener('change', function(event) {
  butfor.onclick=function(e){
     e.preventDefault(); 
     Swal.fire({
-        title: "Opération réussie !",
-        text: "Le formateur a été ajouté avec succès.",
-        icon: "success"
-    });
+        title: "Ajout de formateur en cours...",
+        html: "Veuillez patienter un peu.",
+        showConfirmButton: false,
+        didOpen: () => {
+          Swal.showLoading();
     adduser(email.value,password.value,tele.value,1) .then(id => {
-        addformateur(name.value,prenom.value,id,description.value,fichier);
-        const modalElement = document.getElementById('ajouterFormateurModal');
-        
+        addformateur(name.value,prenom.value,id,description.value,fichier).then(()=>{
+            Swal.close();
+            const modalElement = document.getElementById('ajouterFormateurModal');
         $(modalElement).modal('hide');
         $('.modal-backdrop').remove(); 
+    });
+});
+    
+}
      })
+    
      .catch(error => {
        console.error('Une erreur s\'est produite lors de la récupération de l\'ID :', error);
      });
