@@ -27,7 +27,7 @@
                       @if(count($data['formation'])>0)
                       @foreach($data['formation'] as $formation)
                       <li>
-                        <a href="{{ route('course', ['id' => $formation['id']]) }}" class="nav-link text-left">{{$formation['titre']}}</a>
+                        <a href="{{ route('course', ['id' => Crypt::encrypt($formation->id)]) }}" class="nav-link text-left">{{$formation['titre']}}</a>
                       </li>
                     @endforeach
                       @else

@@ -99,7 +99,18 @@ class MembreController extends Controller
      */
     public function destroy(string $id)
     {
-        Membre::findOrFail($id)->delete();
+        $membre = Membre::where('iduser', $id)->first();
+        // Vérifier si le support existe
+    if($membre) {
+        // Supprimer le fichier associé s'il existe
+        if(file_exists(public_path('/Membrespic/' . $membre->image))) {
+            unlink(public_path('/Membrespic/' . $membre->image));
+        }
+
+        return "Le membre a été supprimé avec succès.";
+    } else {
+        return "Le membre que vous essayez de supprimer n'existe pas.";
+    }
     }
     public function commentaire_membre(string $id){
         $membre=Membre::find($id);

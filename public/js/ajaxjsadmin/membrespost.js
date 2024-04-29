@@ -79,14 +79,23 @@ image.addEventListener('change', function(event) {
   });
 butmemb.onclick=function(e){
     e.preventDefault(); 
+    Swal.fire({
+        title: "Opération réussie !",
+        text: "Le membre a été ajouté avec succès.",
+        icon: "success"
+    });
     adduser(email.value,password.value,tele.value,2) .then(id => {
-        addmembre(namee.value,prenom.value,id,fichier);
-        const modalElement = document.getElementById('ajouterMembreModal');
+        addmembre(namee.value,prenom.value,id,fichier).then(()=>{
+            const modalElement = document.getElementById('ajouterMembreModal');
+            $(modalElement).modal('hide');
+            $('.modal-backdrop').remove(); // Supprimer le backdrop
+            // Réinitialiser le formulaire si nécessaire
+            document.getElementById('ajouterMembreForm').reset();
+        })
         
-        $(modalElement).modal('hide');
-        $('.modal-backdrop').remove(); // Supprimer le backdrop
-        // Réinitialiser le formulaire si nécessaire
-        document.getElementById('ajouterMembreForm').reset();
+       
+        
+       
         
      })
      .catch(error => {
@@ -134,7 +143,24 @@ async function deleteMember(id) {
             const errorMessage = await response.text();
             throw new Error(errorMessage || 'Something went wrong');
         }
-        fetchData(table);
+    } catch (error) {
+        console.error('Error deleting post:', error);
+        alert('Une erreur est survenue lors de la suppression du post.');
+    }
+}
+async function deleteImage(id) {
+    const urlAPI = `http://127.0.0.1:8000/api/v1/membres/${id}`;
+    try {
+        const response = await fetch(urlAPI, {
+            method: 'DELETE',
+        });
+
+        if (!response.ok) {
+            const errorMessage = await response.text();
+            throw new Error(errorMessage || 'Something went wrong');
+        }
+        deleteMember(id);
+        fetchData();
     } catch (error) {
         console.error('Error deleting post:', error);
         alert('Une erreur est survenue lors de la suppression du post.');
@@ -150,7 +176,8 @@ function suppdialog(id){
       }).then((result) => {
         if (result.isConfirmed) {
           Swal.fire("deleted membre", "", "success");
-          deleteMember(id);
+          deleteImage(id);
+          
         } 
       });
 }

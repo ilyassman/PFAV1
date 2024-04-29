@@ -32,19 +32,23 @@ image.addEventListener('change', function(event) {
     const modalElement = document.getElementById('modifierFormateurModal');
     $(modalElement).modal('hide');
     $('.modal-backdrop').remove();
-    fetchData(table);
+    fetchData();
    
   }  
 }
  butfor.onclick=function(e){
     e.preventDefault(); 
+    Swal.fire({
+        title: "Opération réussie !",
+        text: "Le formateur a été ajouté avec succès.",
+        icon: "success"
+    });
     adduser(email.value,password.value,tele.value,1) .then(id => {
         addformateur(name.value,prenom.value,id,description.value,fichier);
         const modalElement = document.getElementById('ajouterFormateurModal');
         
         $(modalElement).modal('hide');
         $('.modal-backdrop').remove(); 
-        fetchData(table);
      })
      .catch(error => {
        console.error('Une erreur s\'est produite lors de la récupération de l\'ID :', error);
@@ -69,7 +73,7 @@ async function lireAPI(url) {
     }
   }
 
-async function fetchData(table) {
+async function fetchData() {
     table.innerHTML="";
     const urlAPI = 'http://127.0.0.1:8000/api/v1/formateurs/';
     const loading=document.getElementById("loading");
@@ -116,7 +120,7 @@ async function fetchData(table) {
             processData: false,
             contentType: false,
             success: function(response) {
-                fetchData(table);
+                fetchData();
                 console.log('Formateur ajouté avec succès:', response);
                 // Vous pouvez traiter les données mises à jour ici si nécessaire
                 // console.log('add Post:', addPost);
@@ -171,7 +175,7 @@ function suppdialog(id){
       }).then((result) => {
         if (result.isConfirmed) {
           Swal.fire("deleted Formateur", "", "success");
-          deleteForm(id);
+          deleteImage(id);
         } 
       });
 }
@@ -186,7 +190,25 @@ async function deleteForm(id) {
             const errorMessage = await response.text();
             throw new Error(errorMessage || 'Something went wrong');
         }
-        fetchData(table);
+        
+    } catch (error) {
+        console.error('Error deleting post:', error);
+        alert('Une erreur est survenue lors de la suppression du post.');
+    }
+}
+async function deleteImage(id) {
+    const urlAPI = `http://127.0.0.1:8000/api/v1/formateurs/${id}`;
+    try {
+        const response = await fetch(urlAPI, {
+            method: 'DELETE',
+        });
+
+        if (!response.ok) {
+            const errorMessage = await response.text();
+            throw new Error(errorMessage || 'Something went wrong');
+        }
+        deleteForm(id);
+        fetchData();
     } catch (error) {
         console.error('Error deleting post:', error);
         alert('Une erreur est survenue lors de la suppression du post.');

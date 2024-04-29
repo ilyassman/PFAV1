@@ -88,7 +88,18 @@ class FormateurController extends Controller
      */
     public function destroy(string $id)
     {
-        Formateur::find($id)->delete();
+        $formateur = Formateur::where('iduser', $id)->first();
+        // Vérifier si le support existe
+    if($formateur) {
+        // Supprimer le fichier associé s'il existe
+        if(file_exists(public_path('/Formateurspic/' . $formateur->image))) {
+            unlink(public_path('/Formateurspic/' . $formateur->image));
+        }
+
+        return "Le formateur a été supprimé avec succès.";
+    } else {
+        return "Le formateur que vous essayez de supprimer n'existe pas.";
+    }
     }
     public function sessionform(string $id){
         $form=Formateur::find($id);
