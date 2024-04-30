@@ -96,10 +96,16 @@
                             <div class="col-md-12 form-group">
                                 <label for="email">Email</label>
                                 <input type="text" id="email" name="email" class="form-control form-control-lg">
+                                @error('email')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                             <div class="col-md-12 form-group">
                                 <label for="password">Password</label>
                                 <input type="password" id="password" name="password" class="form-control form-control-lg">
+                                @error('password')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                         </div>
                         <div class="row">

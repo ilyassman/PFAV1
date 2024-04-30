@@ -33,13 +33,18 @@ class RegisterController extends Controller
             'type' => 0, // Assurez-vous que le champ 'type' est configuré correctement dans votre table
         ]);
 
-        // Création du membre correspondant
-        $membre = Membre::create([
-            'nom' => $request->nom,
-            'prenom' => $request->prenom,
-            'image' => $request->file('image') ? $request->file('image')->storeAs('images', $request->file('image')->getClientOriginalName()) : null,
-            'iduser' => $user->id,
-        ]);
+        $imagePath = $request->file('image')->store('picMembres', 'public');
+        $imageName = basename($imagePath);
+
+// Création du membre correspondant
+$membre = Membre::create([
+    'nom' => $request->nom,
+    'prenom' => $request->prenom,
+    'image' => $imageName,
+    'iduser' => $user->id,
+]);
+
+
 
         if ($user instanceof Authenticatable) {
             Auth::login($user);

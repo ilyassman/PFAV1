@@ -88,11 +88,11 @@
                 <div class="card">
                     <div class="card-header text-center">
                         @if($membre && $membre->image)
-                            <img src="{{ asset($membre->image) }}" class="rounded-circle" style="width: 100px; height: 100px;" alt="Image de profil">
+                          <img src="{{ asset('storage/picMembres/' . $membre->image) }}" class="rounded-circle" style="width: 100px; height: 100px;" alt="Image de profil">
                         @else
-                            <div class="bg-secondary rounded-circle" style="width: 100px; height: 100px;"></div>
+                          <div class="bg-secondary rounded-circle" style="width: 100px; height: 100px;"></div>
                         @endif
-                    </div>
+                      </div>
                     <div class="card-body">
                         <h5 class="card-title">Informations de l'utilisateur</h5>
                         <p class="card-text" style="margin-top: 10px;">Email: {{ $user->email }}</p>

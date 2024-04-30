@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-
 class LoginController extends Controller
 {
     public function login(Request $request)
@@ -22,8 +21,10 @@ class LoginController extends Controller
             // Redirection après connexion réussie
             return redirect('/profile')->with('success', 'Vous êtes maintenant connecté.');
         } else {
-            // Redirection en cas d'échec de la connexion
-            return redirect('/login')->with('error', 'Adresse e-mail ou mot de passe incorrect.');
+            // Retourner la vue de connexion avec les erreurs
+            return redirect('/login')->withErrors([
+                'email' => 'Adresse e-mail ou mot de passe incorrect.',
+            ]);
         }
     }
 }
