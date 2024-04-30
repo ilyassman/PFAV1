@@ -1,10 +1,35 @@
-console.log("admin")
 const ctxm = document.getElementById('myChart');
 const months = [
     'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
     'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
 ];
+const ctxm1=document.getElementById('myChart2');
 
+fetch("http://127.0.0.1:8000/chartcateg")
+.then(response => response.json())
+.then(json => {
+    // Générer une palette de couleurs dynamique
+    let dynamicColors = [];
+    for (let i = 0; i < json.labels.length; i++) {
+        dynamicColors.push(`rgb(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)})`);
+    }
+
+    new Chart(ctxm1, {
+        type: 'doughnut',
+        data: {
+            labels: json.labels,
+            datasets: [{
+                label: 'Nombre de formation',
+                data: json.dataset,
+                backgroundColor: dynamicColors, // Utiliser la palette de couleurs dynamique
+                hoverOffset: 4,
+            }]
+        },
+    });
+});
+
+
+ 
 fetch("http://127.0.0.1:8000/chartmembre")
 .then(response=>response.json())
 .then(json=>{new Chart(ctxm, {

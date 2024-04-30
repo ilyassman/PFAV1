@@ -182,4 +182,21 @@ class HomeController extends Controller
 
 
     }
+    public function chartcateg(){
+        $datas=DB::select("select categories.nom,count(*) nbrformation from formations,categories 
+        where categories.id=formations.categ_id
+        group by categories.nom;");
+        $dataset=[];
+      foreach($datas as $data){
+          $dataset['labels'][]=$data->nom;
+          $dataset['nbr'][] = $data->nbrformation;
+      }
+        return  [
+          'labels'=> $dataset['labels'],
+          'dataset'=>$dataset['nbr']
+          
+        ];
+  
+  
+      }
 }
