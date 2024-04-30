@@ -78,7 +78,8 @@ image.addEventListener('change', function(event) {
      fichier = event.target.files[0];
   });
 butmemb.onclick=function(e){
-    e.preventDefault(); 
+    e.preventDefault();
+     
     Swal.fire({
         title: "Ajout de membre en cours...",
         html: "Veuillez patienter un peu.",

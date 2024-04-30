@@ -160,4 +160,26 @@ class HomeController extends Controller
         // Redirection vers la page de connexion avec un message de succès
         return redirect('/login')->with('success', 'Vous avez été déconnecté avec succès.');
     }
+    public function chartmembre(){
+      $datas=DB::select("SELECT COUNT(*) AS nbr, MONTH(created_at) AS month  
+      FROM membres  
+      WHERE YEAR(created_at) = YEAR(NOW())
+      GROUP BY month 
+      ORDER BY month;");
+      $dataset=[];
+        // Créer un tableau pour stocker les données de chaque mois
+    $dataset = array_fill(1, 12, 0);
+
+    // Remplir le tableau avec les données existantes
+    foreach($datas as $data){
+        $month = $data->month;
+        $dataset[$month] = $data->nbr;
+    }
+      return  [
+        'dataset'=>array_values($dataset)
+        
+      ];
+
+
+    }
 }
