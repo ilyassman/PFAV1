@@ -477,20 +477,29 @@
 
         </div>
             </div>
-            <div class="row justify-content-center">
-              <div class="col-md-8">
-                  <div class="card">
-                      <div class="card-body">
-      
-                          <h1>{{ $chart1->options['chart_title'] }}</h1>
-                          {!! $chart1->renderHtml() !!}
-                          {!! $chart1->renderChartJsLibrary() !!}
-                          {!! $chart1->renderJs() !!}
-                      </div>
-      
-                  </div>
-              </div>
-          </div>
+            
+           <div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6"> <!-- Deuxième colonne pour le deuxième graphique -->
+            <div class="card ">
+                <div class="card-body">
+                    <h1>Formations par catégorie</h1>
+                    <canvas id="myChart2"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6"> <!-- Première colonne pour le premier graphique -->
+            <div class="card h-95"> <!-- Utilisation de h-100 pour assurer la même hauteur -->
+                <div class="card-body">
+                    <h1>Les clients inscrits par mois</h1>
+                    <canvas height="300px" id="myChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+          
           </div>
           <!-- /.container-fluid -->
         </section>
@@ -558,5 +567,8 @@
     <script src="dist/js/demo.js"></script>
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="dist/js/pages/dashboard.js"></script>
+    <!-- chart -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/charts/chart.js"></script>
   </body>
 </html>
