@@ -478,27 +478,27 @@
         </div>
             </div>
             
-            <div class="container">
-              <div class="row justify-content-center">
-                <div class="col-md-6"> <!-- Deuxième colonne pour le deuxième graphique -->
-                  <div class="card">
-                      <div class="card-body">
-                          <h1>Formations par catégorie</h1>
-                          <canvas id="myChart2"></canvas>
-                      </div>
-                  </div>
-              </div>
-                  <div class="col-md-6"> <!-- Première colonne pour le premier graphique -->
-                      <div class="card h-90">
-                          <div class="card-body">
-                              <h1>Les clients inscrits par mois</h1>
-                              <canvas id="myChart"></canvas>
-                          </div>
-                      </div>
-                  </div>
-                  
-              </div>
-          </div>
+           <div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6"> <!-- Deuxième colonne pour le deuxième graphique -->
+            <div class="card ">
+                <div class="card-body">
+                    <h1>Formations par catégorie</h1>
+                    <canvas id="myChart2"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6"> <!-- Première colonne pour le premier graphique -->
+            <div class="card h-95"> <!-- Utilisation de h-100 pour assurer la même hauteur -->
+                <div class="card-body">
+                    <h1>Les clients inscrits par mois</h1>
+                    <canvas height="300px" id="myChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
           
           </div>
           <!-- /.container-fluid -->
