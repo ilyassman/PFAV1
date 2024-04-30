@@ -483,7 +483,7 @@
                 <div class="col-md-6"> <!-- Deuxième colonne pour le deuxième graphique -->
                   <div class="card">
                       <div class="card-body">
-                          <h1>Les formations de categorie</h1>
+                          <h1>Formations par catégorie</h1>
                           <canvas id="myChart2"></canvas>
                       </div>
                   </div>
