@@ -54,7 +54,7 @@ class UtilisateurController extends Controller
       if(!empty($request->email))
       $user->email=$request->email;
       if(!empty($request->password))
-      $user->password=$request->password;
+      $user->password=Hash::make($request->password);
       if(!empty($request->num_tel))
       $user->num_tel=$request->num_tel;
       if(!empty($request->type))
