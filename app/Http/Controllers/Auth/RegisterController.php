@@ -16,7 +16,7 @@ class RegisterController extends Controller
     public function register(Request $request)
     {
         // Validation des données d'inscription
-  
+
 $request->validate([
     'nom' => 'required|string|max:255',
     'prenom' => 'required|string|max:255',
@@ -26,6 +26,13 @@ $request->validate([
     'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
 ], [
     'email.unique' => 'Cet email est déjà utilisé. Veuillez choisir un autre email.',
+    'nom.required' => 'Le champ nom est requis.',
+    'prenom.required' => 'Le champ prénom est requis.',
+    'tel.required' => 'Le champ téléphone est requis.',
+    'password.required' => 'Le champ mot de passe est requis.',
+    'password.min' => 'Le mot de passe doit comporter au moins 8 caractères.',
+    'email.required' => 'Le champ email est requis.',
+    'image.max' => 'L\'image ne doit pas dépasser 2 Mo.',
 ]);
 
 

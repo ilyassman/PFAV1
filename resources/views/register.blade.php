@@ -102,10 +102,16 @@
                             <div class="col-md-12 form-group">
                                 <label for="nom">Nom</label>
                                 <input type="text" id="nom" name="nom" class="form-control form-control-lg">
+                                @error('nom')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                             <div class="col-md-12 form-group">
                                 <label for="prenom">Prénom</label>
                                 <input type="text" id="prenom" name="prenom" class="form-control form-control-lg">
+                                @error('prenom')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                             <div class="col-md-12 form-group">
                                 <label for="email">E-mail</label>
@@ -117,14 +123,23 @@
                             <div class="col-md-12 form-group">
                                 <label for="tel">Numéro de téléphone</label>
                                 <input type="tel" id="tel" name="tel" class="form-control form-control-lg">
+                                @error('tel')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                             <div class="col-md-12 form-group">
                                 <label for="image">Image</label>
                                 <input type="file" id="image" name="image" class="form-control-file">
+                                @error('image')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                             <div class="col-md-12 form-group">
                                 <label for="password">Mot de passe</label>
                                 <input type="password" id="password" name="password" class="form-control form-control-lg">
+                                @error('password')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                         </div>
                         <div class="row">
@@ -137,6 +152,7 @@
             </div>
         </div>
     </form>
+
 
 
 
