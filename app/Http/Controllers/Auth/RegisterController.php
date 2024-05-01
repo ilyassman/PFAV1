@@ -30,17 +30,26 @@ class RegisterController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'num_tel' => $request->tel,
-            'type' => 0, // Assurez-vous que le champ 'type' est configuré correctement dans votre table
+            'type' => 2, // Assurez-vous que le champ 'type' est configuré correctement dans votre table
         ]);
 
-        $imagePath = $request->file('image')->store('picMembres', 'public');
-        $imageName = basename($imagePath);
+        // $imagePath = $request->file('image')->store('Membrespic', 'public');
+        // $imageName = basename($imagePath);
+        if ($request->hasFile('image')) {
+            // Récupérer le fichier image
+            $image = $request->file('image');
+            $fileName = time() . '_' . $image->getClientOriginalName();
+            
+            $image->move(public_path('/Membrespic'), $fileName);
+            
+            
+        }
 
 // Création du membre correspondant
 $membre = Membre::create([
     'nom' => $request->nom,
     'prenom' => $request->prenom,
-    'image' => $imageName,
+    'image' => $fileName,
     'iduser' => $user->id,
 ]);
 
