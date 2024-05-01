@@ -16,14 +16,26 @@ class RegisterController extends Controller
     public function register(Request $request)
     {
         // Validation des données d'inscription
-        $request->validate([
-            'nom' => 'required|string|max:255',
-            'prenom' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:utilisateurs',
-            'tel' => 'required|string|max:20',
-            'password' => 'required|string|min:8',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-        ]);
+  
+$request->validate([
+    'nom' => 'required|string|max:255',
+    'prenom' => 'required|string|max:255',
+    'email' => 'required|string|email|max:255|unique:utilisateurs', // Vérifie que l'email est unique dans la table utilisateurs
+    'tel' => 'required|string|max:20',
+    'password' => 'required|string|min:8',
+    'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+], [
+    'email.unique' => 'Cet email est déjà utilisé. Veuillez choisir un autre email.',
+]);
+
+
+        $existingUser = utilisateur::where('email', $request->email)->first();
+        if ($existingUser) {
+            // Retourner la vue d'inscription avec un message d'erreur
+            return redirect('/register')->withErrors([
+                'email' => 'Cet email est déjà utilisé. Veuillez choisir un autre email.',
+            ]);
+        }
 
         // Création de l'utilisateur
         $user = utilisateur::create([
@@ -39,10 +51,10 @@ class RegisterController extends Controller
             // Récupérer le fichier image
             $image = $request->file('image');
             $fileName = time() . '_' . $image->getClientOriginalName();
-            
+
             $image->move(public_path('/Membrespic'), $fileName);
-            
-            
+
+
         }
 
 // Création du membre correspondant

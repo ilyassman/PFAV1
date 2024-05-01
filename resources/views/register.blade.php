@@ -110,6 +110,9 @@
                             <div class="col-md-12 form-group">
                                 <label for="email">E-mail</label>
                                 <input type="email" id="email" name="email" class="form-control form-control-lg">
+                                @error('email')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                             <div class="col-md-12 form-group">
                                 <label for="tel">Numéro de téléphone</label>
