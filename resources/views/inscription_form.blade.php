@@ -249,8 +249,10 @@ input[type="submit"]:hover {
                     </div>
                     <div class="form_row">
                         <div class="form_group">
-                            <label for="pays" >Pays :</label>
-                            <input type="text" id="pays" name="pays" required  style="width: 300px ;">
+                            <label for="pays">Pays :</label>
+                            <select id="pays" name="pays" required style="width: 300px;">
+                                <option value="">Sélectionnez un pays</option>
+                            </select>
                         </div>
                     </div>
                     <div class="form_group">
@@ -333,11 +335,36 @@ input[type="submit"]:hover {
   <script src="js/jquery.sticky.js"></script>
   <script src="js/jquery.mb.YTPlayer.min.js"></script>
   <script src="js/header.js"></script>
-
-
-
-
   <script src="js/main.js"></script>
+  <script>
+      function fetchCountries() {
+    fetch('https://restcountries.com/v3.1/all')
+    .then(response => response.json())
+    .then(data => {
+        const select = document.getElementById('pays');
+
+        // Tri des pays par ordre alphabétique
+        data.sort((a, b) => {
+            if (a.name.common < b.name.common) return -1;
+            if (a.name.common > b.name.common) return 1;
+            return 0;
+        });
+
+        // Ajout des pays triés à la liste déroulante
+        data.forEach(country => {
+            const option = document.createElement('option');
+            option.value = country.name.common;
+            option.textContent = country.name.common;
+            select.appendChild(option);
+        });
+    })
+    .catch(error => console.error('Erreur lors de la récupération des pays :', error));
+}
+
+// Appel de la fonction pour récupérer les pays au chargement de la page
+fetchCountries();
+
+  </script>
 
 </body>
 
