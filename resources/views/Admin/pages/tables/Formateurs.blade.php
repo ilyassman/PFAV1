@@ -35,12 +35,18 @@
     position: relative; /* Positionner la div de chargement de manière fixe par rapport à la fenêtre du navigateur */
     top: 0; /* Aligner la div en haut de la fenêtre */
     left: 40%; /* Aligner la div à gauche de la fenêtre */
-   
-  
+
+
 }
 #supp:hover {
-    cursor: pointer; 
+    cursor: pointer;
 }
+.error-message {
+  color: red;
+  font-size: 12px;
+  font-weight: 600;
+}
+
     </style>
   </head>
   <body class="hold-transition sidebar-mini">
@@ -354,13 +360,13 @@
                             <i id="supp" onclick="suppdialog({{$data->id}})" class="fas fa-trash-alt text-danger"></i>
                             <!-- Icône de suppression -->
                             <i
-                            onclick="updatedialog({{$data->id}})" 
+                            onclick="updatedialog({{$data->id}})"
                             data-toggle="modal"
                             data-target="#modifierFormateurModal"
                             id="supp" class="fas fa-edit text-primary ml-2"></i>
                             <!-- Icône de modification -->
                           </td>
-                        </tr> 
+                        </tr>
                         @endforeach
                         <!-- Ajouter d'autres lignes pour chaque formateur -->
                       </tbody>
@@ -462,7 +468,7 @@
                     <label for="motdepasse">Mot de passe:</label>
                     <input type="password" class="form-control" id="motdepasseu" name="motdepasse" required>
                   </div>
-                  
+
                   <button id="modifierform" type="submit" class="btn btn-primary">Modifier</button>
                 </form>
               </div>
@@ -537,6 +543,100 @@
           responsive: true,
         });
       });
+
+      // Écoute des événements de saisie sur les champs du formulaire
+document.getElementById('nom').addEventListener('input', function() {
+  var nom = this.value;
+  resetErrorMessage('nom'); // Réinitialiser les messages d'erreur
+
+  // Valider le champ nom
+  if (nom.trim() === '') {
+    displayErrorMessage('nom', 'Le nom est obligatoire');
+  } else if (nom.length < 3) {
+    displayErrorMessage('nom', 'Le nom doit contenir au moins 3 caractères');
+  }
+});
+
+document.getElementById('prenom').addEventListener('input', function() {
+  var prenom = this.value;
+  resetErrorMessage('prenom');
+
+  // Valider le champ prénom
+  if (prenom.trim() === '') {
+    displayErrorMessage('prenom', 'Le prénom est obligatoire');
+  } else if (prenom.length < 3) {
+    displayErrorMessage('prenom', 'Le prénom doit contenir au moins 3 caractères');
+  }
+});
+
+document.getElementById('email').addEventListener('input', function() {
+  var email = this.value;
+  resetErrorMessage('email');
+
+  // Valider le champ email
+  if (email.trim() === '') {
+    displayErrorMessage('email', 'L\'adresse email est obligatoire');
+  } else if (!validateEmail(email)) {
+    displayErrorMessage('email', 'L\'adresse email est invalide');
+  }
+});
+
+document.getElementById('telephone').addEventListener('input', function() {
+  var telephone = this.value;
+  resetErrorMessage('telephone');
+
+  // Valider le champ téléphone
+  if (telephone.trim() === '') {
+    displayErrorMessage('telephone', 'Le numéro de téléphone est obligatoire');
+  } else if (!validatePhone(telephone)) {
+    displayErrorMessage('telephone', 'Le format du numéro de téléphone est invalide');
+  }
+});
+
+document.getElementById('description').addEventListener('input', function() {
+  var description = this.value;
+  resetErrorMessage('description');
+
+  // Valider le champ description
+  if (description.trim() === '') {
+    displayErrorMessage('description', 'La description est obligatoire');
+  } else if (description.length < 5) {
+    displayErrorMessage('description', 'La description doit contenir au moins 10 caractères');
+  }
+});
+
+document.getElementById('motdepasse').addEventListener('input', function() {
+  var motdepasse = this.value;
+  resetErrorMessage('motdepasse');
+
+  // Valider le champ mot de passe
+  if (motdepasse.trim() === '') {
+    displayErrorMessage('motdepasse', 'Le mot de passe est obligatoire');
+  } else if (motdepasse.length < 8) {
+    displayErrorMessage('motdepasse', 'Le mot de passe doit contenir au moins 8 caractères');
+  }
+});
+
+// Fonction pour afficher un message d'erreur
+function displayErrorMessage(inputId, message) {
+  var errorMessageElement = document.getElementById(inputId + '-error');
+  if (!errorMessageElement) {
+    errorMessageElement = document.createElement('p');
+    errorMessageElement.id = inputId + '-error';
+    errorMessageElement.classList.add('error-message');
+    document.getElementById(inputId).parentNode.appendChild(errorMessageElement);
+  }
+  errorMessageElement.textContent = message;
+}
+
+// Fonction pour réinitialiser un message d'erreur
+function resetErrorMessage(inputId) {
+  var errorMessageElement = document.getElementById(inputId + '-error');
+  if (errorMessageElement) {
+    errorMessageElement.textContent = '';
+  }
+}
+
     </script>
   </body>
 </html>
