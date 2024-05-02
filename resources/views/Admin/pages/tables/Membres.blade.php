@@ -432,6 +432,9 @@
                       name="nom"
                       required
                     />
+                    <div id="erreurname" class="invalid-feedback">
+                    </div>
+
                   </div>
                   <div class="form-group">
                     <label for="prenom">Prénom:</label>
@@ -442,6 +445,8 @@
                       name="prenom"
                       required
                     />
+                    <div id="erreurprenom" class="invalid-feedback">
+                    </div>
                   </div>
                   <div class="form-group">
                     <label for="email">Email:</label>
@@ -452,6 +457,8 @@
                       name="email"
                       required
                     />
+                    <div id="erreuremail" class="invalid-feedback">
+                    </div>
                   </div>
                   <div class="form-group">
                     <label for="telephone">Numéro de téléphone:</label>
@@ -462,6 +469,8 @@
                       name="telephone"
                       required
                     />
+                    <div id="erreurphone" class="invalid-feedback">
+                    </div>
                   </div>
                   <div class="form-group">
                     <label for="motdepasse">Mot de passe:</label>
@@ -472,6 +481,8 @@
                       name="motdepasse"
                       required
                     />
+                    <div id="erreurpass" class="invalid-feedback">
+                    </div> 
                   </div>
                   <div class="form-group">
                     <label for="image">Image:</label>

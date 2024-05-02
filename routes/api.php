@@ -98,4 +98,5 @@ Route::get('categories/{idcateg}',[CategorieController::class,'categoriebyid']);
 Route::get('sessionvotes/{idsession}',[SessionController::class,'sessionvotes']);
 Route::get('login/{email}/{pass}',[UtilisateurController::class,'login']);
 Route::get('/courses', 'CourseController@index')->name('courses');
+Route::get('/isEmailexists/{email}', [MembreController::class,'isEmailexist']);
 

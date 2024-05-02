@@ -117,4 +117,11 @@ class MembreController extends Controller
         return response()->json($membre->commentaire()->get());
 
     }
+    public function isEmailexist(string $email)
+    {
+        $datas=DB::select("select * from utilisateurs where email='$email'");
+        if($datas)
+        return 1;
+        else return 0;
+    }
 }
