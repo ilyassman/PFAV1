@@ -34,13 +34,13 @@ class CategorieController extends Controller
      */
     public function show(string $id)
     {
-        $data=DB::select("SELECT f.*, case 
+        $data=DB::select("SELECT f.*, case
         when v.niveau_etoile is null then 0
         else niveau_etoile
       end as  niveau_etoile
-              FROM formations f 
-              LEFT JOIN sessions s ON f.id = s.id_formation 
-              LEFT JOIN votes v ON v.id_session = s.id
+              FROM formations f
+              
+              LEFT JOIN votes v ON v.id_formation = f.id
         where f.categ_id=$id");
         return response()->json($data);
     }

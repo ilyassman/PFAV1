@@ -25,8 +25,8 @@ class HomeController extends Controller
         else niveau_etoile
       end as  niveau_etoile
               FROM formations f
-              LEFT JOIN sessions s ON f.id = s.id_formation
-              LEFT JOIN votes v ON v.id_session = s.id;
+              
+              LEFT JOIN votes v ON v.id_formation = f.id;
         ");
         $formateurs=Formateur::take(6)->get();
         return view("welcome",compact('datas','formations','formateurs','ecole'));
@@ -43,8 +43,8 @@ class HomeController extends Controller
         else niveau_etoile
       end as  niveau_etoile
               FROM formations f
-              LEFT JOIN sessions s ON f.id = s.id_formation
-              LEFT JOIN votes v ON v.id_session = s.id;
+              
+              LEFT JOIN votes v ON v.id_formation = f.id;
         ");
         return view("courses",compact('datas','formations'));
     }

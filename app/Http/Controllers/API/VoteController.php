@@ -24,7 +24,7 @@ class VoteController extends Controller
         $data=new Vote();
         $data->niveau_etoile = $request->niveau_etoile;
         $data->id_membre = $request->id_membre;
-        $data->id_session = $request->id_session;
+        $data->id_formation = $request->id_formation;
         $data->save();
     }
 
@@ -46,8 +46,8 @@ class VoteController extends Controller
         $data->niveau_etoile = $request->niveau_etoile;
         if(!empty($request->id_membre))                        
         $data->id_membre = $request->id_membre;
-        if(!empty($request->id_session))
-        $data->id_session = $request->id_session;
+        if(!empty($request->id_formation))
+        $data->id_formation = $request->id_formation;
         $data->save();
     }
 
