@@ -14,6 +14,71 @@ const passwordu=document.getElementById("motdepasseu");
 const descriptionu=document.getElementById("descriptionu");
 const butupdate=document.getElementById("modifierform");
 let fichier;
+// -------msg erreur ajout---------------
+function isValidEmail(email) {
+    // Expression régulière pour vérifier le format de l'e-mail
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+}
+function containsOnlyDigits(str) {
+    const digitsRegex = /^[0-9]+$/;
+    return digitsRegex.test(str);
+}
+function champvide(inputname, erreurmessage) {
+    if (inputname.value.length == 0) {
+        erreurmessage.innerHTML = "Champ obligatoires";
+        erreurmessage.style.display = "block";
+        inputname.style.borderColor = "#dc3545";
+        return false;
+    } else {
+        erreurmessage.style.display = "none";
+        inputname.style.borderColor = "";
+        return true;
+    }
+}
+function champemailvalid(inputname, erreurmessage) {
+    if (!isValidEmail(inputname.value)) {
+        erreurmessage.innerHTML = "Veuillez entrer un email valide";
+        erreurmessage.style.display = "block";
+        inputname.style.borderColor = "#dc3545";
+        return false;
+    } else {
+        erreurmessage.style.display = "none";
+        inputname.style.borderColor = "";
+        return true;
+    }
+}
+function champphonelvalid(inputname, erreurmessage) {
+    if (!containsOnlyDigits(inputname.value) || inputname.value.length != 10) {
+        erreurmessage.innerHTML = "Numéro de téléphone invalide";
+        erreurmessage.style.display = "block";
+        inputname.style.borderColor = "#dc3545";
+        return false;
+    } else {
+        erreurmessage.style.display = "none";
+        inputname.style.borderColor = "";
+        return true;
+    }
+}
+function champpassvalid(inputname, erreurmessage) {
+    if (inputname.value.length < 8) {
+        erreurmessage.innerHTML =
+            "Le mot de passe doit comporter au moins 8 caractères";
+        erreurmessage.style.display = "block";
+        inputname.style.borderColor = "#dc3545";
+        return false;
+    } else {
+        erreurmessage.style.display = "none";
+        inputname.style.borderColor = "";
+        return true;
+    }
+}
+function isEmailexists(email) {
+    return fetch(`http://127.0.0.1:8000/api/isEmailexists/${email}`)
+        .then((response) => response.json())
+        .then((json) => json);
+}
+// --------------------------------------------------------------------------
 image.addEventListener('change', function(event) {
     fichier = event.target.files[0];
  });
@@ -28,16 +93,84 @@ image.addEventListener('change', function(event) {
     teleu.value=data[0].num_tel;
   butupdate.onclick=function(e){
     e.preventDefault();
+    if(emailu.value!=data[0].email){
+    isEmailexists(emailu.value)
+    .then((isexists) => {
+        if(isexists){
+            document.getElementById("erreuremailu").innerHTML = "Email deja existe";
+            document.getElementById("erreuremailu").style.display = "block";
+            emailu.style.borderColor = "#dc3545";
+        }
+    
+        else{
+            document.getElementById("erreuremailu").style.display = "none";
+            emailu.style.borderColor = "";
     updateForm(id, emailu.value,passwordu.value,teleu.value,nameu.value,prenomu.value,descriptionu.value);
     const modalElement = document.getElementById('modifierFormateurModal');
     $(modalElement).modal('hide');
     $('.modal-backdrop').remove();
     fetchData();
+}
+
+});
    
   }  
+  else{
+    updateForm(id, emailu.value,passwordu.value,teleu.value,nameu.value,prenomu.value,descriptionu.value);
+    const modalElement = document.getElementById('modifierFormateurModal');
+    $(modalElement).modal('hide');
+    $('.modal-backdrop').remove();
+    fetchData();
+  } 
 }
+}
+name.onkeyup = () => {
+    champvide(document.getElementById("nom"),document.getElementById("erreurenom"));
+};
+prenom.onkeyup = () => {
+    champvide(prenom, document.getElementById("erreureprenom"));
+};
+description.onkeyup = () => {
+    champvide(description, document.getElementById("erreurdesc"));
+};
+email.onkeyup = () => {
+    champemailvalid(email, document.getElementById("erreuremail"));
+    
+};
+tele.onkeyup = () => {
+    champphonelvalid(tele, document.getElementById("erreurphone"));
+};
+password.onkeyup = () => {
+    champpassvalid(password, document.getElementById("erreurpass"));
+};
  butfor.onclick=function(e){
     e.preventDefault(); 
+    champvide(prenom, document.getElementById("erreureprenom"));
+    champvide(prenom, document.getElementById("erreureprenom"));
+    champemailvalid(email, document.getElementById("erreuremail"));
+    champphonelvalid(tele, document.getElementById("erreurphone"));
+    champpassvalid(password, document.getElementById("erreurpass"));
+    champvide(description, document.getElementById("erreurdesc"));
+    if (
+        !champvide(description, document.getElementById("erreurdesc"))||
+        !champvide(prenom, document.getElementById("erreureprenom"))||
+        !champvide(prenom, document.getElementById("erreureprenom"))||
+        !champemailvalid(email, document.getElementById("erreuremail")) ||
+        !champphonelvalid(tele, document.getElementById("erreurphone")) ||
+        !champpassvalid(password, document.getElementById("erreurpass"))
+    ) {
+        return; // Arrêtez l'exécution de la fonction si l'un des champs est vide
+    } else {
+        isEmailexists(email.value)
+    .then((isexists) => {
+        if(isexists){
+            document.getElementById("erreuremail").innerHTML = "Email deja existe";
+            document.getElementById("erreuremail").style.display = "block";
+            email.style.borderColor = "#dc3545";
+        }
+        else{
+            document.getElementById("erreuremail").style.display = "none";
+            email.style.borderColor = "";
     Swal.fire({
         title: "Ajout de formateur en cours...",
         html: "Veuillez patienter un peu.",
@@ -51,17 +184,19 @@ image.addEventListener('change', function(event) {
         $(modalElement).modal('hide');
         $('.modal-backdrop').remove(); 
     });
+})
+.catch(error => {
+  console.error('Une erreur s\'est produite lors de la récupération de l\'ID :', error);
 });
     
 }
      })
-    
-     .catch(error => {
-       console.error('Une erreur s\'est produite lors de la récupération de l\'ID :', error);
-     });
+    }
+
+});
     
 }
-
+};
 
 
 

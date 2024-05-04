@@ -555,6 +555,8 @@
                       name="email"
                       required
                     />
+                    <div id="erreuremailu" class="invalid-feedback">
+                    </div>
                   </div>
                   <div class="form-group">
                     <label for="telephone">Numéro de téléphone:</label>

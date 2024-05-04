@@ -395,26 +395,38 @@
                   <div class="form-group">
                     <label for="nom">Nom:</label>
                     <input type="text" class="form-control" id="nom" name="nom" required>
+                    <div id="erreurenom" class="invalid-feedback">
+                    </div>
                   </div>
                   <div class="form-group">
                     <label for="prenom">Prénom:</label>
                     <input type="text" class="form-control" id="prenom" name="prenom" required>
+                    <div id="erreureprenom" class="invalid-feedback">
+                    </div>
                   </div>
                   <div class="form-group">
                     <label for="email">Email:</label>
                     <input type="email" class="form-control" id="email" name="email" required>
+                    <div id="erreuremail" class="invalid-feedback">
+                    </div>
                   </div>
                   <div class="form-group">
                     <label for="telephone">Numéro de téléphone:</label>
                     <input type="text" class="form-control" id="telephone" name="telephone" required>
+                    <div id="erreurphone" class="invalid-feedback">
+                    </div>
                   </div>
                   <div class="form-group">
                     <label for="description">Description:</label>
                     <input type="text" class="form-control" id="description" name="description" required>
+                    <div id="erreurdesc" class="invalid-feedback">
+                    </div>
                   </div>
                   <div class="form-group">
                     <label for="motdepasse">Mot de passe:</label>
                     <input type="password" class="form-control" id="motdepasse" name="motdepasse" required>
+                    <div id="erreurpass" class="invalid-feedback">
+                    </div>
                   </div>
                   <div class="form-group">
                     <label for="image">Image:</label>
@@ -455,6 +467,8 @@
                   <div class="form-group">
                     <label for="email">Email:</label>
                     <input type="email" class="form-control" id="emailu" name="email" required>
+                    <div id="erreuremailu" class="invalid-feedback">
+                    </div>
                   </div>
                   <div class="form-group">
                     <label for="telephone">Numéro de téléphone:</label>

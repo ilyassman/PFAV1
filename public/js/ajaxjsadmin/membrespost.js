@@ -90,6 +90,17 @@ async function updatedialog(id) {
     teleu.value = data[0].num_tel;
     butupdate.onclick = function (e) {
         e.preventDefault();
+        if(emailu.value!=data[0].email){
+        isEmailexists(emailu.value)
+        .then((isexists) => {
+            if(isexists){
+                document.getElementById("erreuremailu").innerHTML = "Email deja existe";
+                document.getElementById("erreuremailu").style.display = "block";
+                emailu.style.borderColor = "#dc3545";
+            }
+            else{
+                document.getElementById("erreuremailu").style.display = "none";
+                emailu.style.borderColor = "";
         updateUser(
             id,
             emailu.value,
@@ -103,7 +114,26 @@ async function updatedialog(id) {
         $(modalElement).modal("hide");
         $(".modal-backdrop").remove();
         fetchData(table);
-    };
+    }
+
+});
+    }
+    else{
+        updateUser(
+            id,
+            emailu.value,
+            passwordu.value,
+            teleu.value,
+            nameu.value,
+            prenomu.value,
+            fichier
+        );
+        const modalElement = document.getElementById("modifierMembreModal");
+        $(modalElement).modal("hide");
+        $(".modal-backdrop").remove();
+        fetchData(table);  
+    }
+  } 
 }
 async function fetchData(table) {
     // Supprimer le contenu existant de la table

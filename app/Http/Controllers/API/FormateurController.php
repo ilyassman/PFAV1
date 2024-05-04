@@ -7,6 +7,7 @@ use App\Models\Formateur;
 use App\Models\utilisateur;
 use Illuminate\Http\Request;
 use DB;
+use Illuminate\Support\Facades\Hash;
 
 class FormateurController extends Controller
 {
@@ -66,7 +67,7 @@ class FormateurController extends Controller
         if(!empty($request->email))
         $user->email=$request->email;
         if(!empty($request->password))
-        $user->password=$request->password;
+        $user->password=Hash::make($request->password);
         if(!empty($request->num_tel))
         $user->num_tel=$request->num_tel;
         if(!empty($request->type))
