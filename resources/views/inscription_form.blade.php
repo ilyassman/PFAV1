@@ -223,10 +223,10 @@ input[type="submit"]:hover {
         <div class="content">
             <div class="image">
                 <!-- Insérez votre image représentant la formation ici -->
-                <img src="images/course_3.jpg" alt="Image de la formation">
+                <img src="Formationpic/{{$formation->image}}" alt="Image de la formation">
             </div>
             <div class="formulaire">
-                <form action="traitement.php" method="post">
+                <form action="{{route('addemande')}}" method="post">
                     <div class="form_row">
                         <div class="form_group">
                             <label for="nom">Nom :</label>

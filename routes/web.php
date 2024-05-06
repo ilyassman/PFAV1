@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\CommentaireController;
+use App\Http\Controllers\API\DemandeinscriptionController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Postcontroller;
 use Illuminate\Support\Facades\Route;
@@ -39,8 +40,10 @@ Route::get('/encrypt-id/{id}', function ($id) {
     return response()->json(['encrypted_id' => Crypt::encrypt($id)]);
 });
 Route::get('/chartmembre', [HomeController::class, 'chartmembre']);
+
 Route::get('/chartcateg', [HomeController::class, 'chartcateg']);
 Route::post('/register', [RegisterController::class, 'register']); // Pour soumettre le formulaire d'inscription
 Route::get('/profile', [HomeController::class, 'profile'])->name('profile')->middleware('auth');
 Route::post('/login', [LoginController::class, 'login'])->name('login');
 Route::post('/logout', [HomeController::class, 'logout'])->name('logout');
+Route::post('/addemande', [DemandeinscriptionController::class, 'adddemande'])->name('addemande');

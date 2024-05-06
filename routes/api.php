@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\API\CategorieController;
 use App\Http\Controllers\API\CommentaireController;
+use App\Http\Controllers\API\DemandeinscriptionController;
 use App\Http\Controllers\API\FormateurController;
 use App\Http\Controllers\API\FormateurSessionController;
 use App\Http\Controllers\API\FormationController;
@@ -85,6 +86,10 @@ Route::prefix('v1')->group(function () {
 });
 Route::prefix('v1')->group(function () {
     Route::apiResource('supports', SupportController::class
+    );
+});
+Route::prefix('v1')->group(function () {
+    Route::apiResource('demandes', DemandeinscriptionController::class
     );
 });
 Route::get('commentaires/{idformation}',[CommentaireController::class,'findbyformation']);

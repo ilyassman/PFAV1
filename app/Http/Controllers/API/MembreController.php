@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Models\Membre;
+use App\Models\utilisateur;
 use Illuminate\Http\Request;
 use DB;
 class MembreController extends Controller
@@ -22,7 +23,7 @@ class MembreController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
+    {   
         $memb=new Membre();
         if(!empty($request->nom))
         $memb->nom=$request->nom;
