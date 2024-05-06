@@ -154,9 +154,16 @@ class HomeController extends Controller
             if (!$formation) {
                 abort(404);
             }
+            if(!empty(Auth::id())){
+            $iduser=Auth::id();
+            $membre=DB::select("select * from membres,utilisateurs where membres.iduser=utilisateurs.id and utilisateurs.id=$iduser");
+            return view('inscription_form', compact('formation','membre'));
+            }
+            else{
+                return view('inscription_form', compact('formation'));
+            }
 
-
-            return view('inscription_form', compact('formation'));
+            
         } catch (DecryptException $e) {
             abort(404);
         }

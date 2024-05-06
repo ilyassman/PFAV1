@@ -231,21 +231,21 @@ input[type="submit"]:hover {
                     <div class="form_row">
                         <div class="form_group">
                             <label for="nom">Nom :</label>
-                            <input type="text" id="nom" name="nom" required>
+                            <input  value="{{ !empty($membre) ? $membre[0]->nom : '' }}" @if(!empty($membre)) readonly @endif type="text" id="nom" name="nom" required>
                         </div>
                         <div class="form_group">
                             <label for="prenom">Prénom :</label>
-                            <input type="text" id="prenom" name="prenom" required>
+                            <input  value="{{ !empty($membre) ? $membre[0]->prenom : '' }}" @if(!empty($membre)) readonly @endif type="text" id="prenom" name="prenom" required>
                         </div>
                     </div>
                     <div class="form_row">
                         <div class="form_group">
                             <label for="email">Email :</label>
-                            <input type="email" id="email" name="email" required>
+                            <input  value="{{ !empty($membre) ? $membre[0]->email : '' }}" @if(!empty($membre)) readonly @endif type="email" id="email" name="email" required>
                         </div>
                         <div class="form_group">
                             <label for="tel">Téléphone :</label>
-                            <input type="tel" id="tel" name="tel" required>
+                            <input type="tel" id="tel" name="tel" value="{{ !empty($membre) ? $membre[0]->num_tel : '' }}" @if(!empty($membre)) readonly @endif required>
                         </div>
                     </div>
                     <div class="form_row">
