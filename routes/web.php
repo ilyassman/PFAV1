@@ -44,3 +44,5 @@ Route::post('/register', [RegisterController::class, 'register']); // Pour soume
 Route::get('/profile', [HomeController::class, 'profile'])->name('profile')->middleware('auth');
 Route::post('/login', [LoginController::class, 'login'])->name('login');
 Route::post('/logout', [HomeController::class, 'logout'])->name('logout');
+Route::get('/Membres_Formation',[HomeController::class,'Membres_Formation'])->name('Membres_Formation');
+

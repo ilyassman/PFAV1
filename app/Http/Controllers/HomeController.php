@@ -25,7 +25,7 @@ class HomeController extends Controller
         else niveau_etoile
       end as  niveau_etoile
               FROM formations f
-              
+
               LEFT JOIN votes v ON v.id_formation = f.id;
         ");
         $formateurs=Formateur::take(6)->get();
@@ -43,7 +43,7 @@ class HomeController extends Controller
         else niveau_etoile
       end as  niveau_etoile
               FROM formations f
-              
+
               LEFT JOIN votes v ON v.id_formation = f.id;
         ");
         return view("courses",compact('datas','formations'));
@@ -161,10 +161,10 @@ class HomeController extends Controller
         return redirect('/login')->with('success', 'Vous avez été déconnecté avec succès.');
     }
     public function chartmembre(){
-      $datas=DB::select("SELECT COUNT(*) AS nbr, MONTH(created_at) AS month  
-      FROM membres  
+      $datas=DB::select("SELECT COUNT(*) AS nbr, MONTH(created_at) AS month
+      FROM membres
       WHERE YEAR(created_at) = YEAR(NOW())
-      GROUP BY month 
+      GROUP BY month
       ORDER BY month;");
       $dataset=[];
         // Créer un tableau pour stocker les données de chaque mois
@@ -177,13 +177,13 @@ class HomeController extends Controller
     }
       return  [
         'dataset'=>array_values($dataset)
-        
+
       ];
 
 
     }
     public function chartcateg(){
-        $datas=DB::select("select categories.nom,count(*) nbrformation from formations,categories 
+        $datas=DB::select("select categories.nom,count(*) nbrformation from formations,categories
         where categories.id=formations.categ_id
         group by categories.nom;");
         $dataset=[];
@@ -194,9 +194,12 @@ class HomeController extends Controller
         return  [
           'labels'=> $dataset['labels'],
           'dataset'=>$dataset['nbr']
-          
+
         ];
-  
-  
       }
+
+      public function Membres_Formation(){
+        $categs=Categorie::all();
+        return view("Admin/pages/tables/Membres_Formation",compact('categs'));
+     }
 }

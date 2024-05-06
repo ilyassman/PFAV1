@@ -65,6 +65,12 @@
                 </a>
               </li>
               <li class="nav-item">
+                <a href="{{ route('Membres_Formation') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Membres_Formation</p>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a href="{{ route('sessions') }}" class="nav-link ">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Sessions</p>
