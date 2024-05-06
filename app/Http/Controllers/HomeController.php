@@ -28,7 +28,7 @@ class HomeController extends Controller
         else niveau_etoile
       end as  niveau_etoile
               FROM formations f
-              
+
               LEFT JOIN votes v ON v.id_formation = f.id;
         ");
         $formateurs = Formateur::take(6)->get();
@@ -48,7 +48,7 @@ class HomeController extends Controller
         else niveau_etoile
       end as  niveau_etoile
               FROM formations f
-              
+
               LEFT JOIN votes v ON v.id_formation = f.id;
         ");
         return view("courses", compact('datas', 'formations'));
@@ -192,45 +192,43 @@ class HomeController extends Controller
         // Redirection vers la page de connexion avec un message de succès
         return redirect('/login')->with('success', 'Vous avez été déconnecté avec succès.');
     }
-    public function chartmembre()
-    {
-        $datas = DB::select("SELECT COUNT(*) AS nbr, MONTH(created_at) AS month  
+    public function chartmembre(){
+      $datas=DB::select("SELECT COUNT(*) AS nbr, MONTH(created_at) AS month  
       FROM membres  
       WHERE YEAR(created_at) = YEAR(NOW())
-      GROUP BY month 
+      GROUP BY month
       ORDER BY month;");
         $dataset = [];
         // Créer un tableau pour stocker les données de chaque mois
         $dataset = array_fill(1, 12, 0);
 
-        // Remplir le tableau avec les données existantes
-        foreach ($datas as $data) {
-            $month = $data->month;
-            $dataset[$month] = $data->nbr;
-        }
-        return [
-            'dataset' => array_values($dataset)
-
-        ];
+    // Remplir le tableau avec les données existantes
+    foreach($datas as $data){
+        $month = $data->month;
+        $dataset[$month] = $data->nbr;
+    }
+      return  [
+        'dataset'=>array_values($dataset)
+        
+      ];
 
 
     }
-    public function chartcateg()
-    {
-        $datas = DB::select("select categories.nom,count(*) nbrformation from formations,categories 
+    public function chartcateg(){
+        $datas=DB::select("select categories.nom,count(*) nbrformation from formations,categories 
         where categories.id=formations.categ_id
         group by categories.nom;");
-        $dataset = [];
-        foreach ($datas as $data) {
-            $dataset['labels'][] = $data->nom;
-            $dataset['nbr'][] = $data->nbrformation;
-        }
-        return [
-            'labels' => $dataset['labels'],
-            'dataset' => $dataset['nbr']
-
+        $dataset=[];
+      foreach($datas as $data){
+          $dataset['labels'][]=$data->nom;
+          $dataset['nbr'][] = $data->nbrformation;
+      }
+        return  [
+          'labels'=> $dataset['labels'],
+          'dataset'=>$dataset['nbr']
+          
         ];
-
-
-    }
+  
+  
+      }
 }
