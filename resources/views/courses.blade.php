@@ -153,9 +153,18 @@
                       @endfor
 
                     </div>
-                    <p class="desc mb-4">
-                      {{$form->contenue}}
-                    </p>
+                    <?php
+                    $content = $form->contenue;
+                    $wordCount = str_word_count($content);
+                    
+                    // Si le contenu dépasse 20 mots, afficher uniquement les 20 premiers mots et un lien "Lire la suite"
+                    if ($wordCount > 20) {
+                        $shortContent = implode(' ', array_slice(explode(' ', $content), 0, 20));
+                        echo $shortContent . ' <a href="' . route('course', ['id' => Crypt::encrypt($form->id)]) . '" class="read-more">Lire la suite</a>';
+                    } else {
+                        echo $content;
+                    }
+                    ?>
                     <p>
                         <a href="{{ route('course', ['id' => Crypt::encrypt($form->id)]) }}" class="btn btn-primary rounded-0 px-4">S'inscrire à ce cours</a>
 

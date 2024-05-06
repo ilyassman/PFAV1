@@ -271,9 +271,7 @@
                     </div>
                   </figure>
                   <div class="course-1-content pb-4">
-                    <p>LES PREREQUIS  </p>
-                    <h2>
-                      {{ $form->prerequis }}</h2>
+                    
                     <div class="rating text-center mb-3">
                       @php
                       $i=$form->niveau_etoile;
@@ -289,8 +287,19 @@
 
                     </div>
                     <p class="desc mb-4">
-                      {{$form->contenue}}
-                    </p>
+                      <?php
+                      $content = $form->contenue;
+                      $wordCount = str_word_count($content);
+                      
+                      // Si le contenu dépasse 20 mots, afficher uniquement les 20 premiers mots et un lien "Lire la suite"
+                      if ($wordCount > 20) {
+                          $shortContent = implode(' ', array_slice(explode(' ', $content), 0, 20));
+                          echo $shortContent . ' <a href="' . route('course', ['id' => Crypt::encrypt($form->id)]) . '" class="read-more">Lire la suite</a>';
+                      } else {
+                          echo $content;
+                      }
+                      ?>
+                  </p>
                     <p>
 
                       <a href="{{ route('course', ['id' => Crypt::encrypt($form->id)]) }}" class="btn btn-primary rounded-0 px-4">S'inscrire à ce cours</a>
