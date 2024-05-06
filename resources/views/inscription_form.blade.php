@@ -226,7 +226,8 @@ input[type="submit"]:hover {
                 <img src="Formationpic/{{$formation->image}}" alt="Image de la formation">
             </div>
             <div class="formulaire">
-                <form action="{{route('addemande')}}" method="post">
+                <form action="{{route('addemande',['id' => Crypt::encrypt($formation->id)])}}" method="post">
+                    @csrf
                     <div class="form_row">
                         <div class="form_group">
                             <label for="nom">Nom :</label>
