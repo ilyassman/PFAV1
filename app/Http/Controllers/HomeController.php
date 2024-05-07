@@ -217,11 +217,18 @@ class HomeController extends Controller
         if ($user && $user->type === 2) {
             $membre = Membre::where('iduser', $user->id)->first();
             $datas = Categorie::take(6)->get();
-            return view('profile', compact('user', 'membre', 'datas'));
+
+            // Ajout de la requête pour sélectionner les formations de l'utilisateur connecté avec l'état 1
+            $formations = DB::select("select formations.* from formations,demandeinscriptions
+            where formations.id=demandeinscriptions.id_formation
+            and demandeinscriptions.etat=1 and demandeinscriptions.id_membre=$membre->id ;") ;
+
+            return view('profile', compact('user', 'membre', 'datas', 'formations'));
         } else {
             return redirect('/login')->with('error', 'Vous devez être connecté en tant qu\'utilisateur de type 2 pour accéder à votre profil.');
         }
     }
+
 
     public function logout(Request $request)
     {
@@ -287,7 +294,9 @@ class HomeController extends Controller
         $datas = Categorie::take(6)->get();
         return view('message_inscription',compact('datas'));
     }
-
-
+    public function formation_membre(){
+        $datas = Categorie::take(6)->get();
+        return view('formation_membre',compact('datas'));
+    }
 }
 
