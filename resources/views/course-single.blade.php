@@ -295,11 +295,9 @@
                             </div>
                             <div class="action d-flex justify-content-between mt-2 align-items-center">
                                 <div class="reply px-4">
-                                    @auth
+                                    
                                     <small>supprimer</small>
-                                    @else
-                                    <div><div>
-                                    @endauth
+                                    
                                 </div>
                             </div>
                         </div>
@@ -319,11 +317,9 @@
                         </div>
                         <div class="action d-flex justify-content-between mt-2 align-items-center">
                             <div class="reply px-4">
-                                @auth
+                                
                                 <small>supprimer</small>
-                                @else
-                                <div><div>
-                                @endauth
+                                
                             </div>
                         </div>
                     </div>
@@ -342,11 +338,11 @@
                         </div>
                         <div class="action d-flex justify-content-between mt-2 align-items-center">
                             <div class="reply px-4">
-                                @auth
+                                
                                 <small>supprimer</small>
-                                @else
-                                <div><div>
-                                @endauth
+                               
+                                
+                                
                             </div>
                         </div>
                     </div>

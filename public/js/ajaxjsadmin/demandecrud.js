@@ -1,48 +1,49 @@
 const acceptdemande=(inscription)=>{
-    if(inscription.id_membre){
-        updateEtat(inscription.id,1);
-    }
-    else{
-        Swal.fire({
-            title: "Ajout de membre en cours...",
-            html: "Veuillez patienter un peu.",
-            showConfirmButton: false,
-            didOpen: () => {
-                Swal.showLoading();
-                adduserd(inscription.email, "ilyassman", inscription.tele, 2)
-                    .then((id) => {
+    // if(inscription.id_membre){
+    //     updateEtat(inscription.id,1);
+    // }
+    // else{
+    //     Swal.fire({
+    //         title: "Ajout de membre en cours...",
+    //         html: "Veuillez patienter un peu.",
+    //         showConfirmButton: false,
+    //         didOpen: () => {
+    //             Swal.showLoading();
+    //             adduserd(inscription.email, "ilyassman", inscription.tele, 2)
+    //                 .then((id) => {
                         
-                        addmembred(inscription.nom, inscription.prenom, id,"noimage.png").then(
-                            (id2) => {
-                                updateEtat2(inscription.id,1,id2).then(()=>{
-                                    sendmail(inscription.email,"abdo123",inscription.nom,inscription.prenom) .then(
-                                        ()=>{
-                                          Swal.close();
-                                        }  
-                                      )
-                                })
+    //                     addmembred(inscription.nom, inscription.prenom, id,"noimage.png").then(
+    //                         (id2) => {
+    //                             console.log("ide",id2);
+    //                             updateEtat2(inscription.id,1,id2).then(()=>{
+    //                                 sendmail(inscription.email,"abdo123",inscription.nom,inscription.prenom) .then(
+    //                                     ()=>{
+    //                                       Swal.close();
+    //                                     }  
+    //                                   )
+    //                             })
 
                                 
                                
                                
-                            }
-                        ).catch((error) => {
-                            console.error(
-                                "Une erreur s'est produite lors de la récupération de l'ID :",
-                                error
-                            );
-                        });
-                    })
-                    .catch((error) => {
-                        console.error(
-                            "Une erreur s'est produite lors de la récupération de l'ID :",
-                            error
-                        );
-                    });
-            },
-        });
+    //                         }
+    //                     ).catch((error) => {
+    //                         console.error(
+    //                             "Une erreur s'est produite lors de la récupération de l'ID :",
+    //                             error
+    //                         );
+    //                     });
+    //                 })
+    //                 .catch((error) => {
+    //                     console.error(
+    //                         "Une erreur s'est produite lors de la récupération de l'ID :",
+    //                         error
+    //                     );
+    //                 });
+    //         },
+    //     });
           
-    }
+    // }
     
 }
 

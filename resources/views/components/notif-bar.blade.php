@@ -104,10 +104,7 @@
                 <span class="d-block">{{$notifs[$i]->nom}} {{$notifs[$i]->prenom}}</span>
                 <span class="text-muted">Formation: {{$notifs[$i]->titre}}</span>
             </div>
-            <div class="d-flex justify-content-between">
-                <button class="btn btn-sm btn-success accept-btn" style="font-size: 11px; margin-right: 4px;">Accepter</button>
-                <button class="btn btn-sm btn-danger reject-btn" style="font-size: 11px;">Rejeter</button>
-                <i class="fas fa-check-circle text-success d-none accepted-icon"></i>
+            
 
         <div class="dropdown-item d-flex align-items-center" style="font-size: 13px; display :flex ;justify-content : space-between">
           <div class="mr-2">
@@ -116,10 +113,15 @@
             <span class="text-muted">Formation: {{$notifs[$i]->titre}}</span>
           </div>
           <div class="d-flex justify-content-between">
+            <button class="btn btn-sm btn-success accept-btn" style="font-size: 11px; margin-right: 4px;">Accepter</button>
+            <button class="btn btn-sm btn-danger reject-btn" style="font-size: 11px;">Rejeter</button>
+            <i class="fas fa-check-circle text-success d-none accepted-icon"></i>
+        </div>
+          {{-- <div class="d-flex justify-content-between">
               <button onclick="acceptdemande({{json_encode($notifs[$i])}})" class="btn btn-sm btn-success" style="font-size: 11px; margin-right : 4px ;">Accepter</button>
               <button onclick="suppdemande({{$notifs[$i]->id}})" class="btn btn-sm btn-danger" style="font-size: 11px;">Rejeter</button>
 
-            </div>
+            </div> --}}
         </div>
         @endif
         @endfor
