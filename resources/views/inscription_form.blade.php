@@ -199,7 +199,6 @@ input[type="submit"]:hover {
                 </a>
             @endauth
         </div>
-
         </div>
       </div>
     </div>

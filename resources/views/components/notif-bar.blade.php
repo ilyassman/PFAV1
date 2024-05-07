@@ -9,6 +9,12 @@
               </button>
           </div>
           <div class="modal-body">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Rechercher..." aria-label="Rechercher" aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button">Rechercher</button>
+                </div>
+            </div>
               <table class="table">
                   <thead>
                       <tr>
@@ -31,11 +37,11 @@
                           <button class="btn btn-danger reject-btn">Rejeter</button>
                       </td>
                   </tr>
-                        
+
                     @endforeach
                       <!-- Lignes statiques pour tester -->
-                     
-                      
+
+
                       <!-- Ajoutez d'autres lignes statiques pour tester -->
                   </tbody>
               </table>
@@ -62,10 +68,10 @@
   <!-- Right navbar links -->
   <ul class="navbar-nav ml-auto">
     <!-- Navbar Search -->
-   
+
 
     <!-- Messages Dropdown Menu -->
-   
+
     <!-- Notifications Dropdown Menu -->
     <li class="nav-item dropdown">
       <a class="nav-link" data-toggle="dropdown" href="#">
@@ -76,7 +82,7 @@
           @else
           0
           @endif
-        
+
         </span>
       </a>
       <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
@@ -111,9 +117,9 @@
 
         @endif
 
-       
-        
-        
+
+
+
       </div>
     </li>
     <li class="nav-item">

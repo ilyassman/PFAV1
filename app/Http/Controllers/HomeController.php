@@ -214,14 +214,15 @@ class HomeController extends Controller
     public function profile()
     {
         $user = Auth::user();
-        if ($user) {
-            $membre = Membre::where('iduser', $user->id)->first(); // Récupérer le membre associé à l'utilisateur
+        if ($user && $user->type === 2) {
+            $membre = Membre::where('iduser', $user->id)->first();
             $datas = Categorie::take(6)->get();
-            return view('profile', compact('user', 'membre', 'datas')); // Passer à la vue les informations de l'utilisateur et de son membre associé
+            return view('profile', compact('user', 'membre', 'datas'));
         } else {
-            return redirect('/login')->with('error', 'Veuillez vous connecter pour accéder à votre profil.');
+            return redirect('/login')->with('error', 'Vous devez être connecté en tant qu\'utilisateur de type 2 pour accéder à votre profil.');
         }
     }
+
     public function logout(Request $request)
     {
         Auth::logout(); // Déconnexion de l'utilisateur
@@ -274,7 +275,7 @@ class HomeController extends Controller
         where formations.id=demandeinscriptions.id_formation
         and demandeinscriptions.etat=0;");
 
-       
+
          return view("Admin/pages/tables/Membres_Formation",compact('formations','notifs'));
       }
       public function getMembers($formationId) {
@@ -285,7 +286,6 @@ class HomeController extends Controller
     public function msgdemande(){
         $datas = Categorie::take(6)->get();
         return view('message_inscription',compact('datas'));
-
     }
 
 

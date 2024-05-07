@@ -158,7 +158,7 @@
         <h3 class="card-title">Sélectionner des membres</h3>
     </div>
     <div class="card-body">
-       
+
             <!-- Liste des membres avec barre de recherche -->
 
              <!-- Liste des sessions de formation -->
@@ -195,7 +195,7 @@
             </div>
 
 
-        
+
     </div>
 </div>
 
@@ -247,9 +247,9 @@
     <script src="../../dist/js/demo.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Page specific script -->
-    <<!-- script ajax -->
+    <!-- script ajax -->
     <script src="js/ajaxjsadmin/gerersession.js"></script>
-    <<!--------------------->
+    <!--------------------->
     <script>
      function filterMembers() {
     var input, filter, select, options, option, i, txtValue;
