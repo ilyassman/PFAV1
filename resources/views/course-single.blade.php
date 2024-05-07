@@ -167,7 +167,7 @@
   {!! $formation->programme !!}
 
 
-  <a href="{{ route('inscription') }}" class="small btn btn-primary px-2 py-2 rounded-2 mt-2">
+  <a href="{{ route('inscription',['id' => Crypt::encrypt($formation->id)]) }}" class="small btn btn-primary px-2 py-2 rounded-2 mt-2">
     <span class="icon-users mr-1"></span> S'inscrire
 </a>
 
