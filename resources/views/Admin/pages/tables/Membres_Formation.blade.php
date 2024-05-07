@@ -198,20 +198,44 @@
                 >15 Notifications</span
               >
               <div class="dropdown-divider"></div>
-              <a href="#" class="dropdown-item">
-                <i class="fas fa-envelope mr-2"></i> 4 new messages
-                <span class="float-right text-muted text-sm">3 mins</span>
-              </a>
+              <div class="dropdown-item d-flex align-items-center" style="font-size: 13px; display :flex ;justify-content : space-between">
+                <div class="mr-2">
+                  <i class="fas fa-user-circle text-primary"></i>
+                  <span class="d-block">Pierre Dupont</span>
+                  <span class="text-muted">Formation: Web Dev</span>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <button class="btn btn-sm btn-success" style="font-size: 11px; margin-right : 4px ;">Accepter</button>
+                    <button class="btn btn-sm btn-danger" style="font-size: 11px;">Rejeter</button>
+                  </div>
+              </div>
+
               <div class="dropdown-divider"></div>
-              <a href="#" class="dropdown-item">
-                <i class="fas fa-users mr-2"></i> 8 friend requests
-                <span class="float-right text-muted text-sm">12 hours</span>
-              </a>
+              <div class="dropdown-item d-flex align-items-center" style="font-size: 13px; display :flex ;justify-content : space-between">
+                <div class="mr-2">
+                  <i class="fas fa-user-circle text-primary"></i>
+                  <span class="d-block">Pierre Dupont</span>
+                  <span class="text-muted">Formation: Web Dev</span>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <button class="btn btn-sm btn-success" style="font-size: 11px; margin-right : 4px ;">Accepter</button>
+                    <button class="btn btn-sm btn-danger" style="font-size: 11px;">Rejeter</button>
+                  </div>
+              </div>
+
               <div class="dropdown-divider"></div>
-              <a href="#" class="dropdown-item">
-                <i class="fas fa-file mr-2"></i> 3 new reports
-                <span class="float-right text-muted text-sm">2 days</span>
-              </a>
+              <div class="dropdown-item d-flex align-items-center" style="font-size: 13px; display :flex ;justify-content : space-between">
+                <div class="mr-2">
+                  <i class="fas fa-user-circle text-primary"></i>
+                  <span class="d-block">Pierre Dupont</span>
+                  <span class="text-muted">Formation: Web Dev</span>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <button class="btn btn-sm btn-success" style="font-size: 11px; margin-right : 4px ;">Accepter</button>
+                    <button class="btn btn-sm btn-danger" style="font-size: 11px;">Rejeter</button>
+                  </div>
+              </div>
+
               <div class="dropdown-divider"></div>
               <a href="#" class="dropdown-item dropdown-footer"
                 >See All Notifications</a
@@ -345,6 +369,7 @@
                                                 <button type="button" class="btn btn-primary text-white" data-toggle="modal" data-target="#allMembersModal">
                                                     <i class="fas fa-users me-2"></i> Afficher tous les membres
                                                   </button>
+
                                         <!-- Ajoutez d'autres lignes pour chaque formation avec sa liste de membres -->
                                     </tbody>
                                 </table>

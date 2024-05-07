@@ -77,6 +77,15 @@
         font-size: 24px;
         font-weight: bold;
       }
+
+      .course-image {
+      width: 200px; /* Définit une largeur fixe pour l'image */
+     height: 200px; /* Définit une hauteur fixe pour l'image */
+    object-fit: cover; /* Garde les proportions de l'image tout en remplissant le conteneur */
+}
+
+
+
     </style>
   </head>
 
@@ -260,45 +269,42 @@
               <div class="owl-slide-3 owl-carousel">
                 @foreach ($formations as $form)
                 <div class="course-1-item">
-                  <figure class="thumnail">
-                    <a href="{{ route('course', ['id' =>Crypt::encrypt($form->id)]) }}">
-                        <img src="Formationpic/{{$form->image}}" alt="Ingénierie des ressources en eau" class="img-fluid"
-                        >
-                    </a>
-                    <div class="price">{{$form->prix}}€</div>
-                    <div class="category">
-                      <h3>{{$form->titre}}</h3>
+                    <figure class="thumnail">
+                        <a href="{{ route('course', ['id' =>Crypt::encrypt($form->id)]) }}">
+                            <img src="Formationpic/{{$form->image}}" alt="Ingénierie des ressources en eau" class="img-fluid course-image">
+                        </a>
+                        <div class="price">{{$form->prix}}€</div>
+                        <div class="category">
+                            <h3>{{$form->titre}}</h3>
+                        </div>
+                    </figure>
+                    <div class="course-1-content pb-4">
+                        <!-- Utilise une classe CSS spécifique pour les prérequis -->
+                        <p class="prerequis mb-2" style="font-size: 13px; margin-left: 5px; margin-right: 5px;">LES PREREQUIS </p>
+                        <h2 style="font-size: 15px; margin-left: 5px; margin-right: 5px;">{{ \Illuminate\Support\Str::limit($form->prerequis, 90, $end='...') }}</h2>
+                        <div class="rating text-center mb-3">
+                            @php
+                            $i=$form->niveau_etoile;
+                            @endphp
+                            @for($j=1;$j<=5;$j++)
+                            @if($i!=0)
+                            <span class="icon-star2 text-warning"></span>
+                            @php
+                            $i--;
+                            @endphp
+                            @endif
+                            @endfor
+                        </div>
+                        <p class="desc mb-4">
+                            {{ \Illuminate\Support\Str::limit($form->contenue, 90, $end='...') }}
+                        </p>
+                        <p>
+                            <a href="{{ route('course', ['id' => Crypt::encrypt($form->id)]) }}" class="btn btn-primary rounded-0 px-4">S'inscrire à ce cours</a>
+                        </p>
                     </div>
-                  </figure>
-                  <div class="course-1-content pb-4">
-                    <p>LES PREREQUIS  </p>
-                    <h2>
-                      {{ $form->prerequis }}</h2>
-                    <div class="rating text-center mb-3">
-                      @php
-                      $i=$form->niveau_etoile;
-                      @endphp
-                      @for($j=1;$j<=5;$j++)
-                      @if($i!=0)
-                      <span class="icon-star2 text-warning"></span>
-                      @php
-                      $i--;
-                      @endphp
-                      @endif
-                      @endfor
-
-                    </div>
-                    <p class="desc mb-4">
-                      {{$form->contenue}}
-                    </p>
-                    <p>
-
-                      <a href="{{ route('course', ['id' => Crypt::encrypt($form->id)]) }}" class="btn btn-primary rounded-0 px-4">S'inscrire à ce cours</a>
-
-                    </p>
-                  </div>
                 </div>
                 @endforeach
+
 
               </div>
             </div>
