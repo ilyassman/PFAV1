@@ -4,6 +4,7 @@ use App\Http\Controllers\API\CommentaireController;
 use App\Http\Controllers\API\DemandeinscriptionController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Postcontroller;
+use App\Models\Membre;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
@@ -40,6 +41,7 @@ Route::get('/encrypt-id/{id}', function ($id) {
     return response()->json(['encrypted_id' => Crypt::encrypt($id)]);
 });
 Route::get('/chartmembre', [HomeController::class, 'chartmembre']);
+
 
 Route::get('/chartcateg', [HomeController::class, 'chartcateg']);
 Route::post('/register', [RegisterController::class, 'register']);

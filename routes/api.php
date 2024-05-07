@@ -14,6 +14,9 @@ use App\Http\Controllers\API\SupportController;
 use App\Http\Controllers\API\UtilisateurController;
 use App\Http\Controllers\API\VoteController;
 use App\Http\Controllers\API\EcoleController;
+
+
+use App\Http\Controllers\Mailcontrollerin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -92,6 +95,8 @@ Route::prefix('v1')->group(function () {
     Route::apiResource('demandes', DemandeinscriptionController::class
     );
 });
+
+Route::post('Mailinscri/{Mailinscri}',[Mailcontrollerin::class,'sendmail']);
 Route::get('commentaires/{idformation}',[CommentaireController::class,'findbyformation']);
 Route::get('membrecommentaires/{idmembre}',[MembreController::class,'commentaire_membre']);
 Route::delete('inscriptiondeletemembre/{idmembre}/{idsession}',[InscriptionController::class,'removemembre']);
@@ -99,6 +104,7 @@ Route::put('inscriptionupdate/{idmembre}/{idsession}',[InscriptionController::cl
 Route::get('formateursession/{idformateur}',[FormateurController::class,'sessionform']);
 Route::get('sessionmembres/{idsession}',[SessionController::class,'sessionmembres']);
 Route::get('categories/{idcateg}',[CategorieController::class,'categoriebyid']);
+
 
 Route::get('sessionvotes/{idsession}',[SessionController::class,'sessionvotes']);
 Route::get('login/{email}/{pass}',[UtilisateurController::class,'login']);

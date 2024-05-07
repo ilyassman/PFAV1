@@ -93,7 +93,11 @@ class DemandeinscriptionController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $demande=Demandeinscription::find($id);
+        $demande->etat=$request->etat;
+        if(!empty($request->id_membre))
+        $demande->id_membre=$request->id_membre;
+        $demande->save();
     }
 
     /**
@@ -101,6 +105,7 @@ class DemandeinscriptionController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $demande=Demandeinscription::find($id);
+        $demande->delete();
     }
 }
