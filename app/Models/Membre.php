@@ -27,4 +27,6 @@ class Membre extends Model
     {
         return $this->belongsToMany(Session::class, 'inscriptions', 'id_membre', 'id_session');
     }
+   
+    
 }

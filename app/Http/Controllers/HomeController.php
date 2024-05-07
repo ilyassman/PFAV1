@@ -118,7 +118,10 @@ class HomeController extends Controller
             'chart_type' => 'bar',
         ];
         $chart1 = new LaravelChart($chart_options);
-        return view("Admin/admin", compact('datas', 'chart1'));
+        $notifs=DB::select("select (select count(*) from demandeinscriptions where etat=0)as nbr ,demandeinscriptions.*,formations.titre from formations,demandeinscriptions
+        where formations.id=demandeinscriptions.id_formation
+        and demandeinscriptions.etat=0;");
+        return view("Admin/admin", compact('datas', 'chart1','notifs'));
     }
     public function showCourseSingle(Request $request)
     {
@@ -240,13 +243,17 @@ class HomeController extends Controller
 
       public function Membres_Formation()
       {
-          $categs = Categorie::all();
-          return view("Admin/pages/tables/Membres_Formation", compact('categs'));
+        $formations = Formation::all();
+       
+         return view("Admin/pages/tables/Membres_Formation",compact('formations'));
       }
-      public function message_inscription()
-    {
-          $datas = Categorie::all();
-          return view("message_inscription", compact('datas')) ;
-      }
+      public function getMembers($formationId) {
+        $formation = Formation::findOrFail($formationId);
+        $members = $formation->membres;
+    
+        return response()->json(['members' => $members]);
+    }
+
+
 }
 

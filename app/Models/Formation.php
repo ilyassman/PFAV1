@@ -15,4 +15,7 @@ class Formation extends Model
     {
         return $this->hasOne(Categorie::class,'categ_id');
     }
+    public function membres(){
+        return $this->belongsToMany(Membre::class,'demandeinscriptions','id_formation','id_membre');
+    }
 }

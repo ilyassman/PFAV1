@@ -434,21 +434,31 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>Formation A</td>
+                                      @foreach ($formations as $form)
+                                      @if (count($form->membres)>0 && $form->etat==1)
+                                      <tr>
+                                      
+                                            <td>{{$form->titre}}</td>
                                             <td>
-                                                <div class="member-list" style="max-height: 105px; overflow-y: auto;">
-                                                    <!-- Ajoutez 100 membres pour cette formation -->
-                                                    <!-- Vous pouvez générer ces éléments dynamiquement à partir de JavaScript ou de votre backend -->
-                                                    <!-- Voici juste un exemple statique -->
-                                                    <?php for ($i = 1; $i <= 100; $i++): ?>
-                                                        <div style="height: 35px;">Membre <?= $i ?></div>
-                                                    <?php endfor; ?>
-                                                </div>
-                                                <button type="button" class="btn btn-primary text-white" data-toggle="modal" data-target="#allMembersModal">
-                                                    <i class="fas fa-users me-2"></i> Afficher tous les membres
-                                                  </button>
-
+                                              <div class="member-list" style="max-height: 105px; overflow-y: auto;">
+                                    
+                                                  @foreach ($form->membres as $membre)
+                                                  <div style="height: 35px;">{{$membre->nom}} {{$membre->prenom}}</div>
+                                                  @endforeach
+                                                     
+                                                 
+                                              </div>
+                                              <button type="button" class="btn btn-primary text-white btn-show-members" data-toggle="modal" data-target="#allMembersModal" data-formation-id="{{ $form->id }}">
+                                                <i class="fas fa-users me-2"></i> Afficher tous les membres
+                                            </button>
+                                            
+                                          </td>
+                                        </tr>
+                                        @endif
+                                         
+                                      
+                                      @endforeach
+                                        
                                         <!-- Ajoutez d'autres lignes pour chaque formation avec sa liste de membres -->
                                     </tbody>
                                 </table>
@@ -536,6 +546,33 @@
     <!-- AdminLTE for demo purposes -->
     <script src="../../dist/js/demo.js"></script>
     <!-- Page specific script -->
+    <script>
+      $(document).ready(function() {
+          $('.btn-show-members').click(function() {
+              var formationId = $(this).data('formation-id');
+              
+              // Envoyer une requête AJAX pour récupérer les membres associés à la formation sélectionnée
+              $.ajax({
+                  url: `http://127.0.0.1:8000/getmembers/${formationId}`, // Remplacez '/get-members/' par l'URL de votre endpoint backend pour récupérer les membres
+                  type: 'GET',
+                  success: function(data) {
+                      // Mettre à jour le contenu du modal avec les membres récupérés
+                      var memberList = $('.modal-body .member-list');
+                      memberList.empty(); // Vider le contenu actuel du modal
+                      
+                      // Ajouter les membres récupérés au modal
+                      $.each(data.members, function(index, member) {
+                          memberList.append('<div>' + member.nom + ' ' + member.prenom + '</div>');
+                      });
+                  },
+                  error: function(xhr, status, error) {
+                      console.error(error);
+                  }
+              });
+          });
+      });
+  </script>
+  
     <script>
       $(function () {
         $("#example1")
