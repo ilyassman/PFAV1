@@ -1,4 +1,48 @@
 @props(['notifs'])
+<div class="modal fade" id="allNotificationsModal" tabindex="-1" role="dialog" aria-labelledby="allNotificationsModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="allNotificationsModalLabel">Toutes les Notifications</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body">
+              <table class="table">
+                  <thead>
+                      <tr>
+                          <th>Nom</th>
+                          <th>Prénom</th>
+                          <th>Formation demandée</th>
+                          <th>Temps de demande</th>
+                          <th>Actions</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                    @foreach ($notifs as $notif)
+                    <tr>
+                      <td>{{$notif->nom}}</td>
+                      <td>{{$notif->nom}}</td>
+                      <td>{{$notif->titre}}</td>
+                      <td>{{$notif->created_at}}</td>
+                      <td>
+                          <button class="btn btn-success accept-btn">Accepter</button>
+                          <button class="btn btn-danger reject-btn">Rejeter</button>
+                      </td>
+                  </tr>
+                        
+                    @endforeach
+                      <!-- Lignes statiques pour tester -->
+                     
+                      
+                      <!-- Ajoutez d'autres lignes statiques pour tester -->
+                  </tbody>
+              </table>
+          </div>
+      </div>
+  </div>
+</div>
 <nav class="main-header navbar navbar-expand navbar-white navbar-light">
   <!-- Left navbar links -->
   <ul class="navbar-nav">
@@ -26,13 +70,28 @@
     <li class="nav-item dropdown">
       <a class="nav-link" data-toggle="dropdown" href="#">
         <i class="far fa-bell"></i>
-        <span class="badge badge-warning navbar-badge">{{$notifs[0]->nbr}}</span>
+        <span class="badge badge-warning navbar-badge">
+          @if($notifs)
+          {{$notifs[0]->nbr}}
+          @else
+          0
+          @endif
+        
+        </span>
       </a>
       <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
         <span class="dropdown-item dropdown-header"
-          >{{$notifs[0]->nbr}} Notifications</span
+          >
+          @if($notifs)
+          {{$notifs[0]->nbr}}
+          @else
+          0
+          @endif
+          Notifications</span
         >
+        @if($notifs)
         @for($i=0;$i<3;$i++)
+        @if(isset($notifs[$i]))
         <div class="dropdown-divider"></div>
         <div class="dropdown-item d-flex align-items-center" style="font-size: 13px; display :flex ;justify-content : space-between">
           <div class="mr-2">
@@ -45,14 +104,16 @@
               <button class="btn btn-sm btn-danger" style="font-size: 11px;">Rejeter</button>
             </div>
         </div>
+        @endif
         @endfor
+        <div class="dropdown-divider"></div>
+        <a href="#" class="dropdown-item dropdown-footer" data-toggle="modal" data-target="#allNotificationsModal">See All Notifications</a>
+
+        @endif
 
        
         
-        <div class="dropdown-divider"></div>
-        <a href="#" class="dropdown-item dropdown-footer"
-          >See All Notifications</a
-        >
+        
       </div>
     </li>
     <li class="nav-item">

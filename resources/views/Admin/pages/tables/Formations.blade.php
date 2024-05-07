@@ -85,7 +85,7 @@
   <body class="hold-transition sidebar-mini">
     <div class="wrapper">
       <!-- Navbar -->
-      <x-notif-bar />
+      <x-notif-bar :notifs="$notifs" />
       <!-- /.navbar -->
 
       <!-- Main Sidebar Container -->

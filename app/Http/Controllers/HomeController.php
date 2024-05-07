@@ -63,24 +63,37 @@ class HomeController extends Controller
     {
         $datas = DB::select("select utilisateurs.*,nom,prenom,image from utilisateurs ,membres
         WHERE membres.iduser=utilisateurs.id");
-        return view("Admin/pages/tables/Membres", compact('datas'));
+        $notifs=DB::select("select (select count(*) from demandeinscriptions where etat=0)as nbr ,demandeinscriptions.*,formations.titre from formations,demandeinscriptions
+        where formations.id=demandeinscriptions.id_formation
+        and demandeinscriptions.etat=0;");
+
+        return view("Admin/pages/tables/Membres", compact('datas','notifs'));
     }
     public function showcomment()
     {
         $datas = DB::select("select commentaires.*,membres.nom,membres.prenom,formations.titre from commentaires,membres,formations where commentaires.membre_id=membres.id and commentaires.formation_id=formations.id");
-        return view("Admin/pages/tables/Commentaires", compact('datas'));
+        $notifs=DB::select("select (select count(*) from demandeinscriptions where etat=0)as nbr ,demandeinscriptions.*,formations.titre from formations,demandeinscriptions
+        where formations.id=demandeinscriptions.id_formation
+        and demandeinscriptions.etat=0;");
+        return view("Admin/pages/tables/Commentaires", compact('datas','notifs'));
     }
     public function showformateurs()
     {
         $datas = DB::select("select utilisateurs.*,nom,prenom,image,description from utilisateurs ,formateurs
         WHERE formateurs.iduser=utilisateurs.id");
-        return view("Admin/pages/tables/Formateurs", compact('datas'));
+        $notifs=DB::select("select (select count(*) from demandeinscriptions where etat=0)as nbr ,demandeinscriptions.*,formations.titre from formations,demandeinscriptions
+        where formations.id=demandeinscriptions.id_formation
+        and demandeinscriptions.etat=0;");
+        return view("Admin/pages/tables/Formateurs", compact('datas','notifs'));
     }
     public function showformation()
     {
         $datas = Formation::all();
         $categs = Categorie::all();
-        return view("Admin/pages/tables/Formations", compact('datas', 'categs'));
+        $notifs=DB::select("select (select count(*) from demandeinscriptions where etat=0)as nbr ,demandeinscriptions.*,formations.titre from formations,demandeinscriptions
+        where formations.id=demandeinscriptions.id_formation
+        and demandeinscriptions.etat=0;");
+        return view("Admin/pages/tables/Formations", compact('datas', 'categs','notis'));
     }
     public function showsession()
     {
@@ -88,18 +101,27 @@ class HomeController extends Controller
         from sessions,formations,formateurs where sessions.id_formation=formations.id and formateurs.id=sessions.id_formateur");
         $formations = Formation::all();
         $formateurs = Formateur::all();
-        return view("Admin/pages/tables/Sessions", compact('datas', 'formations', 'formateurs'));
+        $notifs=DB::select("select (select count(*) from demandeinscriptions where etat=0)as nbr ,demandeinscriptions.*,formations.titre from formations,demandeinscriptions
+        where formations.id=demandeinscriptions.id_formation
+        and demandeinscriptions.etat=0;");
+        return view("Admin/pages/tables/Sessions", compact('datas', 'formations', 'formateurs','notifs'));
     }
     public function showsupport()
     {
         $datas = DB::select("select supports.*,formations.titre as formation from supports,formations where supports.id_formation=formations.id");
         $formations = Formation::all();
-        return view("Admin/pages/tables/support", compact('datas', 'formations'));
+        $notifs=DB::select("select (select count(*) from demandeinscriptions where etat=0)as nbr ,demandeinscriptions.*,formations.titre from formations,demandeinscriptions
+        where formations.id=demandeinscriptions.id_formation
+        and demandeinscriptions.etat=0;");
+        return view("Admin/pages/tables/support", compact('datas', 'formations','notifs'));
     }
     public function showecole()
     {
+        $notifs=DB::select("select (select count(*) from demandeinscriptions where etat=0)as nbr ,demandeinscriptions.*,formations.titre from formations,demandeinscriptions
+        where formations.id=demandeinscriptions.id_formation
+        and demandeinscriptions.etat=0;");
         $ecole = Ecole::first();
-        return view("Admin/pages/tables/ecole", compact('ecole'));
+        return view("Admin/pages/tables/ecole", compact('ecole','notifs'));
     }
     public function showdash()
     {
@@ -176,7 +198,11 @@ class HomeController extends Controller
         $sessions = DB::select("select sessions.*,formations.titre from sessions,formations WHERE sessions.id_formation=formations.id");
         $membres = DB::select("select utilisateurs.*,membres.id as idmembre,nom,prenom,image from utilisateurs ,membres
         WHERE membres.iduser=utilisateurs.id");
-        return view('Admin/pages/tables/gererSessions', compact('sessions', 'membres'));
+        $notifs=DB::select("select (select count(*) from demandeinscriptions where etat=0)as nbr ,demandeinscriptions.*,formations.titre from formations,demandeinscriptions
+        where formations.id=demandeinscriptions.id_formation
+        and demandeinscriptions.etat=0;");
+
+        return view('Admin/pages/tables/gererSessions', compact('sessions', 'membres','notifs'));
     }
     public function registered()
     {
@@ -244,13 +270,16 @@ class HomeController extends Controller
       public function Membres_Formation()
       {
         $formations = Formation::all();
+        $notifs=DB::select("select (select count(*) from demandeinscriptions where etat=0)as nbr ,demandeinscriptions.*,formations.titre from formations,demandeinscriptions
+        where formations.id=demandeinscriptions.id_formation
+        and demandeinscriptions.etat=0;");
+
        
-         return view("Admin/pages/tables/Membres_Formation",compact('formations'));
+         return view("Admin/pages/tables/Membres_Formation",compact('formations','notifs'));
       }
       public function getMembers($formationId) {
         $formation = Formation::findOrFail($formationId);
         $members = $formation->membres;
-    
         return response()->json(['members' => $members]);
     }
     public function msgdemande(){
