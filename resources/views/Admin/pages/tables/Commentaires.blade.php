@@ -35,11 +35,11 @@
     position: relative; /* Positionner la div de chargement de manière fixe par rapport à la fenêtre du navigateur */
     top: 0; /* Aligner la div en haut de la fenêtre */
     left: 40%; /* Aligner la div à gauche de la fenêtre */
-   
-  
+
+
 }
       #supp:hover {
-    cursor: pointer; 
+    cursor: pointer;
 }
     </style>
   </head>
@@ -218,9 +218,9 @@
     <script src="../../dist/js/demo.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Page specific script -->
-    <<!-- script ajax -->
+    <!-- script ajax -->
     <script src="js/ajaxjsadmin/commentcrud.js"></script>
-    <<!--------------------->
+    <!--------------------->
     <script>
       $(function () {
         $("#example1")
