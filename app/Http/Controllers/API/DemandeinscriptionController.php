@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Models\Categorie;
 use App\Models\Demandeinscription;
 use App\Models\Membre;
 use Auth;
@@ -49,6 +50,7 @@ class DemandeinscriptionController extends Controller
     {
        
         try {
+            
             // Récupérer l'ID de la formation à partir de la requête
             $encryptedId = $request->input('id');
             $formationId = Crypt::decrypt($encryptedId);
@@ -70,7 +72,7 @@ class DemandeinscriptionController extends Controller
         if(!empty($request->pays))
         $demande->pay=$request->pays;
         $demande->save(); 
-        dd("done");
+        return redirect()->route('page-de-redirection');
         } catch (DecryptException $e) {
             abort(404);
         }

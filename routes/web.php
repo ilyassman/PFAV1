@@ -50,5 +50,7 @@ Route::get('/Membres_Formation',[HomeController::class,'Membres_Formation'])->na
 Route::post('/adddemande', [DemandeinscriptionController::class, 'adddemande'])->name('addemande');
 Route::get('/message_inscription', [HomeController::class, 'message_inscription'])->name('message_inscription');
 Route::get('/getmembers/{id}',[HomeController::class,'getMembers'])->name('getmembers');
+Route::get('/getmembers/{id}',[HomeController::class,'getMembers'])->name('getmembers');
+Route::get('/page-de-redirection',[HomeController::class,'msgdemande'])->name('page-de-redirection');
 
 

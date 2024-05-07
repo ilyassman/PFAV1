@@ -253,6 +253,11 @@ class HomeController extends Controller
     
         return response()->json(['members' => $members]);
     }
+    public function msgdemande(){
+        $datas = Categorie::take(6)->get();
+        return view('message_inscription',compact('datas'));
+
+    }
 
 
 }
