@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class test extends Model
 {
     use HasFactory;
+    public function ilyass_zamal(){
+        return 0 ;
+    }
+
 }
