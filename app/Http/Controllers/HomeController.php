@@ -236,16 +236,12 @@ class HomeController extends Controller
 
         ];
       }
-<<<<<<< HEAD
+
 
       public function Membres_Formation()
       {
           $categs = Categorie::all();
           return view("Admin/pages/tables/Membres_Formation", compact('categs'));
       }
-
-=======
-
->>>>>>> 5a78e05b8f464c395e42a91efcf46aeef8afdb28
 }
 
