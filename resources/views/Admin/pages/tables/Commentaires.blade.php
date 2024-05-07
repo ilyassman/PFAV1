@@ -220,7 +220,7 @@
     <!-- Page specific script -->
     <<!-- script ajax -->
     <script src="js/ajaxjsadmin/commentcrud.js"></script>
-    <<!--------------------->
+    <!--------------------->
     <script>
       $(function () {
         $("#example1")
