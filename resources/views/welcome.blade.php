@@ -302,6 +302,46 @@
                             <a href="{{ route('course', ['id' => Crypt::encrypt($form->id)]) }}" class="btn btn-primary rounded-0 px-4">S'inscrire à ce cours</a>
                         </p>
                     </div>
+<<<<<<< HEAD
+=======
+                  </figure>
+                  <div class="course-1-content pb-4">
+                    
+                    <div class="rating text-center mb-3">
+                      @php
+                      $i=$form->niveau_etoile;
+                      @endphp
+                      @for($j=1;$j<=5;$j++)
+                      @if($i!=0)
+                      <span class="icon-star2 text-warning"></span>
+                      @php
+                      $i--;
+                      @endphp
+                      @endif
+                      @endfor
+
+                    </div>
+                    <p class="desc mb-4">
+                      <?php
+                      $content = $form->contenue;
+                      $wordCount = str_word_count($content);
+                      
+                      // Si le contenu dépasse 20 mots, afficher uniquement les 20 premiers mots et un lien "Lire la suite"
+                      if ($wordCount > 20) {
+                          $shortContent = implode(' ', array_slice(explode(' ', $content), 0, 20));
+                          echo $shortContent . ' <a href="' . route('course', ['id' => Crypt::encrypt($form->id)]) . '" class="read-more">Lire la suite</a>';
+                      } else {
+                          echo $content;
+                      }
+                      ?>
+                  </p>
+                    <p>
+
+                      <a href="{{ route('course', ['id' => Crypt::encrypt($form->id)]) }}" class="btn btn-primary rounded-0 px-4">S'inscrire à ce cours</a>
+
+                    </p>
+                  </div>
+>>>>>>> 5a78e05b8f464c395e42a91efcf46aeef8afdb28
                 </div>
                 @endforeach
 
