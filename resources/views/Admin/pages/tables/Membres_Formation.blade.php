@@ -237,11 +237,10 @@
               </div>
 
               <div class="dropdown-divider"></div>
-              <a href="#" class="dropdown-item dropdown-footer"
-                >See All Notifications</a
-              >
+              <a href="#" class="dropdown-item dropdown-footer" data-toggle="modal" data-target="#allNotificationsModal">See All Notifications</a>
             </div>
           </li>
+
           <li class="nav-item">
             <a class="nav-link" data-widget="fullscreen" href="#" role="button">
               <i class="fas fa-expand-arrows-alt"></i>
@@ -260,6 +259,87 @@
           </li>
         </ul>
       </nav>
+
+                  <!-- Modal pour afficher toutes les notifications -->
+<div class="modal fade" id="allNotificationsModal" tabindex="-1" role="dialog" aria-labelledby="allNotificationsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="allNotificationsModalLabel">Toutes les Notifications</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Nom</th>
+                            <th>Prénom</th>
+                            <th>Formation demandée</th>
+                            <th>Temps de demande</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Lignes statiques pour tester -->
+                        <tr>
+                            <td>John</td>
+                            <td>Doe</td>
+                            <td>Web Dev</td>
+                            <td>2024-04-28 10:00:00</td>
+                            <td>
+                                <button class="btn btn-success accept-btn">Accepter</button>
+                                <button class="btn btn-danger reject-btn">Rejeter</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Alice</td>
+                            <td>Smith</td>
+                            <td>Data Science</td>
+                            <td>2024-04-28 09:30:00</td>
+                            <td>
+                                <button class="btn btn-success accept-btn">Accepter</button>
+                                <button class="btn btn-danger reject-btn">Rejeter</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Emily</td>
+                            <td>Jackson</td>
+                            <td>Mobile App Dev</td>
+                            <td>2024-04-27 15:45:00</td>
+                            <td>
+                                <button class="btn btn-success accept-btn">Accepter</button>
+                                <button class="btn btn-danger reject-btn">Rejeter</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Michael</td>
+                            <td>Williams</td>
+                            <td>UI/UX Design</td>
+                            <td>2024-04-27 12:20:00</td>
+                            <td>
+                                <button class="btn btn-success accept-btn">Accepter</button>
+                                <button class="btn btn-danger reject-btn">Rejeter</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Sophia</td>
+                            <td>Anderson</td>
+                            <td>Data Analysis</td>
+                            <td>2024-04-26 11:10:00</td>
+                            <td>
+                                <button class="btn btn-success accept-btn">Accepter</button>
+                                <button class="btn btn-danger reject-btn">Rejeter</button>
+                            </td>
+                        </tr>
+                        <!-- Ajoutez d'autres lignes statiques pour tester -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
       <!-- /.navbar -->
 
       <!-- Main Sidebar Container -->

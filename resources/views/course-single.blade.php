@@ -142,15 +142,11 @@
             </div>
         </div>
     </div>
-
-
-
     <div class="section-bg presentation style-1">
         <div class="container">
           <div class="roww">
             <h1>Présentation:
             </h1>
-
 <p> {{ $formation->contenue }}
 </p>
   <h1>Niveau <i class="fas fa-users"></i>

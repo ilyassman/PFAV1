@@ -163,7 +163,7 @@ class HomeController extends Controller
                 return view('inscription_form', compact('formation'));
             }
 
-            
+
         } catch (DecryptException $e) {
             abort(404);
         }
@@ -236,7 +236,6 @@ class HomeController extends Controller
 
         ];
       }
-<<<<<<< HEAD
 
       public function Membres_Formation()
       {
@@ -244,8 +243,5 @@ class HomeController extends Controller
           return view("Admin/pages/tables/Membres_Formation", compact('categs'));
       }
 
-=======
-     
->>>>>>> 5a78e05b8f464c395e42a91efcf46aeef8afdb28
 }
 
