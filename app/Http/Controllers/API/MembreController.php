@@ -48,6 +48,7 @@ class MembreController extends Controller
         }
     
         $memb->save();
+        return response()->json(['id' => $memb->id]);
     }
 
     /**
@@ -103,8 +104,8 @@ class MembreController extends Controller
         $membre = Membre::where('iduser', $id)->first();
         // Vérifier si le support existe
     if($membre) {
-        // Supprimer le fichier associé s'il existe
-        if(file_exists(public_path('/Membrespic/' . $membre->image))) {
+        
+        if($membre->image!='noimage.png' && file_exists(public_path('/Membrespic/' . $membre->image))) {
             unlink(public_path('/Membrespic/' . $membre->image));
         }
 
@@ -125,4 +126,5 @@ class MembreController extends Controller
         return 1;
         else return 0;
     }
+    
 }

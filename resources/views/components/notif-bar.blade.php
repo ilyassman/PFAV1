@@ -10,11 +10,11 @@
           </div>
           <div class="modal-body">
             <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Rechercher..." aria-label="Rechercher" aria-describedby="basic-addon2">
-                <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="button">Rechercher</button>
-                </div>
-            </div>
+              <input id="searchInput" type="text" class="form-control" placeholder="Rechercher..." aria-label="Rechercher" aria-describedby="basic-addon2">
+              <div class="input-group-append">
+                  <button class="btn btn-outline-secondary" type="button" onclick="search()">Rechercher</button>
+              </div>
+          </div>          
               <table class="table">
                   <thead>
                       <tr>
@@ -29,12 +29,12 @@
                     @foreach ($notifs as $notif)
                     <tr>
                       <td>{{$notif->nom}}</td>
-                      <td>{{$notif->nom}}</td>
+                      <td>{{$notif->prenom}}</td>
                       <td>{{$notif->titre}}</td>
                       <td>{{$notif->created_at}}</td>
                       <td>
-                          <button class="btn btn-success accept-btn">Accepter</button>
-                          <button class="btn btn-danger reject-btn">Rejeter</button>
+                        <button onclick="acceptdemande({{json_encode($notif)}})" class="btn btn-success accept-btn">Accepter</button>
+                          <button onclick="suppdemande({{$notif->id}})" class="btn btn-danger reject-btn">Rejeter</button>
                       </td>
                   </tr>
 
@@ -106,8 +106,8 @@
             <span class="text-muted">Formation: {{$notifs[$i]->titre}}</span>
           </div>
           <div class="d-flex justify-content-between">
-              <button class="btn btn-sm btn-success" style="font-size: 11px; margin-right : 4px ;">Accepter</button>
-              <button class="btn btn-sm btn-danger" style="font-size: 11px;">Rejeter</button>
+              <button onclick="acceptdemande({{json_encode($notifs[$i])}})" class="btn btn-sm btn-success" style="font-size: 11px; margin-right : 4px ;">Accepter</button>
+              <button onclick="suppdemande({{$notifs[$i]->id}})" class="btn btn-sm btn-danger" style="font-size: 11px;">Rejeter</button>
             </div>
         </div>
         @endif
@@ -140,3 +140,44 @@
     </li>
   </ul>
 </nav>
+<script src="js/ajaxjsadmin/demandecrud.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+  function search() {
+      // Récupérer la valeur de recherche
+      var searchText = document.getElementById('searchInput').value.toLowerCase();
+
+      // Récupérer toutes les lignes de la table
+      var rows = document.querySelector("#allNotificationsModal .table tbody").getElementsByTagName("tr");
+
+      // Parcourir toutes les lignes de la table
+      for (var i = 0; i < rows.length; i++) {
+          var row = rows[i];
+
+          // Récupérer le texte de chaque cellule de la ligne
+          var cells = row.getElementsByTagName("td");
+          var found = false;
+
+          // Parcourir toutes les cellules de la ligne
+          for (var j = 0; j < cells.length; j++) {
+              var cell = cells[j];
+              var cellText = cell.textContent.toLowerCase();
+
+              // Vérifier si le texte de la cellule contient le texte de recherche
+              if (cellText.indexOf(searchText) > -1) {
+                  found = true;
+                  break;
+              }
+          }
+
+          // Afficher ou masquer la ligne en fonction du résultat de la recherche
+          if (found) {
+              row.style.display = "";
+          } else {
+              row.style.display = "none";
+          }
+      }
+  }
+</script>
+
+
