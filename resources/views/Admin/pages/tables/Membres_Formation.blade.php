@@ -48,7 +48,7 @@
   <body class="hold-transition sidebar-mini">
     <div class="wrapper">
       <!-- Navbar -->
-<<<<<<< HEAD
+
       <nav class="main-header navbar navbar-expand navbar-white navbar-light">
         <!-- Left navbar links -->
         <ul class="navbar-nav">
@@ -341,11 +341,6 @@
         </div>
     </div>
 </div>
-=======
-      <x-notif-bar />
->>>>>>> 3722bb983e9071223512405fe920879564d540e0
-      <!-- /.navbar -->
-
       <!-- Main Sidebar Container -->
       <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Brand Logo -->

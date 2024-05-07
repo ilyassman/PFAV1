@@ -48,4 +48,6 @@ Route::post('/login', [LoginController::class, 'login'])->name('login');
 Route::post('/logout', [HomeController::class, 'logout'])->name('logout');
 Route::get('/Membres_Formation',[HomeController::class,'Membres_Formation'])->name('Membres_Formation');
 Route::post('/adddemande', [DemandeinscriptionController::class, 'adddemande'])->name('addemande');
+Route::get('/message_inscription', [HomeController::class, 'message_inscription'])->name('message_inscription');
+
 

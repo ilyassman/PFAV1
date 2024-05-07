@@ -243,5 +243,10 @@ class HomeController extends Controller
           $categs = Categorie::all();
           return view("Admin/pages/tables/Membres_Formation", compact('categs'));
       }
+      public function message_inscription()
+    {
+          $datas = Categorie::all();
+          return view("message_inscription", compact('datas'));
+      }
 }
 
