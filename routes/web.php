@@ -42,7 +42,7 @@ Route::get('/encrypt-id/{id}', function ($id) {
 Route::get('/chartmembre', [HomeController::class, 'chartmembre']);
 
 Route::get('/chartcateg', [HomeController::class, 'chartcateg']);
-Route::post('/register', [RegisterController::class, 'register']); // Pour soumettre le formulaire d'inscription
+Route::post('/register', [RegisterController::class, 'register']); 
 Route::get('/profile', [HomeController::class, 'profile'])->name('profile')->middleware('auth');
 Route::post('/login', [LoginController::class, 'login'])->name('login');
 Route::post('/logout', [HomeController::class, 'logout'])->name('logout');

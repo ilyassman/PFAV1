@@ -246,7 +246,7 @@ class HomeController extends Controller
       public function message_inscription()
     {
           $datas = Categorie::all();
-          return view("message_inscription", compact('datas'));
+          return view("message_inscription", compact('datas')) ;
       }
 }
 

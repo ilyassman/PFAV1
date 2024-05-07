@@ -69,7 +69,7 @@
       .course-image {
      height: 200px;
      width: 100%;
-    object-fit: cover;
+    object-fit: cover ;
     }
 
 
@@ -175,7 +175,7 @@
                         <div class="category">
                             <h3>{{$form->titre}}</h3>
                         </div>
-                    
+
 
                   </figure>
                   <div class="course-1-content pb-4">
@@ -197,7 +197,7 @@
                     <?php
                     $content = $form->contenue;
                     $wordCount = str_word_count($content);
-                    
+
                     // Si le contenu dépasse 20 mots, afficher uniquement les 20 premiers mots et un lien "Lire la suite"
                     if ($wordCount > 20) {
                         $shortContent = implode(' ', array_slice(explode(' ', $content), 0, 20));

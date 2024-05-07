@@ -98,7 +98,7 @@
         <a href="{{ route('home') }}">Home</a>
         <span class="mx-3 icon-keyboard_arrow_right"></span>
         <span class="current">Confirmation d'inscription</span>
-      </div>
+      </div>   
     </div>
 
     <div class="container" style="margin-top: 70px;">
@@ -106,7 +106,7 @@
             <div class="notification-icon">
                 <i class="fas fa-check-circle"></i>
             </div>
-            <div class="notification-message">Message envoyé ! Votre demande d'inscription à la formation xxxx est en cours de traitement.</div>
+            <div class="notification-message">Message envoyé !! Votre demande d'inscription à la formation xxxx est en cours de traitement.</div>
         </div>
     </div>
 

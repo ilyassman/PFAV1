@@ -112,7 +112,7 @@
             </a>
             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
               <a href="#" class="dropdown-item">
-                <!-- Message Start -->
+                <!-- Message Start --->
                 <div class="media">
                   <img
                     src="../../dist/img/user1-128x128.jpg"

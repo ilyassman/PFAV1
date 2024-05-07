@@ -81,7 +81,7 @@
       .course-image {
       width: 200px; /* Définit une largeur fixe pour l'image */
      height: 200px; /* Définit une hauteur fixe pour l'image */
-    object-fit: cover; /* Garde les proportions de l'image tout en remplissant le conteneur */
+    object-fit: cover;
 }
 
 
@@ -277,11 +277,11 @@
                         <div class="category">
                             <h3>{{$form->titre}}</h3>
                         </div>
-                    
+
 
                   </figure>
                   <div class="course-1-content pb-4">
-                    
+
                     <div class="rating text-center mb-3">
                       @php
                       $i=$form->niveau_etoile;
@@ -300,7 +300,7 @@
                       <?php
                       $content = $form->contenue;
                       $wordCount = str_word_count($content);
-                      
+
                       // Si le contenu dépasse 20 mots, afficher uniquement les 20 premiers mots et un lien "Lire la suite"
                       if ($wordCount > 20) {
                           $shortContent = implode(' ', array_slice(explode(' ', $content), 0, 20));

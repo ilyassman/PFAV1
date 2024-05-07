@@ -124,7 +124,7 @@
            <p>Présentation : {{ $formation->contenue }}</p>
            {{-- <div class="info-formateur">
             <div class="img-formateur"><img src="prof.jpeg" alt=""></div>
-            <p class="name-formateur">Enseignant <br> <span> EMS AFRIQUE</span>
+            <p class="name-formateur">Enseignant  <br> <span> EMS AFRIQUE</span>
             </p>
            </div> --}}
 
