@@ -81,12 +81,27 @@
             <a href="#" class="small mr-3"><span class="icon-envelope-o mr-2"></span>Contact</a>
           </div>
           <div class="col-lg-3 text-right">
-            <a href="{{ route('login') }}" class="small btn btn-primary px-2 py-2 rounded-0"
-              ><span class="icon-unlock-alt"></span>Connexion</a
-            >
+            @php
+            $id=Auth::id();
+            @endphp
+            @if(empty($id))
+            <a href="{{ route('login') }}" class="small btn btn-primary px-2 py-2 rounded-0">
+                <span class="icon-unlock-alt"></span> Connexion
+            </a>
             <a href="{{ route('register') }}" class="small btn btn-primary px-2 py-2 rounded-0">
-              <span class="icon-users"></span>S'inscrire
-          </a>
+                <span class="icon-users"></span> S'inscrire
+            </a>
+        @else
+        <form id="logout-form" action="{{ route('logout') }}" method="POST">
+          @csrf
+          <button type="submit" class="small btn btn-primary px-2 py-2 rounded-0">
+              <span class="icon-lock"></span> Déconnexion
+          </button>
+      </form>
+        @endif
+
+         
+          
           </div>
         </div>
       </div>
