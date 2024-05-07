@@ -7,5 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class test extends Model
 {
+    abdo zamal;
     use HasFactory;
 }
