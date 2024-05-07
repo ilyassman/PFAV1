@@ -40,8 +40,6 @@
 
                     @endforeach
                       <!-- Lignes statiques pour tester -->
-
-
                       <!-- Ajoutez d'autres lignes statiques pour tester -->
                   </tbody>
               </table>
@@ -99,15 +97,16 @@
         @for($i=0;$i<3;$i++)
         @if(isset($notifs[$i]))
         <div class="dropdown-divider"></div>
-        <div class="dropdown-item d-flex align-items-center" style="font-size: 13px; display :flex ;justify-content : space-between">
-          <div class="mr-2">
-            <i class="fas fa-user-circle text-primary"></i>
-            <span class="d-block">{{$notifs[$i]->nom}} {{$notifs[$i]->prenom}}</span>
-            <span class="text-muted">Formation: {{$notifs[$i]->titre}}</span>
-          </div>
-          <div class="d-flex justify-content-between">
-              <button class="btn btn-sm btn-success" style="font-size: 11px; margin-right : 4px ;">Accepter</button>
-              <button class="btn btn-sm btn-danger" style="font-size: 11px;">Rejeter</button>
+        <div class="dropdown-item d-flex align-items-center" style="font-size: 13px; display: flex; justify-content: space-between;">
+            <div class="mr-2" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                <i class="fas fa-user-circle text-primary"></i>
+                <span class="d-block">{{$notifs[$i]->nom}} {{$notifs[$i]->prenom}}</span>
+                <span class="text-muted">Formation: {{$notifs[$i]->titre}}</span>
+            </div>
+            <div class="d-flex justify-content-between">
+                <button class="btn btn-sm btn-success accept-btn" style="font-size: 11px; margin-right: 4px;">Accepter</button>
+                <button class="btn btn-sm btn-danger reject-btn" style="font-size: 11px;">Rejeter</button>
+                <i class="fas fa-check-circle text-success d-none accepted-icon"></i>
             </div>
         </div>
         @endif
@@ -140,3 +139,51 @@
     </li>
   </ul>
 </nav>
+<script>
+      document.addEventListener("DOMContentLoaded", function() {
+        const acceptBtns = document.querySelectorAll(".accept-btn");
+        const rejeteBtns = document.querySelectorAll(".reject-btn")
+        acceptBtns.forEach(function(btn) {
+            btn.addEventListener("click", function(event) {
+                const parentDiv = this.closest(".dropdown-item");
+                const acceptedIcon = parentDiv.querySelector(".accepted-icon");
+                const rejectedIcon = parentDiv.querySelector(".accepted-icon");
+
+                acceptedIcon.classList.remove("d-none");
+
+                // Supprimer les boutons après acceptation
+                parentDiv.querySelector(".accept-btn").remove();
+                parentDiv.querySelector(".reject-btn").remove();
+
+                // Supprimer la notification après 10 secondes
+                setTimeout(function() {
+                    parentDiv.remove();
+                }, 3000);
+
+                // Empêcher la propagation de l'événement de clic du bouton à l'élément parent
+                event.stopPropagation();
+            });
+        });
+        rejeteBtns.forEach(function(btn) {
+            btn.addEventListener("click", function(event) {
+                const parentDiv = this.closest(".dropdown-item");
+                const acceptedIcon = parentDiv.querySelector(".accepted-icon");
+                const rejectedIcon = parentDiv.querySelector(".accepted-icon");
+
+                acceptedIcon.classList.remove("d-none");
+
+                // Supprimer les boutons après acceptation
+                parentDiv.querySelector(".accept-btn").remove();
+                parentDiv.querySelector(".reject-btn").remove();
+
+                // Supprimer la notification après 10 secondes
+                setTimeout(function() {
+                    parentDiv.remove();
+                }, 3000);
+
+                // Empêcher la propagation de l'événement de clic du bouton à l'élément parent
+                event.stopPropagation();
+            });
+        });
+    });
+</script>

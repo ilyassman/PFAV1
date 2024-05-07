@@ -291,7 +291,7 @@ function ajouterMembre() {
             var memberElement = document.createElement("div");
             memberElement.classList.add("selected-member");
             memberElement.setAttribute("value", selectedMembers[i].value);
-            memberElement.innerHTML = `<i class="fas fa-user membre-user"></i> ${memberName} <span class="badge badge-success" onclick="changerEtat(this,${selectedMembers[i].value})" style="cursor: pointer;">Validé</span> <i class="fas fa-times-circle membre-delete" onclick="supprimerMembre(this)" style="cursor: pointer;"></i>`;
+            memberElement.innerHTML = `<i class="fas fa-user membre-user"></i> ${memberName} <span class="badge badge-success" onclick="changerEtat(this,${selectedMembers[i].value})" style="cursor: pointer;"></span> <i class="fas fa-times-circle membre-delete" onclick="supprimerMembre(this)" style="cursor: pointer;"></i>`;
 
             selectedMembersContainer.appendChild(memberElement);
         }

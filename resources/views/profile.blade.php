@@ -26,6 +26,7 @@
   <link href="css/jquery.mb.YTPlayer.min.css" media="all" rel="stylesheet" type="text/css">
 
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <style>
     #loading {
         position: relative;
@@ -37,11 +38,60 @@
        margin-top: 140px ;
        margin-bottom: 30px ;
     }
+    body{
+    margin-top:20px;
+    color: #1a202c;
+    text-align: left;
+    background-color: #e2e8f0;
+}
+.main-body {
+    padding: 15px;
+}
+.card {
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,.1), 0 1px 2px 0 rgba(0,0,0,.06);
+}
 
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 0 solid rgba(0,0,0,.125);
+    border-radius: .25rem;
+}
 
+.card-body {
+    flex: 1 1 auto;
+    min-height: 1px;
+    padding: 1rem;
+}
+
+.gutters-sm {
+    margin-right: -8px;
+    margin-left: -8px;
+}
+
+.gutters-sm>.col, .gutters-sm>[class*=col-] {
+    padding-right: 8px;
+    padding-left: 8px;
+}
+.mb-3, .my-3 {
+    margin-bottom: 1rem!important;
+}
+
+.bg-gray-300 {
+    background-color: #e2e8f0;
+}
+.h-100 {
+    height: 100%!important;
+}
+.shadow-none {
+    box-shadow: none!important;
+}
 </style>
-
-
 </head>
 
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
@@ -79,37 +129,115 @@
       </div>
     </div>
     <x-header :categ="$datas"/>
-
-
-
     <div class="container">
-        <div class="row">
-            <div class="col-md-6 offset-md-3">
-                <div class="card">
-                    <div class="card-header text-center">
-                        @if($membre && $membre->image)
-                          <img src="{{ asset('Membrespic/' . $membre->image) }}" class="rounded-circle" style="width: 100px; height: 100px;" alt="Image de profil">
-                        @else
-                          <div class="bg-secondary rounded-circle" style="width: 100px; height: 100px;"></div>
-                        @endif
-                      </div>
+        <div class="main-body">
+              <div class="row gutters-sm">
+                <div class="col-md-4 mb-3">
+                  <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Informations de l'utilisateur</h5>
-                        <p class="card-text" style="margin-top: 10px;">Email: {{ $user->email }}</p>
-                        <p class="card-text">Numéro de téléphone: {{ $user->num_tel }}</p>
-                        @if($membre)
-                            <p class="card-text">Nom: {{ $membre->nom }}</p>
-                            <p class="card-text">Prénom: {{ $membre->prenom }}</p>
+                      <div class="d-flex flex-column align-items-center text-center">
+                        @if($membre && $membre->image)
+                        <img src="{{ asset('Membrespic/' . $membre->image) }}" alt="Admin" class="rounded-circle" width="150" height="150">
                         @else
-                            <p class="card-text">Membre non défini</p>
+                        <div class="bg-secondary rounded-circle" style="width: 100px; height: 100px;"></div>
                         @endif
+                        <div class="mt-3">
+                        @if($membre)
+                          <h4>{{ $membre->nom }} {{ $membre->prenom }}</h4>
+                          <p class="text-muted font-size-sm">{{ $user->email }}</p>
+                          @else
+                          <p class="card-text">Membre non défini</p>
+                      @endif
+                        </div>
+                      </div>
                     </div>
+                  </div>
+                  <div class="card mt-3">
+                    <div class="card-footer">
+                      <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#formationModal">
+                        <i class="fas fa-graduation-cap"></i> Voir vos formations
+                      </button>
+                    </div>
+                  </div>
                 </div>
+                <div class="col-md-8">
+                  <div class="card mb-3">
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col-sm-3">
+                          <h6 class="mb-0">Nom</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary">
+                            {{ $membre->nom }}
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="row">
+                        <div class="col-sm-3">
+                          <h6 class="mb-0">Prénom</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary">
+                        {{ $membre->prenom }}
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="row">
+                        <div class="col-sm-3">
+                          <h6 class="mb-0">Email</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary">
+                            {{ $user->email }}
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="row">
+                        <div class="col-sm-3">
+                          <h6 class="mb-0">Numéro de téléphone</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary">
+                            {{ $user->num_tel }}
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="row">
+                        <div class="col-sm-12">
+                          <a class="btn btn-info " target="__blank" href="https://www.bootdey.com/snippets/view/profile-edit-data-and-skills"> <i class="fa-solid fa-pen-to-square"></i> Edit</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+        </div>
+
+<div class="modal fade" id="formationModal" tabindex="-1" role="dialog" aria-labelledby="formationModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="formationModalLabel">Formations inscrites</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <ul class="list-group">
+                    @foreach($formations as $formation)
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span>{{ $formation->titre }}</span>
+                            <a href="" class="btn btn-primary">Voir</a>
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
             </div>
         </div>
     </div>
-
-
+</div>
 
 
 

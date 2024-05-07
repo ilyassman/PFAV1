@@ -61,7 +61,7 @@ async function fetchData() {
                     var memberElement = document.createElement("div");
                     memberElement.classList.add("selected-member");
                     memberElement.setAttribute("value", membre.id);
-                    memberElement.innerHTML = `<i value=${membre.id} class="fas fa-user membre-user"></i> ${membre.nom}  ${membre.prenom} (${membre.email}) ${statusBadge} <i class="fas fa-times-circle membre-delete" onclick="supprimerMembre(this)" style='cursor: pointer;'></i>`;
+                    memberElement.innerHTML = `<i value=${membre.id} class="fas fa-user membre-user"></i> ${membre.nom}  ${membre.prenom} (${membre.email}) <i class="fas fa-times-circle membre-delete" onclick="supprimerMembre(this)" style='cursor: pointer;'></i>`;
                     selectedMembersContainer.appendChild(memberElement);
                 }
             });
@@ -106,11 +106,11 @@ async function updateEtat(idmembre,idsession,etat) {
             const errorMessage = await response.text();
             throw new Error(errorMessage || 'Something went wrong');
         }
-        
+
         const updatedPost = await response.json();
         // Vous pouvez traiter les données mises à jour ici si nécessaire
         // console.log('Updated Post:', updatedPost);
-        
+
     } catch (error) {
         // console.error('Error updating post:', error);
         // alert('Une erreur est survenue lors de la mise à jour du post.');

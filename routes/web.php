@@ -42,7 +42,7 @@ Route::get('/encrypt-id/{id}', function ($id) {
 Route::get('/chartmembre', [HomeController::class, 'chartmembre']);
 
 Route::get('/chartcateg', [HomeController::class, 'chartcateg']);
-Route::post('/register', [RegisterController::class, 'register']); 
+Route::post('/register', [RegisterController::class, 'register']);
 Route::get('/profile', [HomeController::class, 'profile'])->name('profile')->middleware('auth');
 Route::post('/login', [LoginController::class, 'login'])->name('login');
 Route::post('/logout', [HomeController::class, 'logout'])->name('logout');
@@ -52,5 +52,4 @@ Route::get('/message_inscription', [HomeController::class, 'message_inscription'
 Route::get('/getmembers/{id}',[HomeController::class,'getMembers'])->name('getmembers');
 Route::get('/getmembers/{id}',[HomeController::class,'getMembers'])->name('getmembers');
 Route::get('/page-de-redirection',[HomeController::class,'msgdemande'])->name('page-de-redirection');
-
-
+Route::get('/formation_membre',[HomeController::class,'formation_membre'])->name('formation_membre');
