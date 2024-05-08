@@ -3,6 +3,7 @@ const acceptdemande=(inscription)=>{
         updateEtat(inscription.id,1);
     }
     else{
+       
         Swal.fire({
             title: "Ajout de membre en cours...",
             html: "Veuillez patienter un peu.",
@@ -13,7 +14,7 @@ const acceptdemande=(inscription)=>{
                 var passwd = generateRandomPassword(7);
                 adduserd(inscription.email, passwd, inscription.tele, 2)
                     .then((id) => {
-
+                        console.log("id1",id);
                         addmembred(inscription.nom, inscription.prenom, id,"noimage.png").then(
                             (id2) => {
                                 console.log("ide",id2);
@@ -190,9 +191,8 @@ async function addmembred(nom, prenom, iduser,image) {
             throw new Error(errorMessage || "Something went wrong");
         }
         const idmembre = await response.json();
-
-        fetchData(table);
         return idmembre.id;
+        
         // Vous pouvez traiter les données mises à jour ici si nécessaire
         // console.log('add Post:', addPost);
     } catch (error) {
