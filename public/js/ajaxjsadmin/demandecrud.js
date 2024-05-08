@@ -190,8 +190,6 @@ async function addmembred(nom, prenom, iduser,image) {
             throw new Error(errorMessage || "Something went wrong");
         }
         const idmembre = await response.json();
-
-        fetchData(table);
         return idmembre.id;
         // Vous pouvez traiter les données mises à jour ici si nécessaire
         // console.log('add Post:', addPost);
