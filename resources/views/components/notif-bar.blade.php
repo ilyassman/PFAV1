@@ -10,11 +10,11 @@
           </div>
           <div class="modal-body">
             <div class="input-group mb-3">
-              <input id="searchInput" type="text" class="form-control" placeholder="Rechercher..." aria-label="Rechercher" aria-describedby="basic-addon2">
-              <div class="input-group-append">
-                  <button class="btn btn-outline-secondary" type="button" onclick="search()">Rechercher</button>
-              </div>
-          </div>          
+                <input type="text" class="form-control" placeholder="Rechercher..." aria-label="Rechercher" aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button">Rechercher</button>
+                </div>
+            </div>
               <table class="table">
                   <thead>
                       <tr>
@@ -29,12 +29,12 @@
                     @foreach ($notifs as $notif)
                     <tr>
                       <td>{{$notif->nom}}</td>
-                      <td>{{$notif->prenom}}</td>
+                      <td>{{$notif->nom}}</td>
                       <td>{{$notif->titre}}</td>
                       <td>{{$notif->created_at}}</td>
                       <td>
-                        <button onclick="acceptdemande({{json_encode($notif)}})" class="btn btn-success accept-btn">Accepter</button>
-                          <button onclick="suppdemande({{$notif->id}})" class="btn btn-danger reject-btn">Rejeter</button>
+                          <button onclick="acceptdemande({{json_encode($notif)}})" class="btn btn-success accept-btn">Accepter</button>
+                          <button  onclick="suppdemande({{$notif->id}})" class="btn btn-danger reject-btn">Rejeter</button>
                       </td>
                   </tr>
 
@@ -97,31 +97,17 @@
         @for($i=0;$i<3;$i++)
         @if(isset($notifs[$i]))
         <div class="dropdown-divider"></div>
-
         <div class="dropdown-item d-flex align-items-center" style="font-size: 13px; display: flex; justify-content: space-between;">
             <div class="mr-2" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
                 <i class="fas fa-user-circle text-primary"></i>
                 <span class="d-block">{{$notifs[$i]->nom}} {{$notifs[$i]->prenom}}</span>
                 <span class="text-muted">Formation: {{$notifs[$i]->titre}}</span>
             </div>
-            
-
-        <div class="dropdown-item d-flex align-items-center" style="font-size: 13px; display :flex ;justify-content : space-between">
-          <div class="mr-2">
-            <i class="fas fa-user-circle text-primary"></i>
-            <span class="d-block">{{$notifs[$i]->nom}} {{$notifs[$i]->prenom}}</span>
-            <span class="text-muted">Formation: {{$notifs[$i]->titre}}</span>
-          </div>
-          <div class="d-flex justify-content-between">
-            <button class="btn btn-sm btn-success accept-btn" style="font-size: 11px; margin-right: 4px;">Accepter</button>
-            <button class="btn btn-sm btn-danger reject-btn" style="font-size: 11px;">Rejeter</button>
-            <i class="fas fa-check-circle text-success d-none accepted-icon"></i>
-        </div>
-          {{-- <div class="d-flex justify-content-between">
-              <button onclick="acceptdemande({{json_encode($notifs[$i])}})" class="btn btn-sm btn-success" style="font-size: 11px; margin-right : 4px ;">Accepter</button>
-              <button onclick="suppdemande({{$notifs[$i]->id}})" class="btn btn-sm btn-danger" style="font-size: 11px;">Rejeter</button>
-
-            </div> --}}
+            <div class="d-flex justify-content-between">
+                <button  onclick="acceptdemande({{json_encode($notifs[$i])}})" class="btn btn-sm btn-success accept-btn" style="font-size: 11px; margin-right: 4px;">Accepter</button>
+                <button onclick="suppdemande({{$notifs[$i]->id}})" class="btn btn-sm btn-danger reject-btn" style="font-size: 11px;">Rejeter</button>
+                <i class="fas fa-check-circle text-success d-none accepted-icon"></i>
+            </div>
         </div>
         @endif
         @endfor
@@ -153,7 +139,7 @@
     </li>
   </ul>
 </nav>
-
+<script src="js/ajaxjsadmin/demandecrud.js"></script>
 <script>
       document.addEventListener("DOMContentLoaded", function() {
         const acceptBtns = document.querySelectorAll(".accept-btn");
@@ -202,46 +188,3 @@
         });
     });
 </script>
-
-<script src="js/ajaxjsadmin/demandecrud.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script>
-  function search() {
-      // Récupérer la valeur de recherche
-      var searchText = document.getElementById('searchInput').value.toLowerCase();
-
-      // Récupérer toutes les lignes de la table
-      var rows = document.querySelector("#allNotificationsModal .table tbody").getElementsByTagName("tr");
-
-      // Parcourir toutes les lignes de la table
-      for (var i = 0; i < rows.length; i++) {
-          var row = rows[i];
-
-          // Récupérer le texte de chaque cellule de la ligne
-          var cells = row.getElementsByTagName("td");
-          var found = false;
-
-          // Parcourir toutes les cellules de la ligne
-          for (var j = 0; j < cells.length; j++) {
-              var cell = cells[j];
-              var cellText = cell.textContent.toLowerCase();
-
-              // Vérifier si le texte de la cellule contient le texte de recherche
-              if (cellText.indexOf(searchText) > -1) {
-                  found = true;
-                  break;
-              }
-          }
-
-          // Afficher ou masquer la ligne en fonction du résultat de la recherche
-          if (found) {
-              row.style.display = "";
-          } else {
-              row.style.display = "none";
-          }
-      }
-  }
-</script>
-
-
-
