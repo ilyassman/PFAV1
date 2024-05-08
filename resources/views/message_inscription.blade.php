@@ -92,16 +92,21 @@
                 <span class="icon-users"></span> S'inscrire
             </a>
         @else
-        <form id="logout-form" action="{{ route('logout') }}" method="POST">
-          @csrf
-          <button type="submit" class="small btn btn-primary px-2 py-2 rounded-0">
-              <span class="icon-lock"></span> Déconnexion
-          </button>
-      </form>
+        <div class="connect_container" style="display: flex;justify-content: space-between;width:210px;">
+            <a href="{{ route('profile') }}" class="small btn btn-primary px-2 py-2 rounded-0">
+               <span class="icon-user"></span> Profil
+           </a>
+           <form id="logout-form" action="{{ route('logout') }}" method="POST">
+               @csrf
+               <button type="submit" class="small btn btn-primary px-2 py-2 rounded-0">
+                   <span class="icon-lock"></span> Déconnexion
+               </button>
+           </form></div>
+
         @endif
 
-         
-          
+
+
           </div>
         </div>
       </div>
@@ -113,7 +118,7 @@
         <a href="{{ route('home') }}">Home</a>
         <span class="mx-3 icon-keyboard_arrow_right"></span>
         <span class="current">Confirmation d'inscription</span>
-      </div>   
+      </div>
     </div>
 
     <div class="container" style="margin-top: 70px;">
