@@ -9,25 +9,25 @@ const acceptdemande=(inscription)=>{
             showConfirmButton: false,
             didOpen: () => {
                 Swal.showLoading();
-                var passwd = generateRandomPassword(8);
+                var passwd = generateRandomPassword(9);
                 adduserd(inscription.email, passwd, inscription.tele, 2)
                     .then((id) => {
-                        
+
                         addmembred(inscription.nom, inscription.prenom, id,"noimage.png").then(
                             (id2) => {
                                 console.log("ide",id2);
                                 updateEtat2(inscription.id,1,id2).then(()=>{
-                                    
+
                                     sendmail(inscription.email,passwd,inscription.nom,inscription.prenom) .then(
                                         ()=>{
                                           Swal.close();
-                                        }  
+                                        }
                                       )
                                 })
 
-                                
-                               
-                               
+
+
+
                             }
                         ).catch((error) => {
                             console.error(
@@ -44,9 +44,9 @@ const acceptdemande=(inscription)=>{
                     });
             },
         });
-          
+
     }
-    
+
 }
 function generateRandomPassword(length) {
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -98,12 +98,12 @@ async function updateEtat(idinscription,etat) {
             const errorMessage = await response.text();
             throw new Error(errorMessage || 'Something went wrong');
         }
-        
+
         const updatedPost = await response.json();
-       
-        
+
+
     } catch (error) {
-       
+
     }
 }
 async function updateEtat2(idinscription,etat,id_membre) {
@@ -122,12 +122,12 @@ async function updateEtat2(idinscription,etat,id_membre) {
             const errorMessage = await response.text();
             throw new Error(errorMessage || 'Something went wrong');
         }
-        
-        
-       
-        
+
+
+
+
     } catch (error) {
-       
+
     }
 }
 async function suppdemande(idinscription) {
@@ -141,7 +141,7 @@ async function suppdemande(idinscription) {
             const errorMessage = await response.text();
             throw new Error(errorMessage || 'Something went wrong');
         }
-        
+
     } catch (error) {
         console.error('Error deleting post:', error);
         alert('Une erreur est survenue lors de la suppression du post.');
@@ -198,5 +198,5 @@ async function addmembred(nom, prenom, iduser,image) {
         // console.error('Error add post:', error);
         // alert('Une erreur est survenue lors de la mise à jour du post.');
     }
-    
+
 }
