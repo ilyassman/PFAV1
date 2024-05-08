@@ -185,12 +185,17 @@
                     </div>
                     <div class="col-lg-3 text-right">
                         @auth
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST">
-                                @csrf
-                                <button type="submit" class="small btn btn-primary px-2 py-2 rounded-0">
-                                    <span class="icon-lock"></span> Déconnexion
-                                </button>
-                            </form>
+                        <div class="connect_container" style="display: flex;justify-content: space-between;width:210px;">
+                            <a href="{{ route('profile') }}" class="small btn btn-primary px-2 py-2 rounded-0">
+                               <span class="icon-user"></span> Profil
+                           </a>
+                           <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                               @csrf
+                               <button type="submit" class="small btn btn-primary px-2 py-2 rounded-0">
+                                   <span class="icon-lock"></span> Déconnexion
+                               </button>
+                           </form></div>
+
                         @else
                             <a href="{{ route('login') }}" class="small btn btn-primary px-2 py-2 rounded-0">
                                 <span class="icon-unlock-alt"></span> Connexion
@@ -295,9 +300,9 @@
                             </div>
                             <div class="action d-flex justify-content-between mt-2 align-items-center">
                                 <div class="reply px-4">
-                                    
+
                                     <small>supprimer</small>
-                                    
+
                                 </div>
                             </div>
                         </div>
@@ -317,9 +322,9 @@
                         </div>
                         <div class="action d-flex justify-content-between mt-2 align-items-center">
                             <div class="reply px-4">
-                                
+
                                 <small>supprimer</small>
-                                
+
                             </div>
                         </div>
                     </div>
@@ -338,11 +343,11 @@
                         </div>
                         <div class="action d-flex justify-content-between mt-2 align-items-center">
                             <div class="reply px-4">
-                                
+
                                 <small>supprimer</small>
-                               
-                                
-                                
+
+
+
                             </div>
                         </div>
                     </div>

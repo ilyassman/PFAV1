@@ -34,7 +34,7 @@
                       <td>{{$notif->created_at}}</td>
                       <td>
                           <button onclick="acceptdemande({{json_encode($notif)}})" class="btn btn-success accept-btn">Accepter</button>
-                          <button  onclick="suppdemande({{$notif->id}})" class="btn btn-danger reject-btn">Rejeter</button>
+                          <button onclick="suppdemande({{$notif->id}})" class="btn btn-danger reject-btn">Rejeter</button>
                       </td>
                   </tr>
 
@@ -66,10 +66,7 @@
   <!-- Right navbar links -->
   <ul class="navbar-nav ml-auto">
     <!-- Navbar Search -->
-
-
     <!-- Messages Dropdown Menu -->
-
     <!-- Notifications Dropdown Menu -->
     <li class="nav-item dropdown">
       <a class="nav-link" data-toggle="dropdown" href="#">
@@ -115,10 +112,6 @@
         <a href="#" class="dropdown-item dropdown-footer" data-toggle="modal" data-target="#allNotificationsModal">See All Notifications</a>
 
         @endif
-
-
-
-
       </div>
     </li>
     <li class="nav-item">
@@ -145,46 +138,151 @@
         const acceptBtns = document.querySelectorAll(".accept-btn");
         const rejeteBtns = document.querySelectorAll(".reject-btn")
         acceptBtns.forEach(function(btn) {
-            btn.addEventListener("click", function(event) {
-                const parentDiv = this.closest(".dropdown-item");
-                const acceptedIcon = parentDiv.querySelector(".accepted-icon");
-                const rejectedIcon = parentDiv.querySelector(".accepted-icon");
+    btn.addEventListener("click", function(event) {
+        const parentDiv = this.closest(".dropdown-item");
+        const acceptedIcon = parentDiv.querySelector(".accepted-icon");
+        const rejectedIcon = parentDiv.querySelector(".accepted-icon");
 
-                acceptedIcon.classList.remove("d-none");
+        acceptedIcon.classList.remove("d-none");
 
-                // Supprimer les boutons après acceptation
-                parentDiv.querySelector(".accept-btn").remove();
-                parentDiv.querySelector(".reject-btn").remove();
+        // Supprimer les boutons après acceptation
+        parentDiv.querySelector(".accept-btn").remove();
+        parentDiv.querySelector(".reject-btn").remove();
 
-                // Supprimer la notification après 10 secondes
-                setTimeout(function() {
-                    parentDiv.remove();
-                }, 3000);
+        // Mettre à jour le nombre dans le badge
+        const badge = document.querySelector(".navbar-badge");
+        if (badge) {
+            let count = parseInt(badge.textContent);
+            if (!isNaN(count) && count > 0) {
+                count--;
+                badge.textContent = count;
+            }
+        }
 
-                // Empêcher la propagation de l'événement de clic du bouton à l'élément parent
-                event.stopPropagation();
-            });
-        });
-        rejeteBtns.forEach(function(btn) {
-            btn.addEventListener("click", function(event) {
-                const parentDiv = this.closest(".dropdown-item");
-                const acceptedIcon = parentDiv.querySelector(".accepted-icon");
-                const rejectedIcon = parentDiv.querySelector(".accepted-icon");
+        // Supprimer la notification après 10 secondes
+        setTimeout(function() {
+            parentDiv.remove();
+        }, 3000);
 
-                acceptedIcon.classList.remove("d-none");
-
-                // Supprimer les boutons après acceptation
-                parentDiv.querySelector(".accept-btn").remove();
-                parentDiv.querySelector(".reject-btn").remove();
-
-                // Supprimer la notification après 10 secondes
-                setTimeout(function() {
-                    parentDiv.remove();
-                }, 3000);
-
-                // Empêcher la propagation de l'événement de clic du bouton à l'élément parent
-                event.stopPropagation();
-            });
-        });
+        // Empêcher la propagation de l'événement de clic du bouton à l'élément parent
+        event.stopPropagation();
     });
+});
+
+rejeteBtns.forEach(function(btn) {
+    btn.addEventListener("click", function(event) {
+        const parentDiv = this.closest(".dropdown-item");
+        const acceptedIcon = parentDiv.querySelector(".accepted-icon");
+        const rejectedIcon = parentDiv.querySelector(".accepted-icon");
+
+        acceptedIcon.classList.remove("d-none");
+
+        // Supprimer les boutons après acceptation
+        parentDiv.querySelector(".accept-btn").remove();
+        parentDiv.querySelector(".reject-btn").remove();
+
+        // Mettre à jour le nombre dans le badge
+        const badge = document.querySelector(".navbar-badge");
+        if (badge) {
+            let count = parseInt(badge.textContent);
+            if (!isNaN(count) && count > 0) {
+                count--;
+                badge.textContent = count;
+            }
+        }
+
+        // Supprimer la notification après 10 secondes
+        setTimeout(function() {
+            parentDiv.remove();
+        }, 3000);
+
+        // Empêcher la propagation de l'événement de clic du bouton à l'élément parent
+        event.stopPropagation();
+    });
+});
+
+    });
+
+    const acceptBtns = document.querySelectorAll(".accept-btn");
+const rejectBtns = document.querySelectorAll(".reject-btn");
+
+acceptBtns.forEach(function(btn) {
+    btn.addEventListener("click", function(event) {
+        const row = this.closest("tr"); // Target the table row (TR)
+        const parentDiv = row.parentElement; // Optional: If needed for further actions
+
+        // Handle acceptance logic (assuming it's handled elsewhere)
+        // ...
+
+        // Remove buttons from the row after click
+        row.querySelector(".accept-btn").remove();
+        row.querySelector(".reject-btn").remove();
+
+        // Mettre à jour le nombre dans le badge
+        const badge = document.querySelector(".navbar-badge");
+        if (badge) {
+            let count = parseInt(badge.textContent);
+            if (!isNaN(count) && count > 0) {
+                count--;
+                badge.textContent = count;
+            }
+        }
+
+        // Create and append a check icon (replace 'check-icon' with your actual class)
+        const checkIcon = document.createElement("i");
+        checkIcon.classList.add("check-icon", "fas", "fa-check"); // Add appropriate classes for your icon
+        row.insertAdjacentHTML("beforeend", `<td></td>`); // Add an empty cell for the icon
+        const iconCell = row.querySelector("td:last-child"); // Get the new cell
+        iconCell.appendChild(checkIcon); // Append the icon to the cell
+
+        // Optionally, remove the entire row after a delay (modify delay as needed)
+        setTimeout(function() {
+            row.remove();
+        }, 3000); // 3 seconds
+
+        // Prevent click propagation (if necessary)
+        event.stopPropagation();
+    });
+});
+
+rejectBtns.forEach(function(btn) {
+    btn.addEventListener("click", function(event) {
+        const row = this.closest("tr"); // Target the table row (TR)
+        const parentDiv = row.parentElement; // Optional: If needed for further actions
+
+        // Handle rejection logic (assuming it's handled elsewhere)
+        // ...
+
+        // Remove buttons from the row after click
+        row.querySelector(".accept-btn").remove();
+        row.querySelector(".reject-btn").remove();
+
+        // Mettre à jour le nombre dans le badge
+        const badge = document.querySelector(".navbar-badge");
+        if (badge) {
+            let count = parseInt(badge.textContent);
+            if (!isNaN(count) && count > 0) {
+                count--;
+                badge.textContent = count;
+            }
+        }
+
+        // Create and append a done icon (replace 'done-icon' with your actual class)
+        const doneIcon = document.createElement("i");
+        doneIcon.classList.add("done-icon", "fas", "fa-times-circle"); // Add appropriate classes for your icon
+        row.insertAdjacentHTML("beforeend", `<td></td>`); // Add an empty cell for the icon
+        const iconCell = row.querySelector("td:last-child"); // Get the new cell
+        iconCell.appendChild(doneIcon); // Append the icon to the cell
+
+        // Optionally, remove the entire row after a delay (modify delay as needed)
+        setTimeout(function() {
+            row.remove();
+        }, 3000); // 3 seconds
+
+        // Prevent click propagation (if necessary)
+        event.stopPropagation();
+    });
+});
+
+
 </script>
