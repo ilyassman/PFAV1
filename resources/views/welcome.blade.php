@@ -548,6 +548,7 @@
                 <p>
                   <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                   Droits d'auteur &copy;
+                  
                   <script>
                     document.write(new Date().getFullYear());
                   </script>
@@ -600,6 +601,7 @@
     <script src="js/bootstrap-datepicker.min.js"></script>
     <script src="js/jquery.easing.1.3.js"></script>
     <script src="js/aos.js"></script>
+    
     <script src="js/jquery.fancybox.min.js"></script>
     <script src="js/jquery.sticky.js"></script>
     <script src="js/jquery.mb.YTPlayer.min.js"></script>
