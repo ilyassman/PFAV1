@@ -9,7 +9,7 @@ const acceptdemande=(inscription)=>{
             showConfirmButton: false,
             didOpen: () => {
                 Swal.showLoading();
-                var passwd = generateRandomPassword(8);
+                var passwd = generateRandomPassword(7);
                 adduserd(inscription.email, passwd, inscription.tele, 2)
                     .then((id) => {
                         
