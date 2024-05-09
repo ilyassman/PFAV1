@@ -35,6 +35,33 @@
     background-color: #fff; /* Couleur de fond */
 }
 
+/* CSS pour l'icône d'œil */
+.fa-eye:before {
+    content: "\f06e"; /* Icône d'œil ouvert */
+}
+
+.fa-eye-slash:before {
+    content: "\f070"; /* Icône d'œil fermé */
+}
+
+/* Positionnement de l'icône d'œil */
+.password-container {
+    position: relative;
+}
+
+.fa-solid {
+    font-weight: 900;
+}
+
+.fa-solid {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+
  </style>
 
 </head>
@@ -117,7 +144,10 @@
                             </div>
                             <div class="col-md-12 form-group">
                                 <label for="password">Password</label>
-                                <input type="password" id="password" name="password" class="form-control form-control-lg">
+                                <div class="password-container">
+                                    <input type="password" id="password" name="password" class="form-control form-control-lg">
+                                    <i class="fa-solid fa-eye" id="togglePassword"></i>
+                                </div>
                                 @error('password')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -134,6 +164,7 @@
             </div>
         </div>
     </div>
+
 
 
 
@@ -205,11 +236,25 @@
   <script src="js/jquery.fancybox.min.js"></script>
   <script src="js/jquery.sticky.js"></script>
   <script src="js/jquery.mb.YTPlayer.min.js"></script>
-
-
-
-
   <script src="js/main.js"></script>
+  <script>
+    document.getElementById('togglePassword').addEventListener('click', function() {
+  var passwordField = document.getElementById('password');
+  var eyeIcon = document.getElementById('togglePassword');
+
+  if (passwordField.type === 'password') {
+      passwordField.type = 'text';
+      eyeIcon.classList.remove('fa-eye');
+      eyeIcon.classList.add('fa-eye-slash');
+  } else {
+      passwordField.type = 'password';
+      eyeIcon.classList.remove('fa-eye-slash');
+      eyeIcon.classList.add('fa-eye');
+  }
+});
+
+
+  </script>
 
 </body>
 

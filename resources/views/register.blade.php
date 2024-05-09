@@ -26,12 +26,40 @@
   <link href="css/jquery.mb.YTPlayer.min.css" media="all" rel="stylesheet" type="text/css">
 
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
  <style>
     .formulaire-card {
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Ajoute une ombre */
     border-radius: 10px; /* Arrondit les coins */
     padding: 20px; /* Ajoute un espace intérieur */
     background-color: #fff; /* Couleur de fond */
+}
+
+/* CSS pour l'icône d'œil */
+.fa-eye:before {
+    content: "\f06e"; /* Icône d'œil ouvert */
+}
+
+.fa-eye-slash:before {
+    content: "\f070"; /* Icône d'œil fermé */
+}
+
+/* Positionnement de l'icône d'œil */
+.password-container {
+    position: relative;
+}
+
+.fa-solid {
+    font-weight: 900;
+}
+
+.fa-solid {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
 }
 
  </style>
@@ -141,7 +169,10 @@
                             </div>
                             <div class="col-md-12 form-group">
                                 <label for="password">Mot de passe</label>
-                                <input type="password" id="password" name="password" class="form-control form-control-lg">
+                                <div class="password-container">
+                                    <input type="password" id="password" name="password" class="form-control form-control-lg">
+                                    <i class="fa-solid fa-eye" id="togglePassword"></i>
+                                </div>
                                 @error('password')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -157,6 +188,7 @@
             </div>
         </div>
     </form>
+
 
 
 
@@ -234,7 +266,24 @@
 
 
     <script src="js/main.js"></script>
+    <script>
+      document.getElementById('togglePassword').addEventListener('click', function() {
+    var passwordField = document.getElementById('password');
+    var eyeIcon = document.getElementById('togglePassword');
 
+    if (passwordField.type === 'password') {
+        passwordField.type = 'text';
+        eyeIcon.classList.remove('fa-eye');
+        eyeIcon.classList.add('fa-eye-slash');
+    } else {
+        passwordField.type = 'password';
+        eyeIcon.classList.remove('fa-eye-slash');
+        eyeIcon.classList.add('fa-eye');
+    }
+});
+
+
+    </script>
   </body>
 
   </html>
