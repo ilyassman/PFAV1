@@ -34,14 +34,20 @@ class CategorieController extends Controller
      */
     public function show(string $id)
     {
-        $data=DB::select("SELECT f.*, case
-        when v.niveau_etoile is null then 0
-        else niveau_etoile
-      end as  niveau_etoile
-              FROM formations f
-              
-              LEFT JOIN votes v ON v.id_formation = f.id
-        where f.categ_id=$id");
+        $data=DB::select("SELECT f.id, f.titre, f.prix, f.contenue, f.disponibilite, 
+        f.langue, f.image, f.niveau, f.prerequis, f.objectif, 
+        f.created_at, f.updated_at, f.categ_id, f.programme,
+        CASE
+            WHEN ROUND(AVG(v.niveau_etoile)) IS NULL THEN 0
+            ELSE ROUND(AVG(v.niveau_etoile))
+        END AS niveau_etoile
+ FROM formations f
+ LEFT JOIN votes v ON v.id_formation = f.id
+ where f.categ_id=$id
+ GROUP BY f.id, f.titre, f.prix, f.contenue, f.disponibilite, 
+         f.langue, f.image, f.niveau, f.prerequis, f.objectif, 
+         f.created_at, f.updated_at, f.categ_id, f.programme
+       ");
         return response()->json($data);
     }
 

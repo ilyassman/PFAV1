@@ -10,6 +10,7 @@ use App\Models\Session;
 use App\Models\Formation;
 use App\Models\Membre;
 use App\Models\Support;
+use App\Models\Vote;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -23,13 +24,19 @@ class HomeController extends Controller
     {
         $datas = Categorie::take(6)->get();
         $ecole = Ecole::first();
-        $formations = DB::select("SELECT f.*, case
-        when v.niveau_etoile is null then 0
-        else niveau_etoile
-      end as  niveau_etoile
-              FROM formations f
-
-              LEFT JOIN votes v ON v.id_formation = f.id;
+        $formations = DB::select("SELECT f.id, f.titre, f.prix, f.contenue, f.disponibilite, 
+        f.langue, f.image, f.niveau, f.prerequis, f.objectif, 
+        f.created_at, f.updated_at, f.categ_id, f.programme,
+        CASE
+            WHEN ROUND(AVG(v.niveau_etoile)) IS NULL THEN 0
+            ELSE ROUND(AVG(v.niveau_etoile))
+        END AS niveau_etoile
+ FROM formations f
+ LEFT JOIN votes v ON v.id_formation = f.id
+ GROUP BY f.id, f.titre, f.prix, f.contenue, f.disponibilite, 
+         f.langue, f.image, f.niveau, f.prerequis, f.objectif, 
+         f.created_at, f.updated_at, f.categ_id, f.programme;
+ 
         ");
         $formateurs = Formateur::take(6)->get();
         return view("welcome", compact('datas', 'formations', 'formateurs', 'ecole'));
@@ -43,13 +50,18 @@ class HomeController extends Controller
     public function courses()
     {
         $datas = Categorie::take(6)->get();
-        $formations = DB::select("SELECT f.*, case
-        when v.niveau_etoile is null then 0
-        else niveau_etoile
-      end as  niveau_etoile
-              FROM formations f
-
-              LEFT JOIN votes v ON v.id_formation = f.id;
+        $formations = DB::select("SELECT f.id, f.titre, f.prix, f.contenue, f.disponibilite, 
+        f.langue, f.image, f.niveau, f.prerequis, f.objectif, 
+        f.created_at, f.updated_at, f.categ_id, f.programme,
+        CASE
+            WHEN ROUND(AVG(v.niveau_etoile)) IS NULL THEN 0
+            ELSE ROUND(AVG(v.niveau_etoile))
+        END AS niveau_etoile
+ FROM formations f
+ LEFT JOIN votes v ON v.id_formation = f.id
+ GROUP BY f.id, f.titre, f.prix, f.contenue, f.disponibilite, 
+         f.langue, f.image, f.niveau, f.prerequis, f.objectif, 
+         f.created_at, f.updated_at, f.categ_id, f.programme;
         ");
         return view("courses", compact('datas', 'formations'));
     }
@@ -93,7 +105,7 @@ class HomeController extends Controller
         $notifs=DB::select("select (select count(*) from demandeinscriptions where etat=0)as nbr ,demandeinscriptions.*,formations.titre from formations,demandeinscriptions
         where formations.id=demandeinscriptions.id_formation
         and demandeinscriptions.etat=0;");
-        return view("Admin/pages/tables/Formations", compact('datas', 'categs','notis'));
+        return view("Admin/pages/tables/Formations", compact('datas', 'categs','notifs'));
     }
     public function showsession()
     {
@@ -151,7 +163,7 @@ class HomeController extends Controller
             // Récupérer l'ID de la formation à partir de la requête
             $encryptedId = $request->input('id');
             $formationId = Crypt::decrypt($encryptedId);
-
+            $membre= Membre::where('iduser', Auth::id())->first();
             // Récupérer la formation correspondante depuis la base de données
             $formation = Formation::find($formationId);
 
@@ -159,8 +171,15 @@ class HomeController extends Controller
                 abort(404);
             }
 
-
-            return view('course-single', compact('formation'));
+            $vote=DB::select("SELECT ROUND(AVG(votes.niveau_etoile)) as nbr
+            from votes
+            where votes.id_formation=$formationId
+            group by votes.id_formation
+                      ");
+            $comments=DB::select("select commentaires.*,membres.nom,membres.prenom,membres.image from commentaires,membres where commentaires.formation_id=$formationId
+            AND
+            commentaires.membre_id=membres.id;");
+            return view('course-single', compact('formation','vote','comments','membre'));
         } catch (DecryptException $e) {
             abort(404);
         }
@@ -294,9 +313,13 @@ class HomeController extends Controller
         $datas = Categorie::take(6)->get();
         return view('message_inscription',compact('datas'));
     }
-    public function formation_membre(){
+    public function formation_membre(Request $request){
+        $encryptedId = $request->input('id');
+        $formationId = Crypt::decrypt($encryptedId);
         $datas = Categorie::take(6)->get();
-        return view('formation_membre',compact('datas'));
+        $membre= Membre::where('iduser', Auth::id())->first();
+        $vote=Vote::where('id_membre',$membre->id)->where('id_formation',$formationId)->first();
+        return view('formation_membre',compact('datas','membre','vote'));
     }
 }
 

@@ -137,24 +137,26 @@
         .comment {
             width: 60%;
         }
-.underline {
-    width: 100%;
-    height: 1.5px;
-    background-color: #ccc;
-}
-.comment-title {
-    color: black ;
-    font-size: 24px ;
-    font-weight: 800 ;
-}
 
-.icons .fa-star {
-    font-size: 16px ;
-}
+        .underline {
+            width: 100%;
+            height: 1.5px;
+            background-color: #ccc;
+        }
 
-.user-info {
-    width:85%;
-}
+        .comment-title {
+            color: black;
+            font-size: 24px;
+            font-weight: 800;
+        }
+
+        .icons .fa-star {
+            font-size: 16px;
+        }
+
+        .user-info {
+            width: 85%;
+        }
     </style>
 
 </head>
@@ -185,24 +187,26 @@
                     </div>
                     <div class="col-lg-3 text-right">
                         @auth
-                        <div class="connect_container" style="display: flex;justify-content: space-between;width:210px;">
+                        <div class="connect_container"
+                            style="display: flex;justify-content: space-between;width:210px;">
                             <a href="{{ route('profile') }}" class="small btn btn-primary px-2 py-2 rounded-0">
-                               <span class="icon-user"></span> Profil
-                           </a>
-                           <form id="logout-form" action="{{ route('logout') }}" method="POST">
-                               @csrf
-                               <button type="submit" class="small btn btn-primary px-2 py-2 rounded-0">
-                                   <span class="icon-lock"></span> Déconnexion
-                               </button>
-                           </form></div>
+                                <span class="icon-user"></span> Profil
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                                @csrf
+                                <button type="submit" class="small btn btn-primary px-2 py-2 rounded-0">
+                                    <span class="icon-lock"></span> Déconnexion
+                                </button>
+                            </form>
+                        </div>
 
                         @else
-                            <a href="{{ route('login') }}" class="small btn btn-primary px-2 py-2 rounded-0">
-                                <span class="icon-unlock-alt"></span> Connexion
-                            </a>
-                            <a href="{{ route('register') }}" class="small btn btn-primary px-2 py-2 rounded-0">
-                                <span class="icon-users"></span> S'inscrire
-                            </a>
+                        <a href="{{ route('login') }}" class="small btn btn-primary px-2 py-2 rounded-0">
+                            <span class="icon-unlock-alt"></span> Connexion
+                        </a>
+                        <a href="{{ route('register') }}" class="small btn btn-primary px-2 py-2 rounded-0">
+                            <span class="icon-users"></span> S'inscrire
+                        </a>
                         @endauth
                     </div>
                 </div>
@@ -229,10 +233,10 @@
                         </h1>
                         <p>Présentation : {{ $formation->contenue }}</p>
                         {{-- <div class="info-formateur">
-            <div class="img-formateur"><img src="prof.jpeg" alt=""></div>
-            <p class="name-formateur">Enseignant  <br> <span> EMS AFRIQUE</span>
-            </p>
-           </div> --}}
+                            <div class="img-formateur"><img src="prof.jpeg" alt=""></div>
+                            <p class="name-formateur">Enseignant <br> <span> EMS AFRIQUE</span>
+                            </p>
+                        </div> --}}
 
                     </div>
                     <div class="col-lg-4 col-12 video">
@@ -281,27 +285,35 @@
             <div class="container mt-5" style="padding-top : 30px;">
                 <h2 class="comment-title">
                     <i class="fa fa-star text-warning"></i>
-                    4,5 note de cour<i class="fa-solid fa-circle" style="color : gray ; font-size : 7px ;"></i>
-                    <span>1K</span><span> commentaires et notes</span>
-                  </h2>
-                                  <div class="row  d-flex justify-content-center" style="margin-top : 20px ;">
+                    @if($vote)
+                    {{$vote[0]->nbr}}
+                    @else
+                    0
+                    @endif
+                    note de cour
+
+                </h2>
+                <div class="row  d-flex justify-content-center" style="margin-top : 20px ;">
                     <div class="col-md-12">
                         <div class="underline"></div>
-                    <!--A single comment--------------------->
+                        <!--A single comment--------------------->
+                        @foreach ($comments as $comment)
                         <div class="card p-3">
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="user user-info d-flex flex-row align-items-center">
-                                    <img src="Membrespic/abdo.jpg" width="30"
+                                    <img src="Membrespic/{{$comment->image}}" width="30"
                                         class="user-img rounded-circle mr-2">
-                                    <span><small class="font-weight-bold text-primary">bouleknadel adberrahmane</small> <small
-                                            class="font-weight-bold">This course was incredibly informative and well-structured. I learned a lot and would highly recommend it to anyone interested in this topic.</small></span>
+                                    <span><small class="font-weight-bold text-primary">{{$comment->nom}}
+                                            {{$comment->prenom}}</small> <small
+                                            class="font-weight-bold">{{$comment->contenu}}</small></span>
                                 </div>
-                                <small>2 days ago</small>
+                                <small>{{$comment->created_at}}</small>
                             </div>
                             <div class="action d-flex justify-content-between mt-2 align-items-center">
                                 <div class="reply px-4">
-
-                                    <small>supprimer</small>
+                                    @if($comment->membre_id==$membre->id)
+                                    <small  id="{{$comment->id}}">Supprimer</small>
+                                    @endif
 
                                 </div>
                             </div>
@@ -309,118 +321,77 @@
                         <!--end of single comment--------------------->
                         <div class="underline"></div>
 
-                      <!--A single comment--------------------->
-                      <div class="card p-3">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="user user-info d-flex flex-row align-items-center">
-                                <img src="Membrespic/abdo.jpg" width="30"
-                                    class="user-img rounded-circle mr-2">
-                                <span><small class="font-weight-bold text-primary">mandour ilyass</small> <small
-                                        class="font-weight-bold">I found the course to be very helpful and practical. I was able to apply the concepts I learned immediately to my work.</small></span>
-                            </div>
-                            <small>2 days ago</small>
-                        </div>
-                        <div class="action d-flex justify-content-between mt-2 align-items-center">
-                            <div class="reply px-4">
 
-                                <small>supprimer</small>
-
-                            </div>
-                        </div>
-                    </div>
-                    <!--end of single comment--------------------->
-                    <div class="underline"></div>
-                    <!--A single comment--------------------->
-                    <div class="card p-3">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="user user-info d-flex flex-row align-items-center">
-                                <img src="Membrespic/abdo.jpg" width="30"
-                                    class="user-img rounded-circle mr-2">
-                                <span><small class="font-weight-bold text-primary">omar agtib</small> <small
-                                        class="font-weight-bold">I found the course to be very impractical. I was not able to apply the concepts I learned to my work.</small></span>
-                            </div>
-                            <small>2 days ago</small>
-                        </div>
-                        <div class="action d-flex justify-content-between mt-2 align-items-center">
-                            <div class="reply px-4">
-
-                                <small>supprimer</small>
+                        @endforeach
 
 
-
-                            </div>
-                        </div>
-                    </div>
-                    <!--end of single comment--------------------->
                     </div>
 
                 </div>
-
             </div>
         </div>
-    </div>
 
 
 
-    <a href="https://api.whatsapp.com/send?phone=212606178638&text=Bienvenue%20dans%20notre%20formation."
-        class="float" target="_blank">
-        <i class="fa fa-whatsapp my-float"></i>
+        <a href="https://api.whatsapp.com/send?phone=212606178638&text=Bienvenue%20dans%20notre%20formation."
+            class="float" target="_blank">
+            <i class="fa fa-whatsapp my-float"></i>
 
-    </a>
+        </a>
 
-    <div class="footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3">
-                    <p class="mb-4"><img src="images/logo.png" alt="Image" class="img-fluid"></p>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae nemo minima qui dolor, iusto
-                        iure.</p>
-                    <p><a href="#">En savoir plus</a></p>
+        <div class="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3">
+                        <p class="mb-4"><img src="images/logo.png" alt="Image" class="img-fluid"></p>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae nemo minima qui dolor, iusto
+                            iure.</p>
+                        <p><a href="#">En savoir plus</a></p>
+                    </div>
+                    <div class="col-lg-3">
+                        <h3 class="footer-heading"><span>Nos Certifications</span></h3>
+                        <ul class="list-unstyled">
+                            <li><a href="#">Finance</a></li>
+                            <li><a href="#">Management</a></li>
+                            <li><a href="#">Hôtellerie</a></li>
+                            <li><a href="#">Génie Civil</a></li>
+                            <li><a href="#">Santé</a></li>
+                            <li><a href="#">Informatique</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-3">
+                        <h3 class="footer-heading"><span>Contact</span></h3>
+                        <ul class="list-unstyled">
+                            <li><a href="#">Développement Web</a></li>
+                            <li><a href="#">Science des Données</a></li>
+                            <li><a href="#">Sécurité Informatique</a></li>
+                            <li><a href="#">Réseaux et Systèmes</a></li>
+                            <li><a href="#">Intelligence Artificielle</a></li>
+                            <li><a href="#">Génie Logiciel</a></li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="col-lg-3">
-                    <h3 class="footer-heading"><span>Nos Certifications</span></h3>
-                    <ul class="list-unstyled">
-                        <li><a href="#">Finance</a></li>
-                        <li><a href="#">Management</a></li>
-                        <li><a href="#">Hôtellerie</a></li>
-                        <li><a href="#">Génie Civil</a></li>
-                        <li><a href="#">Santé</a></li>
-                        <li><a href="#">Informatique</a></li>
-                    </ul>
-                </div>
 
-                <div class="col-lg-3">
-                    <h3 class="footer-heading"><span>Contact</span></h3>
-                    <ul class="list-unstyled">
-                        <li><a href="#">Développement Web</a></li>
-                        <li><a href="#">Science des Données</a></li>
-                        <li><a href="#">Sécurité Informatique</a></li>
-                        <li><a href="#">Réseaux et Systèmes</a></li>
-                        <li><a href="#">Intelligence Artificielle</a></li>
-                        <li><a href="#">Génie Logiciel</a></li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-12">
-                    <div class="copyright">
-                        <p>
-                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                            Droits d'auteur
-                            &copy;
-                            <script>
-                                document.write(new Date().getFullYear());
-                            </script> Tous droits réservés | Ce modèle est créé avec
-                            <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com"
-                                target="_blank">Colorlib</a>
-                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                        </p>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="copyright">
+                            <p>
+                                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                                Droits d'auteur
+                                &copy;
+                                <script>
+                                    document.write(new Date().getFullYear());
+                                </script> Tous droits réservés | Ce modèle est créé avec
+                                <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com"
+                                    target="_blank">Colorlib</a>
+                                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
 
     </div>
@@ -428,12 +399,12 @@
 
     <!-- loader -->
     <div id="loader" class="show fullscreen"><svg class="circular" width="48px" height="48px">
-            <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4"
-                stroke="#eeeeee" />
-            <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4"
-                stroke-miterlimit="10" stroke="#51be78" />
+            <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
+            <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10"
+                stroke="#51be78" />
         </svg></div>
-
+        <script src="js/ajaxjs/sendcomment.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/jquery-migrate-3.0.1.min.js"></script>
     <script src="js/jquery-ui.js"></script>
@@ -458,12 +429,8 @@
           var commentaire = element.closest('.card');
           commentaire.remove();
         }
-        document.querySelectorAll('.reply').forEach(function(bouton) {
-          bouton.addEventListener('click', function() {
-            supprimerCommentaire(this);
-          });
-        });
-      </script>
+        
+    </script>
 
 
 </body>

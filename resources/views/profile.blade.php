@@ -226,7 +226,7 @@
                     @foreach($formations as $formation)
                         <li class="list-group-item d-flex justify-content-between align-items-center">
                             <span>{{ $formation->titre }}</span>
-                            <a href="" class="btn btn-primary">Voir</a>
+                            <a href="{{ route('formation_membre', ['id' =>Crypt::encrypt($formation->id)]) }}" class="btn btn-primary">Voir</a>
                         </li>
                     @endforeach
                 </ul>

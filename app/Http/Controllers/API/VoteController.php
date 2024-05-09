@@ -19,8 +19,17 @@ class VoteController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function addvote(Request $request,string $id_membre,string $id_formation)
     {
+        $existingVote = Vote::where('id_membre',$id_membre)
+                        ->where('id_formation',$id_formation)
+                        ->first();
+
+    // Si un vote existant est trouvé, le supprimer
+    if ($existingVote) {
+        
+        $existingVote->delete();
+    }
         $data=new Vote();
         $data->niveau_etoile = $request->niveau_etoile;
         $data->id_membre = $request->id_membre;

@@ -40,6 +40,10 @@ Route::get('/gererSessions', [HomeController::class, 'showgererSessions'])->name
 Route::get('/encrypt-id/{id}', function ($id) {
     return response()->json(['encrypted_id' => Crypt::encrypt($id)]);
 });
+Route::get('/decrypt-id/{id}', function ($id) {
+    $membre= Membre::where('iduser', Auth::id())->first();
+    return response()->json(['idform' => Crypt::decrypt($id),'idmembre' => $membre->id]);
+});
 Route::get('/chartmembre', [HomeController::class, 'chartmembre']);
 
 

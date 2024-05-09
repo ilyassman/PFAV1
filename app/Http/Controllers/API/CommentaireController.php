@@ -25,7 +25,6 @@ class CommentaireController extends Controller
     {
         $comm=new Commentaire();
         $comm->contenu=$request->contenu;
-        $comm->date_de_publication=$request->date_de_publication;
         $comm->membre_id=$request->membre_id;
         $comm->formation_id=$request->formation_id;
         $comm->save();}

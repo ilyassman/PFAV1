@@ -190,24 +190,37 @@
                 <div class="card">
                   <div class="card-header bg-white d-flex justify-content-between align-items-center">
                     <div>
-                      <img src="Membrespic/abdo.jpg" alt="User Image" class="rounded-circle" style="width: 40px; height: 40px;">
-                      <span class="ms-2 ml-2">Bouleknadel Abderrahmane</span>
+                      <img src="Membrespic/{{$membre->image}}" alt="User Image" class="rounded-circle" style="width: 40px; height: 40px;">
+                      <span class="ms-2 ml-2">{{$membre->nom}} {{$membre->prenom}}</span>
                     </div>
                   </div>
                   <div class="card-body">
                     <div class="text-center stars_container">
                       <div class="stars">
+                        @if($vote)
+                        @for($i=1;$i<=$vote->niveau_etoile;$i++)
+                        <i class="fa-solid fa-star active"></i>
+                        @endfor
+                        @php
+                        $nbr=5-$vote->niveau_etoile;
+                        for($i=1;$i<=$nbr;$i++)
+                        echo '<i class="fa-solid fa-star"></i>';
+                        
+                        @endphp
+                        @else
                         <i class="fa-solid fa-star"></i>
                         <i class="fa-solid fa-star"></i>
                         <i class="fa-solid fa-star"></i>
                         <i class="fa-solid fa-star"></i>
                         <i class="fa-solid fa-star"></i>
+                        @endif
+
                       </div>
                     </div>
-                    <textarea class="form-control mt-3" placeholder="What is your view?"></textarea>
+                    <textarea id="commentin" class="form-control mt-3" placeholder="What is your view?"></textarea>
                   </div>
                   <div class="card-footer d-flex bg-white justify-content-between align-items-center">
-                    <button type="button" class="btn ajouter" data-mdb-ripple-init>Ajouter <i class="fa-solid fa-arrow-right" style="font-size: 13px"></i></button>
+                    <button onclick="sendcomment()" type="button" class="btn ajouter" data-mdb-ripple-init>Ajouter <i class="fa-solid fa-arrow-right" style="font-size: 13px"></i></button>
                   </div>
                 </div>
               </div>
@@ -289,28 +302,11 @@
   <script src="js/jquery.fancybox.min.js"></script>
   <script src="js/jquery.sticky.js"></script>
   <script src="js/jquery.mb.YTPlayer.min.js"></script>
-
-
-
+  <script src="js/ajaxjs/sendcomment.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
   <script src="js/main.js"></script>
-  <script>
-     // Select all elements with the "i" tag and store them in a NodeList called "stars"
-const stars = document.querySelectorAll(".stars i");
-
-// Loop through the "stars" NodeList
-stars.forEach((star, index1) => {
-  // Add an event listener that runs a function when the "click" event is triggered
-  star.addEventListener("click", () => {
-    // Loop through the "stars" NodeList Again
-    stars.forEach((star, index2) => {
-      // Add the "active" class to the clicked star and any stars with a lower index
-      // and remove the "active" class from any stars with a higher index
-      index1 >= index2 ? star.classList.add("active") : star.classList.remove("active");
-    });
-  });
-});
-  </script>
+ 
 
 </body>
 
