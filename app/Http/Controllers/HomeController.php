@@ -10,6 +10,7 @@ use App\Models\Session;
 use App\Models\Formation;
 use App\Models\Membre;
 use App\Models\Support;
+use App\Models\utilisateur;
 use App\Models\Vote;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Http\Request;
@@ -137,6 +138,8 @@ class HomeController extends Controller
     }
     public function showdash()
     {
+        $user=utilisateur::find(Auth::id());
+        if($user->type==0){
         $datas = DB::select("SELECT
         (SELECT COUNT(id) FROM formations) AS nbrformation,
         (SELECT COUNT(id) FROM membres) AS nbrmembre,
@@ -156,6 +159,27 @@ class HomeController extends Controller
         where formations.id=demandeinscriptions.id_formation
         and demandeinscriptions.etat=0;");
         return view("Admin/admin", compact('datas', 'chart1','notifs'));
+    }
+    else{
+        $datas = Categorie::take(6)->get();
+        $ecole = Ecole::first();
+        $formations = DB::select("SELECT f.id, f.titre, f.prix, f.contenue, f.disponibilite, 
+        f.langue, f.image, f.niveau, f.prerequis, f.objectif, 
+        f.created_at, f.updated_at, f.categ_id, f.programme,
+        CASE
+            WHEN ROUND(AVG(v.niveau_etoile)) IS NULL THEN 0
+            ELSE ROUND(AVG(v.niveau_etoile))
+        END AS niveau_etoile
+ FROM formations f
+ LEFT JOIN votes v ON v.id_formation = f.id
+ GROUP BY f.id, f.titre, f.prix, f.contenue, f.disponibilite, 
+         f.langue, f.image, f.niveau, f.prerequis, f.objectif, 
+         f.created_at, f.updated_at, f.categ_id, f.programme;
+ 
+        ");
+        $formateurs = Formateur::take(6)->get();
+        return view("welcome",compact('datas','ecole','formations','formateurs'));
+    }
     }
     public function showCourseSingle(Request $request)
     {
