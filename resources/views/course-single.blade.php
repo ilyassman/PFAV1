@@ -311,7 +311,7 @@
                             </div>
                             <div class="action d-flex justify-content-between mt-2 align-items-center">
                                 <div class="reply px-4">
-                                    @if($comment->membre_id==$membre->id)
+                                    @if(isset($membre->id) && $comment->membre_id==$membre->id)
                                     <small  id="{{$comment->id}}">Supprimer</small>
                                     @endif
 
