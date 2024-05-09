@@ -153,7 +153,7 @@
                 <div class="col-md-4 mb-3">
                   <div class="card">
                     <div class="card-body">
-                      <div class="d-flex flex-column align-items-center text-center">
+                      <div id="infodetail" class="d-flex flex-column align-items-center text-center">
                         @if($membre && $membre->image)
                         <img src="{{ asset('Membrespic/' . $membre->image) }}" alt="Admin" class="rounded-circle" width="150" height="150">
                         @else
@@ -178,7 +178,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-md-8">
+                <div id="info2" class="col-md-8">
                   <div class="card mb-3">
                     <div class="card-body">
                       <div class="row">
@@ -281,7 +281,7 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
                 <!-- Ajoute ici un bouton de soumission du formulaire pour enregistrer les modifications -->
-                <button type="submit" class="btn btn-primary" form="editForm">Enregistrer</button>
+                <button id="postmem" type="submit" class="btn btn-primary" form="editForm">Enregistrer</button>
             </div>
         </div>
     </div>
@@ -371,11 +371,11 @@
 
   <!-- loader -->
   <div id="loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#51be78"/></svg></div>
-
+  <script src="js/ajaxjs/updateprofile.js"></script>
   <script src="js/jquery-3.3.1.min.js"></script>
   <script src="js/jquery-migrate-3.0.1.min.js"></script>
   <script src="js/jquery-ui.js"></script>
-  <script src="js/ajaxjs/testajax.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="js/popper.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
   <script src="js/owl.carousel.min.js"></script>

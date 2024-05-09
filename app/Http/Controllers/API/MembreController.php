@@ -72,7 +72,7 @@ class MembreController extends Controller
             dd('yess');
         }
         else
-        dd("nooon");
+       
         if(!empty($request->prenom))
         $memb->prenom=$request->prenom;
         if(!empty($request->image))

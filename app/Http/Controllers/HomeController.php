@@ -349,8 +349,13 @@ class HomeController extends Controller
         $formationId = Crypt::decrypt($encryptedId);
         $datas = Categorie::take(6)->get();
         $membre= Membre::where('iduser', Auth::id())->first();
+        $datefin=DB::select("select sessions.date_fun from sessions,formations WHERE
+        sessions.id_formation=formations.id and formations.id=$formationId");
+        $supports = DB::select("select supports.*,formations.titre as formation from supports,formations where supports.id_formation=formations.id
+        and formations.id=$formationId");
         $vote=Vote::where('id_membre',$membre->id)->where('id_formation',$formationId)->first();
-        return view('formation_membre',compact('datas','membre','vote'));
+        return view('formation_membre',compact('datas','membre','vote','supports','formationId','datefin'));
     }
+    
 }
 
