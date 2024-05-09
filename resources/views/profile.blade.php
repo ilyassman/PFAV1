@@ -227,7 +227,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form id="editForm">
+                <form id="editForm" enctype="multipart/form-data"> <!-- Ajoute enctype="multipart/form-data" pour envoyer des fichiers -->
                     <div class="form-group">
                         <label for="nom">Nom</label>
                         <input type="text" class="form-control" id="nom" name="nom" value="{{ $membre->nom }}">
@@ -244,8 +244,18 @@
                         <label for="num_tel">Numéro de téléphone</label>
                         <input type="tel" class="form-control" id="num_tel" name="num_tel" value="{{ $user->num_tel }}">
                     </div>
+                    <div class="form-group">
+                        <label for="image">Image de profil</label>
+                        <div class="input-group">
+                            <input type="file" class="form-control" id="image" name="image">
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-outline-secondary" data-toggle="tooltip" data-placement="bottom" title="Modifier l'image"><i class="fas fa-pencil-alt"></i></button>
+                            </div>
+                        </div>
+                    </div>
                 </form>
             </div>
+
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
                 <!-- Ajoute ici un bouton de soumission du formulaire pour enregistrer les modifications -->
