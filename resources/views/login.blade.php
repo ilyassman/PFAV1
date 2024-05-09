@@ -126,6 +126,7 @@
                         <div class="row">
                             <div class="col-12">
                                 <button type="submit" class="btn btn-primary btn-lg px-5">Log In</button>
+                                <a href="{{route('restpass')}}">Forgot password</a>
                             </div>
                         </div>
                     </form>

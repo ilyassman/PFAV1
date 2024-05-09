@@ -170,7 +170,14 @@ class HomeController extends Controller
             if (!$formation) {
                 abort(404);
             }
-
+            $isInscrit=false;
+            if(isset($membre->id)){
+            $result = DB::select("select * from membres where id=$membre->id and id in (
+                SELECT demandeinscriptions.id_membre from demandeinscriptions
+                where demandeinscriptions.id_formation=$formationId
+            )");
+            $isInscrit=count($result)>0;
+            }
             $vote=DB::select("SELECT ROUND(AVG(votes.niveau_etoile)) as nbr
             from votes
             where votes.id_formation=$formationId
@@ -179,7 +186,7 @@ class HomeController extends Controller
             $comments=DB::select("select commentaires.*,membres.nom,membres.prenom,membres.image from commentaires,membres where commentaires.formation_id=$formationId
             AND
             commentaires.membre_id=membres.id;");
-            return view('course-single', compact('formation','vote','comments','membre'));
+            return view('course-single', compact('formation','vote','comments','membre','isInscrit'));
         } catch (DecryptException $e) {
             abort(404);
         }

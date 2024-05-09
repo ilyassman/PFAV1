@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\API\CommentaireController;
 use App\Http\Controllers\API\DemandeinscriptionController;
+use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Postcontroller;
 use App\Models\Membre;
@@ -45,6 +46,10 @@ Route::get('/decrypt-id/{id}', function ($id) {
     return response()->json(['idform' => Crypt::decrypt($id),'idmembre' => $membre->id]);
 });
 Route::get('/chartmembre', [HomeController::class, 'chartmembre']);
+Route::get('/restpass', function(){
+    return view('rest_pass');
+})->name('restpass');
+Route::post('/restpass1', [ResetPasswordController::class])->name('restpass1');
 
 
 Route::get('/chartcateg', [HomeController::class, 'chartcateg']);

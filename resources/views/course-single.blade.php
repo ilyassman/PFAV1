@@ -204,8 +204,12 @@
                         <a href="{{ route('login') }}" class="small btn btn-primary px-2 py-2 rounded-0">
                             <span class="icon-unlock-alt"></span> Connexion
                         </a>
+                        
                         <a href="{{ route('register') }}" class="small btn btn-primary px-2 py-2 rounded-0">
                             <span class="icon-users"></span> S'inscrire
+                           
+                                
+                            
                         </a>
                         @endauth
                     </div>
@@ -272,10 +276,14 @@
                     {!! $formation->objectif !!}
                     <h1> Programme de la formation <i class="fas fa-list-ul"></i></h1>
                     {!! $formation->programme !!}
+                    @if(!$isInscrit)
                     <a href="{{ route('inscription', ['id' => Crypt::encrypt($formation->id)]) }}"
                         class="small btn btn-primary px-2 py-2 rounded-2 mt-2">
+                        
                         <span class="icon-users mr-1"></span> S'inscrire
+                        
                     </a>
+                    @endif
                 </div>
             </div>
         </div>
