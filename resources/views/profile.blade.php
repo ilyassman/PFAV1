@@ -201,8 +201,12 @@
                       <hr>
                       <div class="row">
                         <div class="col-sm-12">
-                          <a class="btn btn-info " target="__blank" href="https://www.bootdey.com/snippets/view/profile-edit-data-and-skills"> <i class="fa-solid fa-pen-to-square"></i> Edit</a>
-                        </div>
+                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#editModal"
+    data-nom="{{ $membre->nom }}" data-prenom="{{ $membre->prenom }}"
+    data-email="{{ $user->email }}" data-num-tel="{{ $user->num_tel }}">
+    <i class="fa-solid fa-pen-to-square"></i> Edit
+</button>
+                      </div>
                       </div>
                     </div>
                   </div>
@@ -211,6 +215,46 @@
 
             </div>
         </div>
+
+<!-- Modal -->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editModalLabel">Modifier les informations</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="editForm">
+                    <div class="form-group">
+                        <label for="nom">Nom</label>
+                        <input type="text" class="form-control" id="nom" name="nom" value="{{ $membre->nom }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="prenom">Prénom</label>
+                        <input type="text" class="form-control" id="prenom" name="prenom" value="{{ $membre->prenom }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" value="{{ $user->email }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="num_tel">Numéro de téléphone</label>
+                        <input type="tel" class="form-control" id="num_tel" name="num_tel" value="{{ $user->num_tel }}">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                <!-- Ajoute ici un bouton de soumission du formulaire pour enregistrer les modifications -->
+                <button type="submit" class="btn btn-primary" form="editForm">Enregistrer</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <div class="modal fade" id="formationModal" tabindex="-1" role="dialog" aria-labelledby="formationModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -317,6 +361,24 @@
 
 
   <script src="js/main.js"></script>
+  <script>
+    // JavaScript pour pré-remplir le formulaire de la modal avec les informations de l'utilisateur
+    $('#editModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget) // Button that triggered the modal
+        // Extraction des informations de l'utilisateur depuis les éléments HTML (ex: data-* attributes)
+        var nom = button.data('nom')
+        var prenom = button.data('prenom')
+        var email = button.data('email')
+        var num_tel = button.data('num-tel')
+        // Pré-remplissage des champs du formulaire de la modal
+        var modal = $(this)
+        modal.find('.modal-body #nom').val(nom)
+        modal.find('.modal-body #prenom').val(prenom)
+        modal.find('.modal-body #email').val(email)
+        modal.find('.modal-body #num_tel').val(num_tel)
+    })
+</script>
+
 
 </body>
 

@@ -139,7 +139,7 @@
         }
 
         .underline {
-            width: 100%;
+            width: 90%;
             height: 1.5px;
             background-color: #ccc;
         }
@@ -204,12 +204,12 @@
                         <a href="{{ route('login') }}" class="small btn btn-primary px-2 py-2 rounded-0">
                             <span class="icon-unlock-alt"></span> Connexion
                         </a>
-                        
+
                         <a href="{{ route('register') }}" class="small btn btn-primary px-2 py-2 rounded-0">
                             <span class="icon-users"></span> S'inscrire
-                           
-                                
-                            
+
+
+
                         </a>
                         @endauth
                     </div>
@@ -279,9 +279,9 @@
                     @if(!$isInscrit)
                     <a href="{{ route('inscription', ['id' => Crypt::encrypt($formation->id)]) }}"
                         class="small btn btn-primary px-2 py-2 rounded-2 mt-2">
-                        
+
                         <span class="icon-users mr-1"></span> S'inscrire
-                        
+
                     </a>
                     @endif
                 </div>
@@ -290,7 +290,7 @@
 
 
         <div class="section-bg presentation style-1 comment" style="padding:0 30px;">
-            <div class="container mt-5" style="padding-top : 30px;">
+            <div class="container mt-5" style="padding-top: 30px;">
                 <h2 class="comment-title">
                     <i class="fa fa-star text-warning"></i>
                     @if($vote)
@@ -298,46 +298,41 @@
                     @else
                     0
                     @endif
-                    note de cour
-
+                    note de cours
                 </h2>
-                <div class="row  d-flex justify-content-center" style="margin-top : 20px ;">
+                <div class="row d-flex justify-content-center" style="margin-top: 20px;">
                     <div class="col-md-12">
-                        <div class="underline"></div>
                         <!--A single comment--------------------->
-                        @foreach ($comments as $comment)
-                        <div class="card p-3">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="user user-info d-flex flex-row align-items-center">
-                                    <img src="Membrespic/{{$comment->image}}" width="30"
-                                        class="user-img rounded-circle mr-2">
-                                    <span><small class="font-weight-bold text-primary">{{$comment->nom}}
-                                            {{$comment->prenom}}</small> <small
-                                            class="font-weight-bold">{{$comment->contenu}}</small></span>
+                        <div class="comment-container" style="height: 300px; overflow-y: scroll;">
+                            @foreach ($comments as $comment)
+                            <div class="underline"></div>
+                            <div class="card p-3">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="user user-info d-flex flex-row align-items-center">
+                                        <img src="Membrespic/{{$comment->image}}" width="30"
+                                            class="user-img rounded-circle mr-2">
+                                        <span><small class="font-weight-bold text-primary">{{$comment->nom}}
+                                                {{$comment->prenom}}</small> <small
+                                                class="font-weight-bold">{{$comment->contenu}}</small></span>
+                                    </div>
+                                    <small>{{$comment->created_at}}</small>
                                 </div>
-                                <small>{{$comment->created_at}}</small>
-                            </div>
-                            <div class="action d-flex justify-content-between mt-2 align-items-center">
-                                <div class="reply px-4">
-                                    @if(isset($membre->id) && $comment->membre_id==$membre->id)
-                                    <small  id="{{$comment->id}}">Supprimer</small>
-                                    @endif
-
+                                <div class="action d-flex justify-content-between mt-2 align-items-center">
+                                    <div class="reply px-4">
+                                        @if(isset($membre->id) && $comment->membre_id==$membre->id)
+                                        <small id="{{$comment->id}}">Supprimer</small>
+                                        @endif
+                                    </div>
                                 </div>
                             </div>
+                            <!--end of single comment--------------------->
+                            @endforeach
                         </div>
-                        <!--end of single comment--------------------->
-                        <div class="underline"></div>
-
-
-                        @endforeach
-
-
                     </div>
-
                 </div>
             </div>
         </div>
+
 
 
 
@@ -437,7 +432,7 @@
           var commentaire = element.closest('.card');
           commentaire.remove();
         }
-        
+
     </script>
 
 

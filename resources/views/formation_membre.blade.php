@@ -165,21 +165,53 @@
     </div>
 
     <section class="support-cours bg-light shadow rounded-3">
-        <div class="container ">
-            <div class="row ">
+        <div class="container">
+            <div class="row">
                 <div class="col-md-12 text-center support">
                     <h2 class="title mt-4 mx-auto" style="display: inline-block;">Support de cours</h2>
-                    <p class="mt-4">Téléchargez le support de cours au format PDF:</p>
-                    <a href="Support/coursIHM.pdf" download class="btn btn-primary rounded-pill mb-3 px-4">
-                        <i class="fa-solid fa-download"></i> Télécharger le support de cours
+                    <p class="mt-4">Téléchargez le support de cours au format PDF :</p>
+
+                    <div>@php
+                    $file_path = 'Support/coursIHM.pdf';
+                    $extension = pathinfo($file_path, PATHINFO_EXTENSION);
+                    @endphp
+                    <a href="{{ $file_path }}" download style="font-size:20px;color:green">
+                        coursIHM
+                        @if($extension == 'pdf')
+                            <i class="fas fa-file-pdf"></i>
+                        @elseif($extension == 'zip')
+                            <i class="fas fa-file-archive"></i>
+                        @elseif(in_array($extension, ['jpg', 'jpeg', 'png', 'gif']))
+                            <i class="fas fa-file-image"></i>
+                        @endif
                     </a>
-                    <p>Ou voir le cours en ligne ici:</p>
-                    <div class="embed-responsive embed-responsive-16by9">
-                        <iframe src="Support/coursIHM.pdf" class="embed-responsive-item" title="Support de cours"></iframe>
-                    </div>
+</div>
+                      <div style="margin-top: 8px;"> @php
+                    $file_path = 'Support/TP7.zip';
+                    $extension = pathinfo($file_path, PATHINFO_EXTENSION);
+                    @endphp
+                    <a href="{{ $file_path }}" download style="font-size:20px;color:green">
+                        TP7
+                        @if($extension == 'pdf')
+                            <i class="fas fa-file-pdf"></i>
+                        @elseif($extension == 'zip')
+                            <i class="fas fa-file-archive"></i>
+                        @elseif(in_array($extension, ['jpg', 'jpeg', 'png', 'gif']))
+                            <i class="fas fa-file-image"></i>
+                            @elseif(in_array($extension, ['doc', 'docx']))
+                            <i class="fas fa-file-archive"></i>
+                            @elseif(in_array($extension, ['xls', 'xlsx']))
+                            <i class="fas fa-file-excel"></i>
+                            @elseif($extension == 'svg')
+                            <i class="fas fa-file-code"></i>
+                        @else
+                        @endif
+                    </a></div>
+
                 </div>
             </div>
         </div>
+
             <div class="row d-flex justify-content-center">
               <div class="col-md-12 text-center support">
                 <h2 class="title mt-4 mx-auto" style="display: inline-block;">Commentaires</h2>
@@ -205,7 +237,7 @@
                         $nbr=5-$vote->niveau_etoile;
                         for($i=1;$i<=$nbr;$i++)
                         echo '<i class="fa-solid fa-star"></i>';
-                        
+
                         @endphp
                         @else
                         <i class="fa-solid fa-star"></i>
@@ -306,7 +338,7 @@
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
   <script src="js/main.js"></script>
- 
+
 
 </body>
 

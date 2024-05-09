@@ -70,7 +70,12 @@
             class="brand-image img-circle elevation-3"
             style="opacity: 0.8"
           />
-          <span class="brand-text font-weight-light">AdminLTE 3</span>
+          <span class="brand-text font-weight-light">AdminLTE 3 <form id="logout-form" action="{{ route('logout') }}" method="POST">
+            @csrf
+            <button type="submit" class="small btn btn-primary px-2 py-2 rounded-0">
+                <span class="icon-lock"></span> Déconnexion
+            </button>
+        </form></span>
         </a>
 
         <!-- Sidebar -->
@@ -291,7 +296,7 @@
 
         </div>
             </div>
-            
+
            <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-6"> <!-- Deuxième colonne pour le deuxième graphique -->
@@ -313,11 +318,11 @@
     </div>
 </div>
 
-          
+
           </div>
           <!-- /.container-fluid -->
         </section>
-       
+
 
 
 

@@ -28,7 +28,7 @@ Route::get('/register', [HomeController::class, 'registered'])->name('register')
 Route::get('/courses',[HomeController::class,'courses'])->name('courses');
 Route::get('/course',[HomeController::class,'course'])->name('course');
 Route::get('/course', [HomeController::class, 'showCourseSingle'])->name('course');
-Route::get('/admin', [HomeController::class, 'showdash'])->name('admin');
+Route::get('/admin', [HomeController::class, 'showdash'])->name('admin')->middleware('auth');
 Route::get('/membres', [HomeController::class, 'showmembre'])->name('membres');
 Route::get('/commentaires', [HomeController::class, 'showcomment'])->name('commentaires');
 Route::get('/formateurs', [HomeController::class, 'showformateurs'])->name('formateurs');
@@ -63,4 +63,4 @@ Route::get('/message_inscription', [HomeController::class, 'message_inscription'
 Route::get('/getmembers/{id}',[HomeController::class,'getMembers'])->name('getmembers');
 Route::get('/getmembers/{id}',[HomeController::class,'getMembers'])->name('getmembers');
 Route::get('/page-de-redirection',[HomeController::class,'msgdemande'])->name('page-de-redirection');
-Route::get('/formation_membre',[HomeController::class,'formation_membre'])->name('formation_membre');
+Route::get('/formation_membre',[HomeController::class,'formation_membre'])->name('formation_membre')->middleware('auth');;
