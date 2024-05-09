@@ -2,10 +2,13 @@
 
 use App\Http\Controllers\API\CommentaireController;
 use App\Http\Controllers\API\DemandeinscriptionController;
+use App\Http\Controllers\API\UtilisateurController;
 use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\GenerateCertif;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Postcontroller;
 use App\Models\Membre;
+use App\Models\utilisateur;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
@@ -45,12 +48,16 @@ Route::get('/decrypt-id/{id}', function ($id) {
     $membre= Membre::where('iduser', Auth::id())->first();
     return response()->json(['idform' => Crypt::decrypt($id),'idmembre' => $membre->id]);
 });
+Route::get('/idsession', function () {
+    return response()->json(['iduser' => Auth::id()]);
+});
+
 Route::get('/chartmembre', [HomeController::class, 'chartmembre']);
 Route::get('/restpass', function(){
     return view('rest_pass');
 })->name('restpass');
 Route::post('/restpass1', [ResetPasswordController::class])->name('restpass1');
-
+Route::get('/Certifgenerat', [GenerateCertif::class, 'Certifgenerat'])->name('Certifgenerat');
 
 Route::get('/chartcateg', [HomeController::class, 'chartcateg']);
 Route::post('/register', [RegisterController::class, 'register']);

@@ -170,13 +170,15 @@
                 <div class="col-md-12 text-center support">
                     <h2 class="title mt-4 mx-auto" style="display: inline-block;">Support de cours</h2>
                     <p class="mt-4">Téléchargez le support de cours au format PDF :</p>
-
-                    <div>@php
-                    $file_path = 'Support/coursIHM.pdf';
+                    @foreach($supports as $support)
+                    <div>
+                      @php
+                    $file_path = "Support/{$support->fichier}";
                     $extension = pathinfo($file_path, PATHINFO_EXTENSION);
                     @endphp
                     <a href="{{ $file_path }}" download style="font-size:20px;color:green">
-                        coursIHM
+                        {{$support->titre}}
+                       
                         @if($extension == 'pdf')
                             <i class="fas fa-file-pdf"></i>
                         @elseif($extension == 'zip')
@@ -186,29 +188,16 @@
                         @endif
                     </a>
 </div>
-                      <div style="margin-top: 8px;"> @php
-                    $file_path = 'Support/TP7.zip';
-                    $extension = pathinfo($file_path, PATHINFO_EXTENSION);
-                    @endphp
-                    <a href="{{ $file_path }}" download style="font-size:20px;color:green">
-                        TP7
-                        @if($extension == 'pdf')
-                            <i class="fas fa-file-pdf"></i>
-                        @elseif($extension == 'zip')
-                            <i class="fas fa-file-archive"></i>
-                        @elseif(in_array($extension, ['jpg', 'jpeg', 'png', 'gif']))
-                            <i class="fas fa-file-image"></i>
-                            @elseif(in_array($extension, ['doc', 'docx']))
-                            <i class="fas fa-file-archive"></i>
-                            @elseif(in_array($extension, ['xls', 'xlsx']))
-                            <i class="fas fa-file-excel"></i>
-                            @elseif($extension == 'svg')
-                            <i class="fas fa-file-code"></i>
-                        @else
-                        @endif
-                    </a></div>
+@endforeach
+                      
 
                 </div>
+                @if ($datefin[0]->date_fun==date('Y-m-d'))
+                <div class="col-md-12 text-center support">
+                  <h2 class="title mt-4 mx-auto" style="display: inline-block;">Certificat</h2>
+                  <a href="{{route('Certifgenerat' ,['id' =>($formationId)])}}">telecharger vos certif</a>
+                </div>
+                @endif
             </div>
         </div>
 

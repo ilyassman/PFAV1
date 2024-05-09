@@ -86,5 +86,43 @@ class UtilisateurController extends Controller
       }
 
     }
+    public function update2(Request $request,string $id)
+    {
+      
+      $user=utilisateur::find($id);
+      $memb = Membre::where('iduser',$id)->first();
+      
+      if(!empty($request->email))
+      $user->email=$request->email;
+      if(!empty($request->password))
+      $user->password=Hash::make($request->password);
+      if(!empty($request->num_tel))
+      $user->num_tel=$request->num_tel;
+      if(!empty($request->type))
+      $user->type=$request->type;
+      if(!empty($request->nom))
+      $memb->nom=$request->nom;
+      if(!empty($request->prenom))
+      $memb->prenom=$request->prenom;
+      if(!empty($request->iduser))
+      $memb->iduser=$request->iduser;
+      if ($request->hasFile('image')) {
+        if($memb->image!='noimage.png')
+        unlink(public_path('/Membrespic/' . $memb->image));
+        // Récupérer le fichier image
+        $image = $request->file('image');
+        
+        // Générer un nom de fichier unique pour l'image
+        $fileName = time() . '_' . $image->getClientOriginalName();
+        
+        // Enregistrer l'image dans le stockage (storage/app/public/images)
+        $image->move(public_path('/Membrespic'), $fileName);
+        
+        // Enregistrer le chemin de l'image dans la base de données
+        $memb->image = $fileName;
+    }
+      $user->save();
+      $memb->save();
+    }
    
 }

@@ -105,7 +105,7 @@ Route::put('inscriptionupdate/{idmembre}/{idsession}',[InscriptionController::cl
 Route::get('formateursession/{idformateur}',[FormateurController::class,'sessionform']);
 Route::get('sessionmembres/{idsession}',[SessionController::class,'sessionmembres']);
 Route::get('categories/{idcateg}',[CategorieController::class,'categoriebyid']);
-
+Route::post('/updatemembre/{iduser}',[UtilisateurController::class,'update2']);
 
 Route::get('sessionvotes/{idsession}',[SessionController::class,'sessionvotes']);
 Route::get('login/{email}/{pass}',[UtilisateurController::class,'login']);
