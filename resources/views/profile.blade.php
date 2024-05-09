@@ -91,6 +91,24 @@
 .shadow-none {
     box-shadow: none!important;
 }
+
+
+.eye-icon {
+    position: absolute;
+    right: 20px;
+    top : 91%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.eye-icon.hide-password::before {
+    content: "\f070"; /* Icône d'œil fermé */
+}
+
+.eye-icon.show-password::before {
+    content: "\f06e"; /* Icône d'œil ouvert */
+}
+
 </style>
 </head>
 
@@ -248,9 +266,13 @@
                         <label for="image">Image de profil</label>
                         <div class="input-group">
                             <input type="file" class="form-control" id="image" name="image">
-                            <div class="input-group-append">
-                                <button type="button" class="btn btn-outline-secondary" data-toggle="tooltip" data-placement="bottom" title="Modifier l'image"><i class="fas fa-pencil-alt"></i></button>
-                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Mot de passe</label>
+                        <div class="password-container">
+                            <input type="password" class="form-control" id="password" name="password">
+                            <i class="eye-icon fa-solid fa-eye" id="togglePassword"></i>
                         </div>
                     </div>
                 </form>
@@ -387,6 +409,25 @@
         modal.find('.modal-body #email').val(email)
         modal.find('.modal-body #num_tel').val(num_tel)
     })
+
+
+    document.getElementById('togglePassword').addEventListener('click', function() {
+    var passwordField = document.getElementById('password');
+    var eyeIcon = document.getElementById('togglePassword');
+
+    if (passwordField.type === 'password') {
+        passwordField.type = 'text';
+        eyeIcon.classList.remove('fa-eye');
+        eyeIcon.classList.add('fa-eye-slash');
+    } else {
+        passwordField.type = 'password';
+        eyeIcon.classList.remove('fa-eye-slash');
+        eyeIcon.classList.add('fa-eye');
+    }
+});
+
+
+
 </script>
 
 
