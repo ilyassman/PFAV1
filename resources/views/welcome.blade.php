@@ -101,8 +101,8 @@
       </div>
 
       <div class="py-2 bg-light">
-        <div class="container">
-          <div class="row align-items-center">
+        <div class="container" >
+          <div class="row align-items-center" >
             <div class="col-lg-9 d-none d-lg-block">
                @if (!empty($ecole->facebook))
                <a href="{{ $ecole->facebook }}" class="small mr-3"
@@ -129,19 +129,20 @@
 
               @endif
             </div>
-            <div class="col-lg-3 text-right">
+            <div class="col-lg-3 text-right" >
                 @auth
-                <div class="connect_container" style="display: flex;justify-content: space-between;width:210px;">
-                    <a href="{{ route('profile') }}" class="small btn btn-primary px-2 py-2 rounded-0">
-                       <span class="icon-user"></span> Profil
-                   </a>
-                   <form id="logout-form" action="{{ route('logout') }}" method="POST">
-                       @csrf
-                       <button type="submit" class="small btn btn-primary px-2 py-2 rounded-0">
-                           <span class="icon-lock"></span> Déconnexion
-                       </button>
-                   </form></div>
+                    <div class="connect_container" style="display: flex; justify-content: space-between; align-items: center; width: 210px;">
 
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                            @csrf
+                            <button type="submit" class="btn btn-primary px-2 py-2 rounded-0">
+                                <span class="icon-lock"></span> Déconnexion
+                            </button>
+                        </form>
+                        <a href="{{ route('profile') }}"  style="width: 50px; height: 50px; overflow: hidden;">
+                            <img src="{{ asset('Membrespic/1715102667_rr.jpg') }}" alt="Profil" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+                        </a>
+                    </div>
                 @else
                     <a href="{{ route('login') }}" class="small btn btn-primary px-2 py-2 rounded-0">
                         <span class="icon-unlock-alt"></span> Connexion
@@ -151,6 +152,7 @@
                     </a>
                 @endauth
             </div>
+
           </div>
         </div>
       </div>
@@ -548,7 +550,7 @@
                 <p>
                   <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                   Droits d'auteur &copy;
-                  
+
                   <script>
                     document.write(new Date().getFullYear());
                   </script>
@@ -601,7 +603,7 @@
     <script src="js/bootstrap-datepicker.min.js"></script>
     <script src="js/jquery.easing.1.3.js"></script>
     <script src="js/aos.js"></script>
-    
+
     <script src="js/jquery.fancybox.min.js"></script>
     <script src="js/jquery.sticky.js"></script>
     <script src="js/jquery.mb.YTPlayer.min.js"></script>

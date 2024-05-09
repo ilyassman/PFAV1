@@ -55,6 +55,7 @@ $request->validate([
         // $imagePath = $request->file('image')->store('Membrespic', 'public');
         // $imageName = basename($imagePath);
         if ($request->hasFile('image')) {
+
             $image = $request->file('image');
             $fileName = time() . '_' . $image->getClientOriginalName();
             $image->move(public_path('/Membrespic'), $fileName);

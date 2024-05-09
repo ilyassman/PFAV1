@@ -130,6 +130,12 @@
         <i class="fas fa-th-large"></i>
       </a>
     </li>
+    <form id="logout-form" action="{{ route('logout') }}" method="POST">
+        @csrf
+        <button type="submit" class="small btn btn-danger btn-sm mt-1 rounded-6" style="">
+            <span class="icon-lock"></span> Déconnexion
+        </button>
+    </form>
   </ul>
 </nav>
 <script src="js/ajaxjsadmin/demandecrud.js"></script>
