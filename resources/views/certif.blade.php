@@ -98,8 +98,10 @@
     font-size: 14px;
     font-weight: 400;
 }
-.img {
+img {
     margin-top: 25px;
+    height: 125px;
+    width: auto;
 }
     </style>
 </head>
@@ -128,6 +130,7 @@
                     <h4>{{ $ecole->nom }} <span>le {{ date('d/m/Y') }}</span></h4>
                 </div>
                 <div class="logo">
+                    <img src="C:\Users\hp\Desktop\PFAV1\public\logo_jpg.jpg" alt="">
                 </div>
             </div>
         </div>
