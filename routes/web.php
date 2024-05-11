@@ -12,6 +12,7 @@ use App\Models\utilisateur;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Models\Categorie;
 
 
 /*
@@ -53,9 +54,17 @@ Route::get('/idsession', function () {
 });
 
 Route::get('/chartmembre', [HomeController::class, 'chartmembre']);
+
 Route::get('/restpass', function(){
-    return view('rest_pass');
+    $datas = Categorie::take(6)->get();
+    return view('rest_pass',compact('datas'));
 })->name('restpass');
+
+Route::get('/modifPassword', function(){
+    $datas = Categorie::take(6)->get();
+    return view('modif_pass',compact('datas'));
+})->name('modifPassword');
+
 Route::post('/restpass1', [ResetPasswordController::class])->name('restpass1');
 Route::get('/Certifgenerat', [GenerateCertif::class, 'Certifgenerat'])->name('Certifgenerat');
 

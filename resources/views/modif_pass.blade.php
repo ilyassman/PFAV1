@@ -90,7 +90,7 @@
       <div class="container">
         <a href="{{ route('home') }}">Home</a>
         <span class="mx-3 icon-keyboard_arrow_right"></span>
-        <span class="current">Mot de passe oublier</span>
+        <span class="current">Réinitialiser le mot de passe</span>
       </div>
     </div>
 
@@ -100,19 +100,37 @@
                 <div class="col-md-5 formulaire-card">
                     <form method="POST" action="">
                         @csrf
+                        <input type="hidden" name="" value="">
                         <div class="row">
                             <div class="col-md-12 form-group">
-                                <label for="email">Email</label>
+                                <label for="email">Adresse e-mail</label>
                                 <input type="email" id="email" name="email" class="form-control form-control-lg">
                                 @error('email')
-                                    <span class="text-danger">{{ $message }}</span>
+                                    <span class="text-danger"></span>
                                 @enderror
+                            </div>
+                            <div class="col-md-12 form-group">
+                                <label for="old_password">Ancien mot de passe</label>
+                                <input type="password" id="old_password" name="old_password" class="form-control form-control-lg">
+                                @error('old_password')
+                                    <span class="text-danger"></span>
+                                @enderror
+                            </div>
+                            <div class="col-md-12 form-group">
+                                <label for="password">Nouveau mot de passe</label>
+                                <input type="password" id="password" name="password" class="form-control form-control-lg">
+                                @error('password')
+                                    <span class="text-danger"></span>
+                                @enderror
+                            </div>
+                            <div class="col-md-12 form-group">
+                                <label for="password_confirmation">Confirmez le nouveau mot de passe</label>
+                                <input type="password" id="password_confirmation" name="password_confirmation" class="form-control form-control-lg">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-12">
-                                <button type="submit" class="btn btn-primary btn-lg px-5">Reset Password</button>
-                                <a href="{{ route('login') }}">Cancel</a>
+                                <button type="submit" class="btn btn-primary btn-lg px-5">Modifier le mot de passe</button>
                             </div>
                         </div>
                     </form>
@@ -120,6 +138,7 @@
             </div>
         </div>
     </div>
+
 
 
 

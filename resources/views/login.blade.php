@@ -79,7 +79,7 @@
       <div class="site-mobile-menu-body"></div>
     </div>
 
-    
+
 
     <x-header :categ="$datas"/>
 
@@ -122,7 +122,10 @@
                         <div class="row">
                             <div class="col-12">
                                 <button type="submit" class="btn btn-primary btn-lg px-5">Log In</button>
-                                <a href="{{route('restpass')}}">Forgot password</a>
+                                <div style="margin-top: 10px;display:flex;justify-content:space-between"><a href="{{route('restpass')}}">Mot de passe oublié ?</a>
+                                <a href="{{route('modifPassword')}}">changer le mot de passe</a>
+                            </div>
+
                             </div>
                         </div>
                     </form>
