@@ -69,5 +69,7 @@ Route::post('/adddemande', [DemandeinscriptionController::class, 'adddemande'])-
 Route::get('/message_inscription', [HomeController::class, 'message_inscription'])->name('message_inscription');
 Route::get('/getmembers/{id}',[HomeController::class,'getMembers'])->name('getmembers');
 Route::get('/getmembers/{id}',[HomeController::class,'getMembers'])->name('getmembers');
-Route::get('/page-de-redirection',[HomeController::class,'msgdemande'])->name('page-de-redirection');
-Route::get('/formation_membre',[HomeController::class,'formation_membre'])->name('formation_membre')->middleware('auth');;
+Route::get('/page-de-redirection/',[HomeController::class,'msgdemande'])->name('page-de-redirection');
+Route::get('/formation_membre',[HomeController::class,'formation_membre'])->name('formation_membre')->middleware('auth');
+
+
