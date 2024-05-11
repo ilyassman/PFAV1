@@ -72,7 +72,7 @@ class DemandeinscriptionController extends Controller
         if(!empty($request->pays))
         $demande->pay=$request->pays;
         $demande->save(); 
-        return redirect()->route('page-de-redirection');
+        return redirect()->route('page-de-redirection', ['id' => $encryptedId]);
         } catch (DecryptException $e) {
             abort(404);
         }

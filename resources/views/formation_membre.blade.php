@@ -116,41 +116,7 @@
       <div class="site-mobile-menu-body"></div>
     </div>
 
-    <div class="py-2 bg-light">
-      <div class="container">
-        <div class="row align-items-center">
-          <div class="col-lg-9 d-none d-lg-block">
-            <a href="#" class="small mr-3"><span class="icon-facebook mr-2"></span></a>
-            <a href="#" class="small mr-3"><span class="icon-instagram mr-2"></span></a>
-            <a href="#" class="small mr-3"><span class="icon-twitter mr-2"></span></a>
-            <a href="#" class="small mr-3"><span class="icon-phone mr-2"></span> 10 20 123 456</a>
-            <a href="#" class="small mr-3"><span class="icon-envelope-o mr-2"></span>Contact</a>
-          </div>
-          <div class="col-lg-3 text-right">
-            @auth
-            <div class="connect_container" style="display: flex;justify-content: space-between;width:210px;">
-                <a href="{{ route('profile') }}" class="small btn btn-primary px-2 py-2 rounded-0">
-                   <span class="icon-user"></span> Profil
-               </a>
-               <form id="logout-form" action="{{ route('logout') }}" method="POST">
-                   @csrf
-                   <button type="submit" class="small btn btn-primary px-2 py-2 rounded-0">
-                       <span class="icon-lock"></span> Déconnexion
-                   </button>
-               </form></div>
-
-            @else
-                <a href="{{ route('login') }}" class="small btn btn-primary px-2 py-2 rounded-0">
-                    <span class="icon-unlock-alt"></span> Connexion
-                </a>
-                <a href="{{ route('register') }}" class="small btn btn-primary px-2 py-2 rounded-0">
-                    <span class="icon-users"></span> S'inscrire
-                </a>
-            @endauth
-        </div>
-        </div>
-      </div>
-    </div>
+    
     <x-header :categ="$datas"/>
 
 
@@ -196,7 +162,7 @@
 
 
                 </div>
-                @if ($datefin[0]->date_fun==date('Y-m-d'))
+                @if (isset($datefin[0]->date_fun) && $datefin[0]->date_fun==date('Y-m-d'))
                 <div class="col-md-12 text-center support">
                   <h2 class="title mt-4 mx-auto" style="display: inline-block;">Certificat</h2>
                   <a href="{{route('Certifgenerat' ,['id' =>($formationId)])}}">telecharger vos certif</a>
@@ -252,14 +218,6 @@
             </div>
     </section>
 
-
-
-
-
-
-
-
-
     <div class="footer">
       <div class="container">
         <div class="row">
@@ -305,6 +263,20 @@
         </div>
       </div>
     </div>
+
+
+
+
+
+
+
+
+
+
+    @if(isset($datas))
+    <x-footer :datas="$datas" />
+    @endif
+
 
 
   </div>

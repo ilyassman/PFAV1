@@ -51,7 +51,8 @@
 
 /* Style pour le logo */
 .site-logo img {
-    max-width: 200px;
+    max-width: 90px;
+    height: 40px;
     height: auto;
     opacity: 0.8;
 }
