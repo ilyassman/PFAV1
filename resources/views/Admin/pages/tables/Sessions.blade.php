@@ -30,6 +30,7 @@
     />
     <!-- Theme style -->
     <link rel="stylesheet" href="../../dist/css/adminlte.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
       #loading {
    position: relative; /* Positionner la div de chargement de manière fixe par rapport à la fenêtre du navigateur */
@@ -168,7 +169,11 @@
                           <td>{{$session->nbd_place}}</td>
                           <td>{{$session->titre}}</td>
                           <td>{{$session->nom}} {{$session->prenom}} </td>
-                          <td>https://meet.google.com/ssq</td>
+                          <td>https://meet.google.com/ssq
+                            <button type="button" class="btn btn-sm btn-primary" style="margin-top:4px ">
+                                <i class="fa-solid fa-play-circle"></i> Lancer la réunion
+                            </button>
+                          </td>
                           <td>
                             <i id="supp" onclick="suppdialog({{$session->id}})" class="fas fa-trash-alt text-danger"></i>
                             <!-- Icône de suppression -->
