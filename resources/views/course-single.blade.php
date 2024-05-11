@@ -205,6 +205,62 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+.custom-btn {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.custom-btn:hover {
+    background-color: #0056b3;
+}
+
+.custom-modal .modal-content {
+    background-color: #fff;
+    border-radius: 20px;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+}
+
+.custom-modal .stars_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.custom-modal .stars {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.custom-modal .stars i {
+    color: #e6e6e6;
+    font-size: 35px;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.custom-modal .stars i.active {
+    color: #ff9c1a;
+}
+
+.custom-modal .annuler {
+    background-color: #e65d5d;
+    color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.custom-modal .ajouter {
+    background-color: #28a745;
+    color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+
 
     </style>
 
@@ -303,10 +359,6 @@
                 </div>
             </div>
         </div>
-
-
-
-
         <div class="clcl"></div>
         <div class="section-bg presentation style-1 comment" style="padding:0 30px;">
             <div class="container mt-5" style="padding-top: 30px;">
@@ -349,22 +401,64 @@
                                 </div>
                                 <!--end of single comment--------------------->
                                 @endforeach
-                            @endif
+                                                         @endif
+                                                         <button type="button" class="btn btn-dark mt-3" data-toggle="modal" data-target="#addCommentModal">
+                                                            Ajouter commentaire
+                                                        </button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-
-
-
-
+        <!-- Modal -->
+        <div class="modal fade custom-modal" id="addCommentModal" tabindex="-1" role="dialog" aria-labelledby="addCommentModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="addCommentModalLabel">Ajouter un commentaire</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="row d-flex justify-content-center">
+                <div class="col-md-8 comment"> <!-- Adjust the column width as needed -->
+                    <div class="card">
+                        <div class="card-header bg-white d-flex justify-content-between align-items-center">
+                            <div>
+                                <img src="user.jpg" alt="User Image" class="rounded-circle" style="width: 40px; height: 40px;">
+                                <span class="ms-2 ml-2">John Doe</span>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="text-center stars_container">
+                                <div class="stars">
+                                    <i class="fa-solid fa-star "></i>
+                                    <i class="fa-solid fa-star "></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                </div>
+                            </div>
+                            <textarea id="commentin" class="form-control mt-3"
+                                placeholder="What is your view?"></textarea>
+                        </div>
+                        <div class="card-footer d-flex bg-white justify-content-between align-items-center">
+                            <button type="button" class="btn ajouter" data-mdb-ripple-init>Ajouter <i class="fa-solid fa-arrow-right" style="font-size: 13px"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
         <a href="https://api.whatsapp.com/send?phone=212606178638&text=Bienvenue%20dans%20notre%20formation."
             class="float" target="_blank">
             <i class="fa fa-whatsapp my-float"></i>
-
         </a>
+
 
         <div class="footer">
             <div class="container">
@@ -375,41 +469,7 @@
                             iure.</p>
                         <p><a href="#">En savoir plus</a></p>
                     </div>
-                    <div class="modal-body">
-                        <div class="zone-commentaire">
-                            <div class="col-md-6 zone-carte">
-                                <div class="card">
-                                    <div class="card-header bg-white d-flex justify-content-between align-items-center">
-                                        <div>
-                                            <!-- Image de l'utilisateur -->
-                                            <img src="url_de_l_image_statique" alt="User Image" class="rounded-circle" style="width: 40px; height: 40px;">
-                                            <!-- Nom de l'utilisateur -->
-                                            <span class="ms-2 ml-2">Nom de l'utilisateur</span>
-                                        </div>
-                                    </div>
-                                    <div class="card-body">
-                                        <!-- Zone de notation statique -->
-                                        <div class="zone-etoiles">
-                                            <div class="etoiles">
-                                                <!-- Étoiles statiques -->
-                                                <i class="fa-solid fa-star active"></i>
-                                                <i class="fa-solid fa-star active"></i>
-                                                <i class="fa-solid fa-star active"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                            </div>
-                                        </div>
-                                        <!-- Zone de commentaire statique -->
-                                        <textarea id="commentin" class="form-control mt-3" placeholder="What is your view?">Commentaire statique</textarea>
-                                    </div>
-                                    <div class="card-footer d-flex bg-white justify-content-between align-items-center">
-                                        <!-- Bouton d'ajout de commentaire (statique) -->
-                                        <button type="button" class="btn bouton-ajouter" data-mdb-ripple-init>Ajouter <i class="fa-solid fa-arrow-right" style="font-size: 13px"></i></button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
                 </div>
             </div>
         </div>

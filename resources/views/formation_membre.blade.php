@@ -116,7 +116,7 @@
       <div class="site-mobile-menu-body"></div>
     </div>
 
-    
+
     <x-header :categ="$datas"/>
 
 
