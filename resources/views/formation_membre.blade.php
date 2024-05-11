@@ -162,7 +162,7 @@
 
 
                 </div>
-                @if ($datefin[0]->date_fun==date('Y-m-d'))
+                @if (isset($datefin[0]->date_fun) && $datefin[0]->date_fun==date('Y-m-d'))
                 <div class="col-md-12 text-center support">
                   <h2 class="title mt-4 mx-auto" style="display: inline-block;">Certificat</h2>
                   <a href="{{route('Certifgenerat' ,['id' =>($formationId)])}}">telecharger vos certif</a>
