@@ -340,9 +340,12 @@ class HomeController extends Controller
         $members = $formation->membres;
         return response()->json(['members' => $members]);
     }
-    public function msgdemande(){
+    public function msgdemande(Request $request){
         $datas = Categorie::take(6)->get();
-        return view('message_inscription',compact('datas'));
+        $encryptedId = $request->input('id');
+        $formationId = Crypt::decrypt($encryptedId);
+        $formation=Formation::find($formationId);
+        return view('message_inscription',compact('datas','formation'));
     }
     public function formation_membre(Request $request){
         $encryptedId = $request->input('id');
