@@ -35,11 +35,11 @@
    position: relative; /* Positionner la div de chargement de manière fixe par rapport à la fenêtre du navigateur */
    top: 0; /* Aligner la div en haut de la fenêtre */
    left: 40%; /* Aligner la div à gauche de la fenêtre */
-  
- 
+
+
 }
 #supp:hover {
-   cursor: pointer; 
+   cursor: pointer;
 }
    </style>
   </head>
@@ -152,6 +152,7 @@
                           <th>Nombre de place</th>
                           <th>Formation</th>
                           <th>Formateur</th>
+                          <th>Lien vers la session</th>
                           <th>Actions</th>
                         </tr>
                       </thead>
@@ -159,7 +160,7 @@
                         <img src="Animation - 1711828043942.gif" alt="Chargement..." />
                     </div>
                       <tbody id="tablebody">
-                        
+
                         @foreach ($datas as $session)
                         <tr>
                           <td>{{$session->date_debut}}</td>
@@ -167,11 +168,12 @@
                           <td>{{$session->nbd_place}}</td>
                           <td>{{$session->titre}}</td>
                           <td>{{$session->nom}} {{$session->prenom}} </td>
+                          <td>https://meet.google.com/ssq</td>
                           <td>
                             <i id="supp" onclick="suppdialog({{$session->id}})" class="fas fa-trash-alt text-danger"></i>
                             <!-- Icône de suppression -->
                             <i
-                            onclick="updatedialog({{$session->id}})" 
+                            onclick="updatedialog({{$session->id}})"
                             data-toggle="modal"
                             data-target="#modifierSessionModal"
                             id="supp" class="fas fa-edit text-primary ml-2"></i>
@@ -179,7 +181,7 @@
                           </td>
                         </tr>
                         @endforeach
-                        
+
                         <!-- Ajouter d'autres lignes pour chaque session -->
                       </tbody>
                     </table>
@@ -269,17 +271,28 @@
                       name="formateur"
                       required
                     >
+
                     @foreach ($formateurs as $formateur)
                     <option value="{{$formateur->id}}">
                       {{$formateur->nom}} {{$formateur->prenom}}
                     </option>
                     @endforeach
-                      
-                     
+
+
                       <!-- Ajouter d'autres options pour les formations disponibles -->
 
                       <!-- Ajouter d'autres options pour les formations disponibles -->
                     </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="dateDebut">Lien vers la session:</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="lien_session"
+                      name="lien_session"
+                      required
+                    />
                   </div>
                   <button id="addsession" type="submit" class="btn btn-primary">Ajouter</button>
                 </form>
@@ -371,12 +384,22 @@
                       {{$formateur->nom}} {{$formateur->prenom}}
                     </option>
                     @endforeach
-                      
-                     
+
+
                       <!-- Ajouter d'autres options pour les formations disponibles -->
 
                       <!-- Ajouter d'autres options pour les formations disponibles -->
                     </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="dateDebut">Lien vers la session:</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="lien_session"
+                      name="lien_session"
+                      required
+                    />
                   </div>
                   <button id="updatesession" type="submit" class="btn btn-primary">Modifier</button>
                 </form>
@@ -384,7 +407,7 @@
             </div>
           </div>
         </div>
-        
+
 
         <!-- /.content -->
       </div>
@@ -431,7 +454,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="js/ajaxjsadmin/sessioncrud.js"></script>
     <script>
-     
+
     </script>
   </body>
 </html>
