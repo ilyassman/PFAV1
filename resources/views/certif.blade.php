@@ -130,7 +130,7 @@ img {
                     <h4>{{ $ecole->nom }} <span>le {{ date('d/m/Y') }}</span></h4>
                 </div>
                 <div class="logo">
-                    <img src="C:\Users\hp\Desktop\PFAV1\public\logo_jpg.jpg" alt="">
+                    <img src="logo_jpg.jpg" alt="">
                 </div>
             </div>
         </div>
