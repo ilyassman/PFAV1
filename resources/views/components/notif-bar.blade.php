@@ -139,7 +139,11 @@
   </ul>
 </nav>
 <script src="js/ajaxjsadmin/demandecrud.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 <script>
+ 
+
       document.addEventListener("DOMContentLoaded", function() {
         const acceptBtns = document.querySelectorAll(".accept-btn");
         const rejeteBtns = document.querySelectorAll(".reject-btn")

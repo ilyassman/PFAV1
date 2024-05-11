@@ -116,41 +116,7 @@
       <div class="site-mobile-menu-body"></div>
     </div>
 
-    <div class="py-2 bg-light">
-      <div class="container">
-        <div class="row align-items-center">
-          <div class="col-lg-9 d-none d-lg-block">
-            <a href="#" class="small mr-3"><span class="icon-facebook mr-2"></span></a>
-            <a href="#" class="small mr-3"><span class="icon-instagram mr-2"></span></a>
-            <a href="#" class="small mr-3"><span class="icon-twitter mr-2"></span></a>
-            <a href="#" class="small mr-3"><span class="icon-phone mr-2"></span> 10 20 123 456</a>
-            <a href="#" class="small mr-3"><span class="icon-envelope-o mr-2"></span>Contact</a>
-          </div>
-          <div class="col-lg-3 text-right">
-            @auth
-            <div class="connect_container" style="display: flex;justify-content: space-between;width:210px;">
-                <a href="{{ route('profile') }}" class="small btn btn-primary px-2 py-2 rounded-0">
-                   <span class="icon-user"></span> Profil
-               </a>
-               <form id="logout-form" action="{{ route('logout') }}" method="POST">
-                   @csrf
-                   <button type="submit" class="small btn btn-primary px-2 py-2 rounded-0">
-                       <span class="icon-lock"></span> Déconnexion
-                   </button>
-               </form></div>
-
-            @else
-                <a href="{{ route('login') }}" class="small btn btn-primary px-2 py-2 rounded-0">
-                    <span class="icon-unlock-alt"></span> Connexion
-                </a>
-                <a href="{{ route('register') }}" class="small btn btn-primary px-2 py-2 rounded-0">
-                    <span class="icon-users"></span> S'inscrire
-                </a>
-            @endauth
-        </div>
-        </div>
-      </div>
-    </div>
+    
     <x-header :categ="$datas"/>
 
 
@@ -260,51 +226,9 @@
 
 
 
-    <div class="footer">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-3">
-            <p class="mb-4"><img src="images/logo.png" alt="Image" class="img-fluid"></p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae nemo minima qui dolor, iusto iure.</p>
-            <p><a href="#">Learn More</a></p>
-          </div>
-          <div class="col-lg-3">
-            <h3 class="footer-heading"><span>Nos Certifications</span></h3>
-            <ul class="list-unstyled">
-              <li><a href="#">Finance</a></li>
-              <li><a href="#">Management</a></li>
-              <li><a href="#">Hôtellerie</a></li>
-              <li><a href="#">Génie Civil</a></li>
-              <li><a href="#">Santé</a></li>
-              <li><a href="#">Informatique</a></li>
-            </ul>
-          </div>
-
-          <div class="col-lg-3">
-              <h3 class="footer-heading"><span>Contact</span></h3>
-              <ul class="list-unstyled">
-                  <li><a href="#">Help Center</a></li>
-                  <li><a href="#">Support Community</a></li>
-                  <li><a href="#">Press</a></li>
-                  <li><a href="#">Share Your Story</a></li>
-                  <li><a href="#">Our Supporters</a></li>
-              </ul>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-12">
-            <div class="copyright">
-                <p>
-                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                    Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank" >Colorlib</a>
-                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                    </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    @if(isset($datas))
+    <x-footer :datas="$datas" />
+    @endif
 
 
   </div>
