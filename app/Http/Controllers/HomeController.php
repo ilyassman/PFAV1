@@ -25,8 +25,8 @@ class HomeController extends Controller
     {
         $datas = Categorie::take(6)->get();
         $ecole = Ecole::first();
-        $formations = DB::select("SELECT f.id, f.titre, f.prix, f.contenue, f.disponibilite, 
-        f.langue, f.image, f.niveau, f.prerequis, f.objectif, 
+        $formations = DB::select("SELECT f.id, f.titre, f.prix, f.contenue, f.disponibilite,
+        f.langue, f.image, f.niveau, f.prerequis, f.objectif,
         f.created_at, f.updated_at, f.categ_id, f.programme,
         CASE
             WHEN ROUND(AVG(v.niveau_etoile)) IS NULL THEN 0
@@ -34,10 +34,10 @@ class HomeController extends Controller
         END AS niveau_etoile
  FROM formations f
  LEFT JOIN votes v ON v.id_formation = f.id
- GROUP BY f.id, f.titre, f.prix, f.contenue, f.disponibilite, 
-         f.langue, f.image, f.niveau, f.prerequis, f.objectif, 
+ GROUP BY f.id, f.titre, f.prix, f.contenue, f.disponibilite,
+         f.langue, f.image, f.niveau, f.prerequis, f.objectif,
          f.created_at, f.updated_at, f.categ_id, f.programme;
- 
+
         ");
         $formateurs = Formateur::take(6)->get();
         return view("welcome", compact('datas', 'formations', 'formateurs', 'ecole'));
@@ -51,8 +51,8 @@ class HomeController extends Controller
     public function courses()
     {
         $datas = Categorie::take(6)->get();
-        $formations = DB::select("SELECT f.id, f.titre, f.prix, f.contenue, f.disponibilite, 
-        f.langue, f.image, f.niveau, f.prerequis, f.objectif, 
+        $formations = DB::select("SELECT f.id, f.titre, f.prix, f.contenue, f.disponibilite,
+        f.langue, f.image, f.niveau, f.prerequis, f.objectif,
         f.created_at, f.updated_at, f.categ_id, f.programme,
         CASE
             WHEN ROUND(AVG(v.niveau_etoile)) IS NULL THEN 0
@@ -60,17 +60,17 @@ class HomeController extends Controller
         END AS niveau_etoile
  FROM formations f
  LEFT JOIN votes v ON v.id_formation = f.id
- GROUP BY f.id, f.titre, f.prix, f.contenue, f.disponibilite, 
-         f.langue, f.image, f.niveau, f.prerequis, f.objectif, 
+ GROUP BY f.id, f.titre, f.prix, f.contenue, f.disponibilite,
+         f.langue, f.image, f.niveau, f.prerequis, f.objectif,
          f.created_at, f.updated_at, f.categ_id, f.programme;
         ");
         return view("courses", compact('datas', 'formations'));
     }
     public function course()
     {
-
         $datas = Categorie::take(6)->get();
-        return view("course-single", compact('datas'));
+        $membre= Membre::where('iduser', Auth::id())->first();
+        return view("course-single", compact('datas','membre','vote'));
     }
     public function showmembre()
     {
@@ -163,8 +163,8 @@ class HomeController extends Controller
     else{
         $datas = Categorie::take(6)->get();
         $ecole = Ecole::first();
-        $formations = DB::select("SELECT f.id, f.titre, f.prix, f.contenue, f.disponibilite, 
-        f.langue, f.image, f.niveau, f.prerequis, f.objectif, 
+        $formations = DB::select("SELECT f.id, f.titre, f.prix, f.contenue, f.disponibilite,
+        f.langue, f.image, f.niveau, f.prerequis, f.objectif,
         f.created_at, f.updated_at, f.categ_id, f.programme,
         CASE
             WHEN ROUND(AVG(v.niveau_etoile)) IS NULL THEN 0
@@ -172,10 +172,10 @@ class HomeController extends Controller
         END AS niveau_etoile
  FROM formations f
  LEFT JOIN votes v ON v.id_formation = f.id
- GROUP BY f.id, f.titre, f.prix, f.contenue, f.disponibilite, 
-         f.langue, f.image, f.niveau, f.prerequis, f.objectif, 
+ GROUP BY f.id, f.titre, f.prix, f.contenue, f.disponibilite,
+         f.langue, f.image, f.niveau, f.prerequis, f.objectif,
          f.created_at, f.updated_at, f.categ_id, f.programme;
- 
+
         ");
         $formateurs = Formateur::take(6)->get();
         return view("welcome",compact('datas','ecole','formations','formateurs'));
@@ -359,7 +359,6 @@ class HomeController extends Controller
         $vote=Vote::where('id_membre',$membre->id)->where('id_formation',$formationId)->first();
         return view('formation_membre',compact('datas','membre','vote','supports','formationId','datefin'));
     }
-   
-    
+
 }
 
