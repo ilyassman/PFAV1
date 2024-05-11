@@ -157,6 +157,55 @@
         .user-info {
             width: 85%;
         }
+        .zone-commentaire{
+    padding: 30px 0;
+    display: flex ;
+    justify-content: center;
+    align-content: center;
+}
+
+.zone-commentaire .zone-carte {
+    background-color: rgb(255, 255, 255);
+    border : none ;
+    border-radius: 20px;
+    width: 80% ;
+    padding: 10px ;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+
+}
+.zone-etoiles{
+    display: flex ;
+    justify-content: center ;
+    align-items: center ;
+}
+
+.zone-etoiles .etoiles {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+.zone-etoiles .etoiles i {
+  color: #e6e6e6;
+  font-size: 35px;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+.zone-etoiles .etoiles i.active {
+  color: #ff9c1a;
+}
+.bouton-annuler {
+    background-color: rgb(230, 93, 93);
+    color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.bouton-ajouter {
+    background-color: green;
+    color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+
     </style>
 
 </head>
@@ -289,6 +338,9 @@
         </div>
 
 
+
+
+        <div class="clcl"></div>
         <div class="section-bg presentation style-1 comment" style="padding:0 30px;">
             <div class="container mt-5" style="padding-top: 30px;">
                 <h2 class="comment-title">
@@ -303,7 +355,7 @@
                 <div class="row d-flex justify-content-center" style="margin-top: 20px;">
                     <div class="col-md-12">
                         <!--A single comment--------------------->
-                        <div class="comment-container" @if(count($comments) === 0) style="height:80px"  @elseif (count($comments) === 1) style="height:150px" @elseif (count($comments) === 2) style="height:250px" @else style="height: 300px; overflow-y: scroll;" @endif>
+                        <div class="comment-container" @if(count($comments) === 0) style="height:100px"  @elseif (count($comments) === 1) style="min-height:180px" @elseif (count($comments) === 2) style="min-height:250px" @else style="min-height: 300px; overflow-y: scroll;" @endif>
                             @if(count($comments) === 0)
                                 <p>Aucun commentaire pour le moment.</p>
                             @else
@@ -331,20 +383,61 @@
                                 <!--end of single comment--------------------->
                                 @endforeach
                             @endif
+                            <button type="button" class="btn btn-dark bouton-ajouter-commentaire" data-toggle="modal" data-target="#modal-commentaire">Add Comment</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="modal-commentaire" tabindex="-1" aria-labelledby="modal-commentaire-label" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg"> <!-- Ajout de la classe "modal-lg" pour une largeur plus grande -->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <!-- Bouton pour fermer la modal -->
+                        <button type="button" class="btn btn-close" data-dismiss="modal" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="zone-commentaire">
+                            <div class="col-md-6 zone-carte">
+                                <div class="card">
+                                    <div class="card-header bg-white d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <!-- Image de l'utilisateur -->
+                                            <img src="url_de_l_image_statique" alt="User Image" class="rounded-circle" style="width: 40px; height: 40px;">
+                                            <!-- Nom de l'utilisateur -->
+                                            <span class="ms-2 ml-2">Nom de l'utilisateur</span>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <!-- Zone de notation statique -->
+                                        <div class="zone-etoiles">
+                                            <div class="etoiles">
+                                                <!-- Étoiles statiques -->
+                                                <i class="fa-solid fa-star active"></i>
+                                                <i class="fa-solid fa-star active"></i>
+                                                <i class="fa-solid fa-star active"></i>
+                                                <i class="fa-solid fa-star"></i>
+                                                <i class="fa-solid fa-star"></i>
+                                            </div>
+                                        </div>
+                                        <!-- Zone de commentaire statique -->
+                                        <textarea id="commentin" class="form-control mt-3" placeholder="What is your view?">Commentaire statique</textarea>
+                                    </div>
+                                    <div class="card-footer d-flex bg-white justify-content-between align-items-center">
+                                        <!-- Bouton d'ajout de commentaire (statique) -->
+                                        <button type="button" class="btn bouton-ajouter" data-mdb-ripple-init>Ajouter <i class="fa-solid fa-arrow-right" style="font-size: 13px"></i></button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-
-
-
-
         <a href="https://api.whatsapp.com/send?phone=212606178638&text=Bienvenue%20dans%20notre%20formation."
             class="float" target="_blank">
             <i class="fa fa-whatsapp my-float"></i>
-
         </a>
 
         <div class="footer">

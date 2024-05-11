@@ -8,7 +8,7 @@
             <div class="site-logo">
               <a href="{{ route('home') }}" class="d-block">
                 @if(!empty($ecole->logo))
-                <img src="/Ecolelogo/{{ $ecole->logo }}" alt="Image" class="img-fluid" style="max-width: 140px; height: auto;"  />
+                <img src="/Ecolelogo/{{ $ecole->logo }}" alt="Image" class="img-fluid" style="max-width: 90px; height: 40px;"  />
                 @endif
 
               </a>
