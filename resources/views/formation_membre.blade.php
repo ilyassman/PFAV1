@@ -170,6 +170,9 @@
                 <div class="col-md-12 text-center support">
                     <h2 class="title mt-4 mx-auto" style="display: inline-block;">Support de cours</h2>
                     <p class="mt-4">Téléchargez le support de cours au format PDF :</p>
+                    @if (count($supports)==0)
+                    <h2 class="mt-2 mx-auto" style="font-size:15px;color:red;">Pas de support pour le moment</h2>
+                    @else
                     @foreach($supports as $support)
                     <div>
                       @php
@@ -178,7 +181,7 @@
                     @endphp
                     <a href="{{ $file_path }}" download style="font-size:20px;color:green">
                         {{$support->titre}}
-                       
+
                         @if($extension == 'pdf')
                             <i class="fas fa-file-pdf"></i>
                         @elseif($extension == 'zip')
@@ -189,7 +192,8 @@
                     </a>
 </div>
 @endforeach
-                      
+@endif
+
 
                 </div>
                 @if ($datefin[0]->date_fun==date('Y-m-d'))

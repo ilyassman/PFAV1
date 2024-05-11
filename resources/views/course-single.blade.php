@@ -303,35 +303,40 @@
                 <div class="row d-flex justify-content-center" style="margin-top: 20px;">
                     <div class="col-md-12">
                         <!--A single comment--------------------->
-                        <div class="comment-container" style="height: 300px; overflow-y: scroll;">
-                            @foreach ($comments as $comment)
-                            <div class="underline"></div>
-                            <div class="card p-3">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="user user-info d-flex flex-row align-items-center">
-                                        <img src="Membrespic/{{$comment->image}}" width="30"
-                                            class="user-img rounded-circle mr-2">
-                                        <span><small class="font-weight-bold text-primary">{{$comment->nom}}
-                                                {{$comment->prenom}}</small> <small
-                                                class="font-weight-bold">{{$comment->contenu}}</small></span>
+                        <div class="comment-container" @if(count($comments) === 0) style="height:80px"  @elseif (count($comments) === 1) style="height:150px" @elseif (count($comments) === 2) style="height:250px" @else style="height: 300px; overflow-y: scroll;" @endif>
+                            @if(count($comments) === 0)
+                                <p>Aucun commentaire pour le moment.</p>
+                            @else
+                                @foreach ($comments as $comment)
+                                <div class="underline"></div>
+                                <div class="card p-3">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="user user-info d-flex flex-row align-items-center">
+                                            <img src="Membrespic/{{$comment->image}}" width="30"
+                                                class="user-img rounded-circle mr-2">
+                                            <span><small class="font-weight-bold text-primary">{{$comment->nom}}
+                                                    {{$comment->prenom}}</small> <small
+                                                    class="font-weight-bold">{{$comment->contenu}}</small></span>
+                                        </div>
+                                        <small>{{$comment->created_at}}</small>
                                     </div>
-                                    <small>{{$comment->created_at}}</small>
-                                </div>
-                                <div class="action d-flex justify-content-between mt-2 align-items-center">
-                                    <div class="reply px-4">
-                                        @if(isset($membre->id) && $comment->membre_id==$membre->id)
-                                        <small id="{{$comment->id}}">Supprimer</small>
-                                        @endif
+                                    <div class="action d-flex justify-content-between mt-2 align-items-center">
+                                        <div class="reply px-4">
+                                            @if(isset($membre->id) && $comment->membre_id==$membre->id)
+                                            <small id="{{$comment->id}}">Supprimer</small>
+                                            @endif
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <!--end of single comment--------------------->
-                            @endforeach
+                                <!--end of single comment--------------------->
+                                @endforeach
+                            @endif
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
 
 
 
