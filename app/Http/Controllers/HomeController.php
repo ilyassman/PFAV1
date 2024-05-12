@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Categorie;
 use App\Models\Commentaire;
+use Illuminate\Support\Facades\Hash;
 use App\Models\Ecole;
 use App\Models\Formateur;
 use App\Models\Session;
@@ -383,19 +384,33 @@ class HomeController extends Controller
     public function restpass(Request $request){
             $datas = Categorie::take(6)->get();
             $code = '';
+            $email=$request->email;
             for ($i = 0; $i < 5; $i++) {
                 $code .= mt_rand(0, 9); // Ajoute un chiffre aléatoire (0 à 9) au code
             }
             Mail::to($request->email)
             ->send(new RestPassword($code));
-            return view('modif_pass', compact('datas', 'code'));
+            return view('modif_pass', compact('datas', 'code','email'));
     }
   public function changerpass(Request $request){
     $code = implode('', $request->code);
-    if($code==$request->codeemail)
-    dd("nadi");
-    else
-    dd("ghalat");
+    if($code==$request->codeemail){
+        $email=$request->email;
+        $datas = Categorie::take(6)->get();
+    return view('changePass',compact('datas','email'));
+    }
+    else{
+        $datas = Categorie::take(6)->get();
+        $code=$request->codeemail;
+        $email=$request->email;
+        return view('modif_pass', compact('datas', 'code','email'))->with('error','Le code taper est invalide');
+    }
+  }
+  public function confirmpass(Request $request){
+    $user=utilisateur::where('email',$request->email)->first();
+    $user->password=Hash::make($request->password);
+    $user->save();
+    return redirect()->route('login');
   }
 }
 

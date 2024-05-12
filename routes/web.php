@@ -61,15 +61,18 @@ Route::get('/restpass', function () {
     return view('rest_pass', compact('datas'));
 })->name('restpass');
 
-Route::get('/changePass', function () {
-    $datas = Categorie::take(6)->get();
-    return view('changePass', compact('datas'));
-})->name('changePass');
+// Route::get('/changePass', function () {
+//     $datas = Categorie::take(6)->get();
+//     return view('changePass', compact('datas'));
+// })->name('changePass');
 
 
 
 Route::post('/modifPassword', [HomeController::class, 'restpass'])->name('modifPassword1');
 Route::post('/changepass', [HomeController::class, 'changerpass'])->name('changepass');
+Route::post('/confirmpass', [HomeController::class, 'confirmpass'])->name('confirmpass');
+// Route::post('/changepass', [HomeController::class, 'changerpass'])->name('changepass');
+
 
 // Route::post('/restpass1', [ResetPasswordController::class])->name('restpass1');
 Route::get('/Certifgenerat', [GenerateCertif::class, 'Certifgenerat'])->name('Certifgenerat');

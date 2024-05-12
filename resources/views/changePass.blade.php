@@ -98,10 +98,11 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-5 formulaire-card">
-                  <form action="" method="post">
+                  <form action="{{route('confirmpass')}}" method="post">
                         @csrf
                         <div class="row">
                             <div class="col-md-12 form-group">
+                              <input name="email" value="{{$email}}" style="display: none">
                                 <label for="password">Nouveau Mot de passe :</label>
                                 <input type="password" id="password" name="password" class="form-control form-control-lg">
                                 @error('password')
@@ -110,7 +111,7 @@
                             </div>
                             <div class="col-md-12 form-group">
                                 <label for="password">Confirmer le nouveau Mot de passe :</label>
-                                <input type="password" id="confirmer-password" name="confirmer-password" class="form-control form-control-lg">
+                                <input type="password" id="confirmer-password" name="confirmerpassword" class="form-control form-control-lg">
                                 @error('password')
                                     <span class="text-danger"></span>
                                 @enderror

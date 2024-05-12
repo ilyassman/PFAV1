@@ -117,6 +117,7 @@ input[type="text"] {
                     <form method="POST" action="{{route('changepass')}}">
                         @csrf
                         <div class="verification-code d-flex justify-content-center mt-4">
+                            <input value="{{$email}}" name="email" type="text" style="display: none">
                             <input value="{{$code}}" name="codeemail" type="text" style="display: none">
                             <input name="code[]" type="text" maxlength="1" size="1" onkeyup="focusNext(this)" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
 <input name="code[]" type="text" maxlength="1" size="1" onkeyup="focusNext(this)" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
@@ -125,6 +126,12 @@ input[type="text"] {
 <input name="code[]" type="text" maxlength="1" size="1" onkeyup="focusNext(this)" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
 
                         </div>
+                        @if(isset($error))
+                            
+                       
+                                    <h6 style="text-align: center" class="text-danger">{{ $error }}</h6>
+                                @endif
+                        
                         <button type="submit" class="btn btn-primary btn-block mt-4">Envoyer</button>
 
                     </form>
