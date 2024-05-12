@@ -53,7 +53,6 @@
 .site-logo img {
     max-width: 90px;
     height: 40px;
-    height: auto;
     opacity: 0.8;
 }
 
@@ -100,6 +99,7 @@
             src="../../dist/img/AdminLTELogo.png"
             alt="AdminLTE Logo"
             class="brand-image img-circle elevation-3"
+            style="max-width: 90px; height: 40px;"
           />
           <span class="brand-text font-weight-light">AdminLTE 3</span>
         </a>
