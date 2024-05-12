@@ -1,5 +1,9 @@
 <div>
   <nav class="mt-2">
+    <a href="../../index3.html" class="brand-link">
+        <span class="brand-text font-weight-light">Admin</span>
+      </a>
+
       <ul
         class="nav nav-pills nav-sidebar flex-column"
         data-widget="treeview"

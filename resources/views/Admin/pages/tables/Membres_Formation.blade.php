@@ -55,48 +55,15 @@
       <!-- Main Sidebar Container -->
       <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Brand Logo -->
-        <a href="../../index3.html" class="brand-link">
-          <img
-            src="../../dist/img/AdminLTELogo.png"
-            alt="AdminLTE Logo"
-            class="brand-image img-circle elevation-3"
-            style="opacity: 0.8"
-          />
-          <span class="brand-text font-weight-light">AdminLTE 3</span>
-        </a>
+
 
         <!-- Sidebar -->
         <div class="sidebar">
           <!-- Sidebar user (optional) -->
-          <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-            <div class="image">
-              <img
-                src="../../dist/img/user2-160x160.jpg"
-                class="img-circle elevation-2"
-                alt="User Image"
-              />
-            </div>
-            <div class="info">
-              <a href="#" class="d-block">Alexander Pierce</a>
-            </div>
-          </div>
+         
 
           <!-- SidebarSearch Form -->
-          <div class="form-inline">
-            <div class="input-group" data-widget="sidebar-search">
-              <input
-                class="form-control form-control-sidebar"
-                type="search"
-                placeholder="Search"
-                aria-label="Search"
-              />
-              <div class="input-group-append">
-                <button class="btn btn-sidebar">
-                  <i class="fas fa-search fa-fw"></i>
-                </button>
-              </div>
-            </div>
-          </div>
+
 
           <!-- Sidebar Menu -->
           <x-navbar-admin />
@@ -148,28 +115,28 @@
                                       @foreach ($formations as $form)
                                       @if (count($form->membres)>0)
                                       <tr>
-                                      
+
                                             <td>{{$form->titre}}</td>
                                             <td>
                                               <div class="member-list" style="max-height: 105px; overflow-y: auto;">
-                                    
+
                                                   @foreach ($form->membres as $membre)
                                                   <div style="height: 35px;">{{$membre->nom}} {{$membre->prenom}}</div>
                                                   @endforeach
-                                                     
-                                                 
+
+
                                               </div>
                                               <button type="button" class="btn btn-primary text-white btn-show-members" data-toggle="modal" data-target="#allMembersModal" data-formation-id="{{ $form->id }}">
                                                 <i class="fas fa-users me-2"></i> Afficher tous les membres
                                             </button>
-                                            
+
                                           </td>
                                         </tr>
                                         @endif
-                                         
-                                      
+
+
                                       @endforeach
-                                        
+
                                         <!-- Ajoutez d'autres lignes pour chaque formation avec sa liste de membres -->
                                     </tbody>
                                 </table>
@@ -201,7 +168,7 @@
                             <!-- Ajoutez ici tous les membres de toutes les formations -->
                             <!-- Vous pouvez les récupérer dynamiquement à partir de votre backend -->
                             <!-- Voici juste un exemple statique -->
-                            
+
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -259,7 +226,7 @@
       $(document).ready(function() {
           $('.btn-show-members').click(function() {
               var formationId = $(this).data('formation-id');
-              
+
               // Envoyer une requête AJAX pour récupérer les membres associés à la formation sélectionnée
               $.ajax({
                   url: `http://127.0.0.1:8000/getmembers/${formationId}`, // Remplacez '/get-members/' par l'URL de votre endpoint backend pour récupérer les membres
@@ -268,7 +235,7 @@
                       // Mettre à jour le contenu du modal avec les membres récupérés
                       var memberList = $('.modal-body .member-list');
                       memberList.empty(); // Vider le contenu actuel du modal
-                      
+
                       // Ajouter les membres récupérés au modal
                       $.each(data.members, function(index, member) {
                           memberList.append('<div>' + member.nom + ' ' + member.prenom + '</div>');
@@ -281,7 +248,7 @@
           });
       });
   </script>
-  
+
     <script>
       $(function () {
         $("#example1")

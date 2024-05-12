@@ -30,7 +30,7 @@
     />
     <!-- Theme style -->
     <link rel="stylesheet" href="../../dist/css/adminlte.min.css" />
-    
+
     <style>
       <style>
       #loading {
@@ -44,7 +44,7 @@
    left: 50%; /* Aligner la div à gauche de la fenêtre */
 }
 #supp:hover {
-    cursor: pointer; 
+    cursor: pointer;
 }
 #listeCategories::-webkit-scrollbar {
   height: 6px;
@@ -54,7 +54,7 @@
 #listeCategories::-webkit-scrollbar-track {
   border-radius: 5px;
   background-color: #EBEBEB;
-  
+
 }
 
 #listeCategories::-webkit-scrollbar-track:hover {
@@ -91,48 +91,15 @@
       <!-- Main Sidebar Container -->
       <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Brand Logo -->
-        <a href="../../index3.html" class="brand-link">
-          <img
-            src="../../dist/img/AdminLTELogo.png"
-            alt="AdminLTE Logo"
-            class="brand-image img-circle elevation-3"
-            style="opacity: 0.8"
-          />
-          <span class="brand-text font-weight-light">AdminLTE 3</span>
-        </a>
+
 
         <!-- Sidebar -->
         <div class="sidebar">
           <!-- Sidebar user (optional) -->
-          <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-            <div class="image">
-              <img
-                src="../../dist/img/user2-160x160.jpg"
-                class="img-circle elevation-2"
-                alt="User Image"
-              />
-            </div>
-            <div class="info">
-              <a href="#" class="d-block">Alexander Pierce</a>
-            </div>
-          </div>
+
 
           <!-- SidebarSearch Form -->
-          <div class="form-inline">
-            <div class="input-group" data-widget="sidebar-search">
-              <input
-                class="form-control form-control-sidebar"
-                type="search"
-                placeholder="Search"
-                aria-label="Search"
-              />
-              <div class="input-group-append">
-                <button class="btn btn-sidebar">
-                  <i class="fas fa-search fa-fw"></i>
-                </button>
-              </div>
-            </div>
-          </div>
+
 
           <!-- Sidebar Menu -->
           <x-navbar-admin />
@@ -198,8 +165,8 @@
                           <th>Objectif</th>
                           <th>Programme</th>
                           <th>Actions</th>
-                          
-                          
+
+
                         </tr>
                       </thead>
                       <tbody>
@@ -234,9 +201,9 @@
                                 />                                </a>
                               </div>
                             </div>
-                               
-                              
-                            
+
+
+
                           </td>
                           <td>{{$formation->niveau}}</td>
                           <td>{{$formation->prerequis}}</td>
@@ -258,9 +225,9 @@
                             <!-- Icône de modification -->
                           </td>
                         </tr>
-                    
+
                         @endforeach
-                        
+
                         <!-- Ajouter d'autres lignes pour chaque formation -->
                       </tbody>
                     </table>
@@ -710,11 +677,11 @@ aria-hidden="true"
     i--;
       }
   }
-  
+
 
   document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("addPrerequis").addEventListener("click", function() {
-      
+
       var container = document.getElementById("prerequisContainer");
       var inputGroup = document.createElement("div");
       inputGroup.className = "input-group mb-1";
@@ -735,12 +702,12 @@ aria-hidden="true"
       inputGroup.appendChild(buttonWrapper);
       container.appendChild(inputGroup);
       i++;
-      
+
     });
   });
   document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("addPrerequisu").addEventListener("click", function() {
-      
+
       var containeru = document.getElementById("prerequisContaineru");
       var inputGroup = document.createElement("div");
       inputGroup.className = "input-group mb-1";
@@ -761,7 +728,7 @@ aria-hidden="true"
       inputGroup.appendChild(buttonWrapper);
       containeru.appendChild(inputGroup);
       j++;
-      
+
     });
   });
   let objectif;
