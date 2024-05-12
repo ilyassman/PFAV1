@@ -34,12 +34,13 @@
         left: 30%;
 
     }
+
     .card {
        margin-top: 140px ;
        margin-bottom: 30px ;
     }
     body{
-    margin-top:20px;
+  
     color: #1a202c;
     text-align: left;
     background-color: #e2e8f0;
@@ -133,14 +134,14 @@
                     <div class="card-body">
                       <div id="infodetail" class="d-flex flex-column align-items-center text-center">
                         @if($membre && $membre->image)
-                       
-                        
+
+
                         @if($user->type===1)
                         <img src="{{ asset('Formateurspic/' . $membre->image) }}" alt="Admin" class="rounded-circle" width="150" height="150">
                         @else
                         <img src="{{ asset('Membrespic/' . $membre->image) }}" alt="Admin" class="rounded-circle" width="150" height="150">
                         @endif
-                        
+
                         @else
                         <div class="bg-secondary rounded-circle" style="width: 100px; height: 100px;"></div>
                         @endif
