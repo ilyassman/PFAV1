@@ -68,27 +68,8 @@
         <!-- Sidebar -->
         <div class="sidebar">
           <!-- Sidebar user panel (optional) -->
-          <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-            <div class="info">
-              <a href="#" class="d-block">Admin</a>
-            </div>
-          </div>
           <!-- SidebarSearch Form -->
-          <div class="form-inline">
-            <div class="input-group" data-widget="sidebar-search">
-              <input
-                class="form-control form-control-sidebar"
-                type="search"
-                placeholder="Search"
-                aria-label="Search"
-              />
-              <div class="input-group-append">
-                <button class="btn btn-sidebar">
-                  <i class="fas fa-search fa-fw"></i>
-                </button>
-              </div>
-            </div>
-          </div>
+        
 
           <!-- Sidebar Menu -->
           <x-navbar-admin />
@@ -369,8 +350,8 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="js/charts/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    
-     
- 
+
+
+
   </body>
 </html>
