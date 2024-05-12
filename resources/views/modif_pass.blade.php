@@ -114,14 +114,15 @@ input[type="text"] {
             <div class="row justify-content-center">
                 <div class="col-md-5 formulaire-card" style="padding:50px">
                     <h2 class="text-center" style="font-size: 25px;">Entrer le code reçu par email</h2>
-                    <form method="POST" action="">
+                    <form method="POST" action="{{route('changepass')}}">
                         @csrf
                         <div class="verification-code d-flex justify-content-center mt-4">
-                            <input type="text" maxlength="1" size="1" onkeyup="focusNext(this)" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
-<input type="text" maxlength="1" size="1" onkeyup="focusNext(this)" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
-<input type="text" maxlength="1" size="1" onkeyup="focusNext(this)" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
-<input type="text" maxlength="1" size="1" onkeyup="focusNext(this)" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
-<input type="text" maxlength="1" size="1" onkeyup="focusNext(this)" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                            <input value="{{$code}}" name="codeemail" type="text" style="display: none">
+                            <input name="code[]" type="text" maxlength="1" size="1" onkeyup="focusNext(this)" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+<input name="code[]" type="text" maxlength="1" size="1" onkeyup="focusNext(this)" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+<input name="code[]" type="text" maxlength="1" size="1" onkeyup="focusNext(this)" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+<input name="code[]" type="text" maxlength="1" size="1" onkeyup="focusNext(this)" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+<input name="code[]" type="text" maxlength="1" size="1" onkeyup="focusNext(this)" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
 
                         </div>
                         <button type="submit" class="btn btn-primary btn-block mt-4">Envoyer</button>

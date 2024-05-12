@@ -390,6 +390,12 @@ class HomeController extends Controller
             ->send(new RestPassword($code));
             return view('modif_pass', compact('datas', 'code'));
     }
-
+  public function changerpass(Request $request){
+    $code = implode('', $request->code);
+    if($code==$request->codeemail)
+    dd("nadi");
+    else
+    dd("ghalat");
+  }
 }
 

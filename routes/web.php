@@ -62,6 +62,7 @@ Route::get('/restpass', function () {
 })->name('restpass');
 
 Route::post('/modifPassword', [HomeController::class, 'restpass'])->name('modifPassword1');
+Route::post('/changepass', [HomeController::class, 'changerpass'])->name('changepass');
 
 // Route::post('/restpass1', [ResetPasswordController::class])->name('restpass1');
 Route::get('/Certifgenerat', [GenerateCertif::class, 'Certifgenerat'])->name('Certifgenerat');
