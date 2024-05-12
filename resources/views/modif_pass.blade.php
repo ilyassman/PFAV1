@@ -61,6 +61,21 @@
     cursor: pointer;
 }
 
+.verification-code {
+    display: flex;
+    justify-content: center;
+}
+
+input[type="text"] {
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    font-size: 20px;
+    margin: 0 5px;
+    border-radius: 10px;
+    border : none ;
+    background: rgb(217, 217, 217);
+}
 
  </style>
 
@@ -95,43 +110,28 @@
     </div>
 
     <div class="site-section">
-        <div class="container">
+        <div class="container" >
             <div class="row justify-content-center">
-                <div class="col-md-5 formulaire-card">
+                <div class="col-md-5 formulaire-card" style="padding:50px">
+                    <h2 class="text-center" style="font-size: 25px;">Entrer le code reçu par email</h2>
                     <form method="POST" action="">
                         @csrf
-                        <input type="hidden" name="" value="">
-                        <div class="row">
-                            <div class="col-md-12 form-group">
-                                <label for="email">Adresse e-mail</label>
-                                <input type="email" id="email" name="email" class="form-control form-control-lg">
-                                @error('email')
-                                    <span class="text-danger"></span>
-                                @enderror
-                            </div>
-                            <div class="col-md-12 form-group">
-                                {{$code}}
-                                <label for="password">Nouveau mot de passe</label>
-                                <input type="password" id="password" name="password" class="form-control form-control-lg">
-                                @error('password')
-                                    <span class="text-danger"></span>
-                                @enderror
-                            </div>
-                            <div class="col-md-12 form-group">
-                                <label for="password_confirmation">Confirmez le nouveau mot de passe</label>
-                                <input type="password" id="password_confirmation" name="password_confirmation" class="form-control form-control-lg">
-                            </div>
+                        <div class="verification-code d-flex justify-content-center mt-4">
+                            <input type="text" maxlength="1" size="1" onkeyup="focusNext(this)" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+<input type="text" maxlength="1" size="1" onkeyup="focusNext(this)" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+<input type="text" maxlength="1" size="1" onkeyup="focusNext(this)" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+<input type="text" maxlength="1" size="1" onkeyup="focusNext(this)" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+<input type="text" maxlength="1" size="1" onkeyup="focusNext(this)" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+
                         </div>
-                        <div class="row">
-                            <div class="col-12">
-                                <button type="submit" class="btn btn-primary btn-lg px-5">Modifier le mot de passe</button>
-                            </div>
-                        </div>
+                        <button type="submit" class="btn btn-primary btn-block mt-4">Envoyer</button>
+
                     </form>
                 </div>
             </div>
         </div>
     </div>
+
 
 
 
@@ -178,6 +178,16 @@
       eyeIcon.classList.add('fa-eye');
   }
 });
+
+
+function focusNext(current) {
+  if (current.value.length === current.maxLength) {
+    var next = current.nextElementSibling;
+    if (next !== null) {
+      next.focus();
+    }
+  }
+}
 
 
   </script>
