@@ -79,7 +79,7 @@
         .felicitation {
             margin: 15px 100px;
             text-align: center;
-            font-size: 20px;
+            font-size: 28px;
         }
 
         .felicitation span {
@@ -96,7 +96,7 @@
     margin-top: -10px;
 }
 .plateform_name h4 span {
-    font-size: 20px;
+    font-size: 30px;
     font-weight: 400;
 }
 img {
@@ -131,7 +131,7 @@ img {
                     <h4>{{ $ecole->nom }} <span>le {{ date('d/m/Y') }}</span></h4>
                 </div>
                 <div class="logo">
-                    <img src="{{$ecole->logo}}" alt="">
+                    <img src="{{'Membrespic/'.$ecole->logo}}" alt="">
                 </div>
             </div>
         </div>
