@@ -111,8 +111,8 @@
                         </div>
                         <div class="row">
                             <div class="col-12">
-                                <button type="submit" class="btn btn-primary btn-lg px-5">Reset Password</button>
-                                <a href="{{ route('login') }}">Cancel</a>
+                                <button type="submit" class="btn btn-primary btn-lg px-5">réinitialiser le mot de passe</button>
+                                <a href="{{ route('login') }}">Annuler</a>
                             </div>
                         </div>
                     </form>

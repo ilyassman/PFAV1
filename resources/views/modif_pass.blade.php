@@ -110,13 +110,6 @@
                                 @enderror
                             </div>
                             <div class="col-md-12 form-group">
-                                <label for="old_password">Ancien mot de passe</label>
-                                <input type="password" id="old_password" name="old_password" class="form-control form-control-lg">
-                                @error('old_password')
-                                    <span class="text-danger"></span>
-                                @enderror
-                            </div>
-                            <div class="col-md-12 form-group">
                                 <label for="password">Nouveau mot de passe</label>
                                 <input type="password" id="password" name="password" class="form-control form-control-lg">
                                 @error('password')
