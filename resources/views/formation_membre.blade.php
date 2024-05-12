@@ -159,9 +159,9 @@
 </div>
 @endforeach
 @endif
-
-
                 </div>
+                @if(Auth::user()->type == 2)
+
                 @if (isset($datefin[0]->date_fun) && $datefin[0]->date_fun==date('Y-m-d'))
                 <div class="col-md-12 text-center support">
                   <h2 class="title mt-4 mx-auto" style="display: inline-block;">Certificat</h2>
@@ -216,6 +216,15 @@
                 </div>
               </div>
             </div>
+
+            @else
+
+              <div class="col-md-12 text-center support" style="margin-bottom: 30px;">
+                <h2 class="title mt-4 mx-auto" style="display: inline-block;">Voici le lien vers la session : </h2>
+                <br>
+                <a href="">Lien de session</a>
+              </div>
+              @endif
     </section>
 
     <div class="footer">
