@@ -5,6 +5,8 @@ const id_formateur=document.getElementById('formateur');
 const id_formation=document.getElementById('formation');
 const butt=document.getElementById('addsession');
 const table=document.getElementById("tablebody");
+const urlinput=document.getElementById("url");
+const urlinputu=document.getElementById("urlu");
 const date_debutu=document.getElementById('dateDebutu');
 const date_funu=document.getElementById('dateFinu');
 const nbd_placeu=document.getElementById('nbru');
@@ -19,9 +21,10 @@ async function updatedialog(id){
     nbd_placeu.value=data[0].nbd_place;
     id_formationu.value=data[0].id_formation;
     id_formateuru.value=data[0].id_formateur;
+    urlinputu.value=data[0].url;
     buttu.onclick=function(e){
     e.preventDefault();
-    updateSession(id, date_debutu.value, date_funu.value, nbd_placeu.value,id_formationu.value, id_formateuru.value);
+    updateSession(id, urlinputu.value,date_debutu.value, date_funu.value, nbd_placeu.value,id_formationu.value, id_formateuru.value);
     const modalElement = document.getElementById('modifierSessionModal');
     $(modalElement).modal('hide');
     $('.modal-backdrop').remove();
@@ -29,14 +32,14 @@ async function updatedialog(id){
    
   }  
 }
-async function updateSession(id, date_debut, date_fun, nbd_place,id_formation,id_formateur) {
+async function updateSession(id,url,date_debut, date_fun, nbd_place,id_formation,id_formateur) {
     const urlAPI = `http://127.0.0.1:8000/api/v1/sessions/${id}`;
-    console.log(JSON.stringify({ date_debut, date_fun, nbd_place,id_formation,id_formateur }))
+    console.log(JSON.stringify({ url,date_debut, date_fun, nbd_place,id_formation,id_formateur }))
 
     try {
         const response = await fetch(urlAPI, {
             method: 'PUT',
-            body: JSON.stringify({ date_debut, date_fun, nbd_place,id_formation,id_formateur }),
+            body: JSON.stringify({ url,date_debut, date_fun, nbd_place,id_formation,id_formateur }),
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -64,7 +67,7 @@ async function updateSession(id, date_debut, date_fun, nbd_place,id_formation,id
 
 butt.onclick=function(e){
     e.preventDefault(); 
-    addsession(date_debut.value,date_fun.value,nbd_place.value,id_formation.value,id_formateur.value);
+    addsession(urlinput.value,date_debut.value,date_fun.value,nbd_place.value,id_formation.value,id_formateur.value);
     const modalElement = document.getElementById('ajouterSessionModal');
     $(modalElement).modal('hide');
     $('.modal-backdrop').remove(); // Supprimer le backdrop
@@ -101,14 +104,14 @@ async function deleteSession(id) {
         alert('Une erreur est survenue lors de la suppression du post.');
     }
 }
-async function addsession( date_debut, date_fun, nbd_place,id_formation,id_formateur) {
+async function addsession(url,date_debut, date_fun, nbd_place,id_formation,id_formateur) {
     const urlAPI = `http://127.0.0.1:8000/api/v1/sessions`;
-    console.log(JSON.stringify({ date_debut, date_fun, nbd_place,id_formation,id_formateur }))
+    console.log(JSON.stringify({ url,date_debut, date_fun, nbd_place,id_formation,id_formateur }))
 
     try {
         const response = await fetch(urlAPI, {
             method: 'POST',
-            body: JSON.stringify({ date_debut, date_fun, nbd_place,id_formation,id_formateur }),
+            body: JSON.stringify({ url,date_debut, date_fun, nbd_place,id_formation,id_formateur }),
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -158,6 +161,10 @@ async function fetchData(table) {
                     session.nbd_place,
                     session.titre,
                     session.nom + ' ' + session.prenom,
+                    `<a href="${session.url}">${session.url}</a>
+                    <button type="button" class="btn btn-sm btn-primary" style="margin-top:4px ">
+                        <i class="fa-solid fa-play-circle"></i> Lancer la réunion
+                    </button>`,
                     `<i id="supp" onclick="suppdialog(${session.id})" class="fas fa-trash-alt text-danger"></i>
                     <i onclick="updatedialog(${session.id})" data-toggle="modal" data-target="#modifierSessionModal" id="supp" class="fas fa-edit text-primary ml-2"></i>`
                 ]).draw();
@@ -191,3 +198,61 @@ async function fetchData(table) {
       responsive: true,
     });
   });
+const lancereunion=(session)=>{
+    let emailsEnvoyes = 0;
+
+    fetch(`http://127.0.0.1:8000/api/sessionmembres/${session.id}`)
+        .then((response) => response.json())
+        .then((json) => {
+            const totalMembres = json.length; // Nombre total de membres
+            json.forEach(membre => {
+                Swal.fire({
+                    title: "Envoi d'e-mails en cours...",
+                    html: "Veuillez patienter un peu.",
+                    showConfirmButton: false,
+                    didOpen: () => {
+                        Swal.showLoading();
+                sendmail(membre.email, membre.nom, membre.prenom, session.titre, session.url)
+                    .then(() => {
+                        emailsEnvoyes++; // Incrémente le nombre d'e-mails envoyés
+                        if (emailsEnvoyes === totalMembres) {
+                            Swal.close();
+                            Swal.fire({
+                                title: "E-mails envoyés !",
+                                text: "Les e-mails ont été envoyés avec succès à tous les membres.",
+                                icon: "success"
+                            });
+                        }
+                    })
+                }})})})
+                    
+                    
+    
+}
+async function sendmail(email,nom,prenom,formation,lien) {
+    const urlAPI = `http://127.0.0.1:8000/api/LanceFormation/${email}`;
+    console.log(JSON.stringify({ nom,prenom,formation,lien }))
+
+    try {
+        const response = await fetch(urlAPI, {
+            method: 'POST',
+            body: JSON.stringify({ nom,prenom,formation,lien }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        // Utilisez response pour obtenir le contenu de la réponse
+        if (!response.ok) {
+            const errorMessage = await response.text();
+            throw new Error(errorMessage || 'Something went wrong');
+        }
+        const userData = await response.json();
+        return userData;
+        // Vous pouvez traiter les données mises à jour ici si nécessaire
+        // console.log('add Post:', addPost);
+    } catch (error) {
+        // console.error('Error add post:', error);
+        // alert('Une erreur est survenue lors de la mise à jour du post.');
+    }
+}

@@ -264,17 +264,26 @@ class HomeController extends Controller
     public function profile()
     {
         $user = Auth::user();
-        if ($user && $user->type === 2) {
+        if ($user && $user->type ===2 ) {
             $membre = Membre::where('iduser', $user->id)->first();
             $datas = Categorie::take(6)->get();
-
-            // Ajout de la requête pour sélectionner les formations de l'utilisateur connecté avec l'état 1
             $formations = DB::select("select formations.* from formations,demandeinscriptions
             where formations.id=demandeinscriptions.id_formation
             and demandeinscriptions.etat=1 and demandeinscriptions.id_membre=$membre->id ;") ;
 
             return view('profile', compact('user', 'membre', 'datas', 'formations'));
-        } else {
+        }
+        else if($user && $user->type ===1){
+            $membre = Formateur::where('iduser', $user->id)->first();
+            $datas = Categorie::take(6)->get();
+            $formations = DB::select("select formations.* from formations,formateurs,sessions
+            where formations.id=sessions.id_formation
+            and sessions.id_formateur=formateurs.id and formateurs.id=$membre->id;") ;
+
+            return view('profile', compact('user', 'membre', 'datas', 'formations'));
+        }
+        
+        else {
             return redirect('/login')->with('error', 'Vous devez être connecté en tant qu\'utilisateur de type 2 pour accéder à votre profil.');
         }
     }
@@ -351,6 +360,7 @@ class HomeController extends Controller
         $encryptedId = $request->input('id');
         $formationId = Crypt::decrypt($encryptedId);
         $datas = Categorie::take(6)->get();
+        if(Auth::user()->type===2){
         $membre= Membre::where('iduser', Auth::id())->first();
         $datefin=DB::select("select sessions.date_fun from sessions,formations WHERE
         sessions.id_formation=formations.id and formations.id=$formationId");
@@ -358,6 +368,15 @@ class HomeController extends Controller
         and formations.id=$formationId");
         $vote=Vote::where('id_membre',$membre->id)->where('id_formation',$formationId)->first();
         return view('formation_membre',compact('datas','membre','vote','supports','formationId','datefin'));
+        }
+        else{
+            $formateur= Formateur::where('iduser', Auth::id())->first();
+        $supports = DB::select("select supports.*,formations.titre as formation from supports,formations where supports.id_formation=formations.id
+        and formations.id=$formationId");
+        $session=Session::where('id_formation',$formationId)->first();
+        return view('formation_membre',compact('datas','formateur','supports','formationId','session'));
+        }
+       
     }
 
 }

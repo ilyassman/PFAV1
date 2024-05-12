@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\InscriMail;
+use App\Mail\LanceFormation;
 use Illuminate\Http\Request;
 use Mail;
 
@@ -34,6 +35,18 @@ class Mailcontrollerin extends Controller
 
     Mail::to($id)
         ->send(new InscriMail($data));
+}
+public function sendmailreunion(string $id, Request $request)
+{
+    $data = [
+        'formation' => $request->input('formation'),
+        'nom'=> $request->input('nom'),
+        'prenom'=>$request->input('prenom'),
+        'lien'=> $request->input('lien'),
+    ];
+
+    Mail::to($id)
+        ->send(new LanceFormation($data));
 }
 
     /**

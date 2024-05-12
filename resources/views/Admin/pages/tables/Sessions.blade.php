@@ -169,8 +169,8 @@
                           <td>{{$session->nbd_place}}</td>
                           <td>{{$session->titre}}</td>
                           <td>{{$session->nom}} {{$session->prenom}} </td>
-                          <td>https://meet.google.com/ssq
-                            <button type="button" class="btn btn-sm btn-primary" style="margin-top:4px ">
+                          <td><a href="{{$session->url}}">{{$session->url}}</a>
+                            <button onclick="lancereunion({{json_encode($session)}})" type="button" class="btn btn-sm btn-primary" style="margin-top:4px ">
                                 <i class="fa-solid fa-play-circle"></i> Lancer la réunion
                             </button>
                           </td>
@@ -294,7 +294,7 @@
                     <input
                       type="text"
                       class="form-control"
-                      id="lien_session"
+                      id="url"
                       name="lien_session"
                       required
                     />
@@ -401,7 +401,7 @@
                     <input
                       type="text"
                       class="form-control"
-                      id="lien_session"
+                      id="urlu"
                       name="lien_session"
                       required
                     />

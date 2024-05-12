@@ -31,6 +31,7 @@ class SessionController extends Controller
         $data->nbd_place=$request->nbd_place;
         $data->id_formation=$request->id_formation;
         $data->id_formateur=$request->id_formateur;
+        $data->url=$request->url;
         $data->save();
     }
 
@@ -60,6 +61,8 @@ class SessionController extends Controller
         $data->id_formation=$request->id_formation;
         if(!empty($request->id_formateur))
         $data->id_formateur=$request->id_formateur;
+        if(!empty($request->url))
+        $data->url=$request->url;
         $data->save();
     }
 

@@ -97,6 +97,7 @@ Route::prefix('v1')->group(function () {
 });
 
 Route::post('Mailinscri/{Mailinscri}',[Mailcontrollerin::class,'sendmail']);
+Route::post('LanceFormation/{email}',[Mailcontrollerin::class,'sendmailreunion']);
 Route::post('addvote/{id_membre}/{id_formation}',[VoteController::class,'addvote']);
 Route::get('commentaires/{idformation}',[CommentaireController::class,'findbyformation']);
 Route::get('membrecommentaires/{idmembre}',[MembreController::class,'commentaire_membre']);

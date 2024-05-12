@@ -222,7 +222,7 @@
               <div class="col-md-12 text-center support" style="margin-bottom: 30px;">
                 <h2 class="title mt-4 mx-auto" style="display: inline-block;">Voici le lien vers la session : </h2>
                 <br>
-                <a href="">Lien de session</a>
+                <a href="{{$session->url}}">{{$session->url}}</a>
               </div>
               @endif
     </section>

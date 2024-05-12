@@ -38,11 +38,18 @@ $ecole = App\Models\Ecole::first();
           </form>
           <a href="{{ route('profile') }}" style="width: 50px; height: 50px; overflow: hidden;">
             @php
-            $user = Auth::id();
-            $membre = App\Models\Membre::where('iduser', $user)->first();
+            $user = Auth::user();
+            if($user->type==1)
+            $membre = App\Models\Formateur::where('iduser', $user->id)->first();
+          else
+           $membre = App\Models\Membre::where('iduser', $user->id)->first();
             @endphp
-            <img src="Membrespic/{{ $membre->image}}" alt="Profil"
-              style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+             @if($user->type===1)
+             <img src="{{ asset('Formateurspic/' . $membre->image) }}" alt="Admin"  style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+             @else
+             <img src="{{ asset('Membrespic/' . $membre->image) }}" alt="Admin"  style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+             @endif
+           
           </a>
         </div>
         @else
