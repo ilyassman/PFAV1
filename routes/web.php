@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\GenerateCertif;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Postcontroller;
+
 use App\Models\Membre;
 use App\Models\utilisateur;
 use Illuminate\Support\Facades\Route;
@@ -26,11 +27,11 @@ use App\Models\Categorie;
 |
 */
 
-Route::get('/',[HomeController::class,'index'])->name('home');
-Route::get('/login',[HomeController::class,'login'])->name('login');
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/login', [HomeController::class, 'login'])->name('login');
 Route::get('/register', [HomeController::class, 'registered'])->name('register');
-Route::get('/courses',[HomeController::class,'courses'])->name('courses');
-Route::get('/course',[HomeController::class,'course'])->name('course');
+Route::get('/courses', [HomeController::class, 'courses'])->name('courses');
+Route::get('/course', [HomeController::class, 'course'])->name('course');
 Route::get('/course', [HomeController::class, 'showCourseSingle'])->name('course');
 Route::get('/admin', [HomeController::class, 'showdash'])->name('admin')->middleware('auth');
 Route::get('/membres', [HomeController::class, 'showmembre'])->name('membres');
@@ -46,8 +47,8 @@ Route::get('/encrypt-id/{id}', function ($id) {
     return response()->json(['encrypted_id' => Crypt::encrypt($id)]);
 });
 Route::get('/decrypt-id/{id}', function ($id) {
-    $membre= Membre::where('iduser', Auth::id())->first();
-    return response()->json(['idform' => Crypt::decrypt($id),'idmembre' => $membre->id]);
+    $membre = Membre::where('iduser', Auth::id())->first();
+    return response()->json(['idform' => Crypt::decrypt($id), 'idmembre' => $membre->id]);
 });
 Route::get('/idsession', function () {
     return response()->json(['iduser' => Auth::id()]);
@@ -55,17 +56,14 @@ Route::get('/idsession', function () {
 
 Route::get('/chartmembre', [HomeController::class, 'chartmembre']);
 
-Route::get('/restpass', function(){
+Route::get('/restpass', function () {
     $datas = Categorie::take(6)->get();
-    return view('rest_pass',compact('datas'));
+    return view('rest_pass', compact('datas'));
 })->name('restpass');
 
-Route::get('/modifPassword', function(){
-    $datas = Categorie::take(6)->get();
-    return view('modif_pass',compact('datas'));
-})->name('modifPassword');
+Route::post('/modifPassword', [HomeController::class, 'restpass'])->name('modifPassword1');
 
-Route::post('/restpass1', [ResetPasswordController::class])->name('restpass1');
+// Route::post('/restpass1', [ResetPasswordController::class])->name('restpass1');
 Route::get('/Certifgenerat', [GenerateCertif::class, 'Certifgenerat'])->name('Certifgenerat');
 
 Route::get('/chartcateg', [HomeController::class, 'chartcateg']);
@@ -73,12 +71,12 @@ Route::post('/register', [RegisterController::class, 'register']);
 Route::get('/profile', [HomeController::class, 'profile'])->name('profile')->middleware('auth');
 Route::post('/login', [LoginController::class, 'login'])->name('login');
 Route::post('/logout', [HomeController::class, 'logout'])->name('logout');
-Route::get('/Membres_Formation',[HomeController::class,'Membres_Formation'])->name('Membres_Formation');
+Route::get('/Membres_Formation', [HomeController::class, 'Membres_Formation'])->name('Membres_Formation');
 Route::post('/adddemande', [DemandeinscriptionController::class, 'adddemande'])->name('addemande');
 Route::get('/message_inscription', [HomeController::class, 'message_inscription'])->name('message_inscription');
-Route::get('/getmembers/{id}',[HomeController::class,'getMembers'])->name('getmembers');
-Route::get('/getmembers/{id}',[HomeController::class,'getMembers'])->name('getmembers');
-Route::get('/page-de-redirection/',[HomeController::class,'msgdemande'])->name('page-de-redirection');
-Route::get('/formation_membre',[HomeController::class,'formation_membre'])->name('formation_membre')->middleware('auth');
+Route::get('/getmembers/{id}', [HomeController::class, 'getMembers'])->name('getmembers');
+Route::get('/getmembers/{id}', [HomeController::class, 'getMembers'])->name('getmembers');
+Route::get('/page-de-redirection/', [HomeController::class, 'msgdemande'])->name('page-de-redirection');
+Route::get('/formation_membre', [HomeController::class, 'formation_membre'])->name('formation_membre')->middleware('auth');
 
 

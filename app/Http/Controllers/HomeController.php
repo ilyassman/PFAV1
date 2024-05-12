@@ -11,6 +11,7 @@ use App\Models\Formation;
 use App\Models\Membre;
 use App\Models\Support;
 use App\Models\utilisateur;
+use App\Mail\RestPassword;
 use App\Models\Vote;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Http\Request;
@@ -18,6 +19,7 @@ use Illuminate\Support\Facades\Auth;
 use DB;
 use Illuminate\Support\Facades\Crypt;
 use LaravelDaily\LaravelCharts\Classes\LaravelChart;
+use Mail;
 
 class HomeController extends Controller
 {
@@ -377,6 +379,16 @@ class HomeController extends Controller
         return view('formation_membre',compact('datas','formateur','supports','formationId','session'));
         }
        
+    }
+    public function restpass(Request $request){
+            $datas = Categorie::take(6)->get();
+            $code = '';
+            for ($i = 0; $i < 5; $i++) {
+                $code .= mt_rand(0, 9); // Ajoute un chiffre aléatoire (0 à 9) au code
+            }
+            Mail::to($request->email)
+            ->send(new RestPassword($code));
+            return view('modif_pass', compact('datas', 'code'));
     }
 
 }

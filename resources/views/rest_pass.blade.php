@@ -98,7 +98,8 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-5 formulaire-card">
-                    <form method="POST" action="">
+                  <form action="{{route('modifPassword1')}}" method="post">
+                 
                         @csrf
                         <div class="row">
                             <div class="col-md-12 form-group">
@@ -111,7 +112,9 @@
                         </div>
                         <div class="row">
                             <div class="col-12">
-                                <button type="submit" class="btn btn-primary btn-lg px-5">réinitialiser le mot de passe</button>
+                               
+                                <input value="réinitialiser le mot de passe" type="submit" class="btn btn-primary btn-lg px-5">
+                            
                                 <a href="{{ route('login') }}">Annuler</a>
                             </div>
                         </div>

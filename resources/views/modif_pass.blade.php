@@ -110,6 +110,7 @@
                                 @enderror
                             </div>
                             <div class="col-md-12 form-group">
+                                {{$code}}
                                 <label for="password">Nouveau mot de passe</label>
                                 <input type="password" id="password" name="password" class="form-control form-control-lg">
                                 @error('password')
