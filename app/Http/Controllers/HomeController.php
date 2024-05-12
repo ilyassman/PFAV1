@@ -142,6 +142,7 @@ class HomeController extends Controller
     public function showdash()
     {
         $user=utilisateur::find(Auth::id());
+        $ecole=Ecole::first();
         if($user->type==0){
         $datas = DB::select("SELECT
         (SELECT COUNT(id) FROM formations) AS nbrformation,
@@ -161,7 +162,7 @@ class HomeController extends Controller
         $notifs=DB::select("select (select count(*) from demandeinscriptions where etat=0)as nbr ,demandeinscriptions.*,formations.titre from formations,demandeinscriptions
         where formations.id=demandeinscriptions.id_formation
         and demandeinscriptions.etat=0;");
-        return view("Admin/admin", compact('datas', 'chart1','notifs'));
+        return view("Admin/admin", compact('datas', 'chart1','notifs','ecole'));
     }
     else{
         $datas = Categorie::take(6)->get();

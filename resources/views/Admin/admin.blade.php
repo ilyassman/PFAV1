@@ -51,7 +51,7 @@
       >
         <img
           class="animation__shake"
-          src="dist/img/AdminLTELogo.png"
+          src="/Ecolelogo/{{$ecole->logo}}"
           alt="AdminLTELogo"
           height="60"
           width="60"
