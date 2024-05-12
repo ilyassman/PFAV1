@@ -56,7 +56,7 @@ class EcoleController extends Controller
         $existingEcole->twitter = $request->twitter;
         $existingEcole->email = $request->email;
 
-        if(!empty($request->logo)){
+        if($request->logo){
         if ($request->hasFile('logo')) {
            // Récupérer le fichier du logo
            $logo = $request->file('logo');
