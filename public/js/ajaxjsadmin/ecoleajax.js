@@ -119,6 +119,7 @@ async function addecole(nom, logo, video, propos, numero_whatsapp,facebook,insta
             success: function(response) {
                 console.log('Ecole Modifier avec succès:', response);
                 fetchData() 
+                logo=null;video=null;
                 // Vous pouvez traiter les données mises à jour ici si nécessaire
                 // console.log('add Post:', addPost);
             },
