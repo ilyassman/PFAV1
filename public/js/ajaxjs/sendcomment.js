@@ -94,13 +94,13 @@ async function addcomment(contenu, membre_id, formation_id) {
             throw new Error(errorMessage || "Something went wrong");
         }
         comment.value='';
-        Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: "Your comment has been saved",
-            showConfirmButton: false,
-            timer: 1500
-          });
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Your comment has been saved",
+                showConfirmButton: false,
+                timer: 1500
+            });
     } catch (error) {
         Swal.fire({
             icon: "error",

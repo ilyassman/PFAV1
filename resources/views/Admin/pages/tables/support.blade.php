@@ -197,7 +197,7 @@
             <label for="titreFormation">Titre de la formation:</label>
             <select class="form-control" name="titreFormation" id="titreFormation">
               @foreach ($formations as $formation)
-              <option value="{{$formation->id}}">{{$formation->titre}}</option>
+              <option value="{{$formation->id}}">{{$formation->date_debut}}-{{$formation->titre}}</option>
               @endforeach
 
             </select>

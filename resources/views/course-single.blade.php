@@ -342,13 +342,9 @@
                     <h1> Programme de la formation <i class="fas fa-list-ul"></i></h1>
                     {!! $formation->programme !!}
                     @if(!$isInscrit)
-                  
                         @php
-                        
                          $user = Auth::user();
-
-
-@endphp
+                         @endphp
 @if(!$user || $user->type===2)
 <a href="{{ route('inscription', ['id' => Crypt::encrypt($formation->id)]) }}"
     class="small btn btn-primary px-2 py-2 rounded-2 mt-2">
@@ -410,7 +406,15 @@
                                 <!--end of single comment--------------------->
                                 @endforeach
                                                          @endif
+                                                         @php
+                                                          
+                         $user = Auth::user();
+                         
+                                                        
+                                                         @endphp
+                                                         
                                                          @if($user && $user->type===2)
+                                                        
                                                          <button type="button" class="btn btn-dark mt-3" data-toggle="modal" data-target="#addCommentModal">
                                                             Ajouter commentaire
                                                         </button>

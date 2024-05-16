@@ -1,15 +1,11 @@
 <?php
 
-use App\Http\Controllers\API\CommentaireController;
 use App\Http\Controllers\API\DemandeinscriptionController;
-use App\Http\Controllers\API\UtilisateurController;
-use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\GenerateCertif;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\Postcontroller;
-
+use App\Models\Session;
+use App\Models\Formation;
 use App\Models\Membre;
-use App\Models\utilisateur;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
@@ -48,7 +44,10 @@ Route::get('/encrypt-id/{id}', function ($id) {
 });
 Route::get('/decrypt-id/{id}', function ($id) {
     $membre = Membre::where('iduser', Auth::id())->first();
-    return response()->json(['idform' => Crypt::decrypt($id), 'idmembre' => $membre->id]);
+    $sessionId = Crypt::decrypt($id);
+    $session=Session::find($sessionId);
+    $formation=Formation::find($session->id_formation);
+    return response()->json(['idform' => $formation->id, 'idmembre' => $membre->id]);
 });
 Route::get('/idsession', function () {
     return response()->json(['iduser' => Auth::id()]);

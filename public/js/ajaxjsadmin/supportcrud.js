@@ -79,7 +79,7 @@ async function fetchData() {
             for (const support of data) {
                 $('#example1').DataTable().row.add([
                     support.titre,
-                    ` <td><a href="Support/${support.fichier}}" download="${support.fichier}">${support.fichier}</a></td>`,
+                    ` <td><a href="Support/${support.fichier}" download="${support.fichier}">${support.fichier}</a></td>`,
                     support.formation,
                     `<i id="supp" onclick="suppdialog(${support.id})"  class="fas fa-trash-alt text-danger"></i>`
                     
