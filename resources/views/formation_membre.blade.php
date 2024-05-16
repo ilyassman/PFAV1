@@ -162,7 +162,7 @@
                 </div>
                 @if(Auth::user()->type == 2)
 
-                @if (isset($datefin[0]->date_fun) && $datefin[0]->date_fun==date('Y-m-d'))
+                @if (isset($support->date_fun) && $support->date_fun==date('Y-m-d'))
                 <div class="col-md-12 text-center support">
                   <h2 class="title mt-4 mx-auto" style="display: inline-block;">Certificat</h2>
                   <a href="{{route('Certifgenerat' ,['id' =>($formationId)])}}">telecharger vos certif</a>
@@ -227,51 +227,7 @@
               @endif
     </section>
 
-    <div class="footer">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-3">
-            <p class="mb-4"><img src="images/logo.png" alt="Image" class="img-fluid"></p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae nemo minima qui dolor, iusto iure.</p>
-            <p><a href="#">Learn More</a></p>
-          </div>
-          <div class="col-lg-3">
-            <h3 class="footer-heading"><span>Nos Certifications</span></h3>
-            <ul class="list-unstyled">
-              <li><a href="#">Finance</a></li>
-              <li><a href="#">Management</a></li>
-              <li><a href="#">Hôtellerie</a></li>
-              <li><a href="#">Génie Civil</a></li>
-              <li><a href="#">Santé</a></li>
-              <li><a href="#">Informatique</a></li>
-            </ul>
-          </div>
-
-          <div class="col-lg-3">
-              <h3 class="footer-heading"><span>Contact</span></h3>
-              <ul class="list-unstyled">
-                  <li><a href="#">Help Center</a></li>
-                  <li><a href="#">Support Community</a></li>
-                  <li><a href="#">Press</a></li>
-                  <li><a href="#">Share Your Story</a></li>
-                  <li><a href="#">Our Supporters</a></li>
-              </ul>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-12">
-            <div class="copyright">
-                <p>
-                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                    Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank" >Colorlib</a>
-                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                    </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    
 
 
 

@@ -124,8 +124,14 @@ class HomeController extends Controller
     }
     public function showsupport()
     {
-        $datas = DB::select("select supports.*,formations.titre as formation from supports,formations where supports.id_formation=formations.id");
-        $formations = Formation::all();
+        $datas = DB::select("select supports.*,formations.titre as formation from sessions,supports,formations where supports.id_session=sessions.id
+        AND
+        sessions.id_formation=formations.id
+        ");
+        $formations =DB::table('formations')
+        ->join('sessions', 'sessions.id_formation', '=', 'formations.id')
+        ->select('sessions.*', 'formations.titre')
+        ->get();
         $notifs=DB::select("select (select count(*) from demandeinscriptions where etat=0)as nbr ,demandeinscriptions.*,formations.titre from formations,demandeinscriptions
         where formations.id=demandeinscriptions.id_formation
         and demandeinscriptions.etat=0;");
@@ -271,16 +277,17 @@ class HomeController extends Controller
         if ($user && $user->type ===2 ) {
             $membre = Membre::where('iduser', $user->id)->first();
             $datas = Categorie::take(6)->get();
-            $formations = DB::select("select formations.* from formations,demandeinscriptions
-            where formations.id=demandeinscriptions.id_formation
-            and demandeinscriptions.etat=1 and demandeinscriptions.id_membre=$membre->id ;") ;
+            $formations = DB::select("select formations.titre,sessions.* from formations,inscriptions,sessions
+            where sessions.id=inscriptions.id_session
+           and inscriptions.id_membre=$membre->id
+           and formations.id=sessions.id_formation; ;") ;
 
             return view('profile', compact('user', 'membre', 'datas', 'formations'));
         }
         else if($user && $user->type ===1){
             $membre = Formateur::where('iduser', $user->id)->first();
             $datas = Categorie::take(6)->get();
-            $formations = DB::select("select formations.* from formations,formateurs,sessions
+            $formations = DB::select("select formations.titre,sessions.* from formations,formateurs,sessions
             where formations.id=sessions.id_formation
             and sessions.id_formateur=formateurs.id and formateurs.id=$membre->id;") ;
 
@@ -362,22 +369,24 @@ class HomeController extends Controller
     }
     public function formation_membre(Request $request){
         $encryptedId = $request->input('id');
-        $formationId = Crypt::decrypt($encryptedId);
+        $sessionId = Crypt::decrypt($encryptedId);
+        $session=Session::find($sessionId);
+        $formation=Formation::find($session->id_formation);
+        $formationId=$formation->id;
         $datas = Categorie::take(6)->get();
         if(Auth::user()->type===2){
         $membre= Membre::where('iduser', Auth::id())->first();
-        $datefin=DB::select("select sessions.date_fun from sessions,formations WHERE
-        sessions.id_formation=formations.id and formations.id=$formationId");
-        $supports = DB::select("select supports.*,formations.titre as formation from supports,formations where supports.id_formation=formations.id
-        and formations.id=$formationId");
+        // $datefin=DB::select("select sessions.date_fun from sessions,formations WHERE
+        // sessions.id_formation=formations.id and formations.id=$formationId");
+        $supports = DB::select("select supports.*,sessions.date_fun from supports,sessions where supports.id_session=sessions.id
+        and sessions.id=$sessionId");
         $vote=Vote::where('id_membre',$membre->id)->where('id_formation',$formationId)->first();
-        return view('formation_membre',compact('datas','membre','vote','supports','formationId','datefin'));
+        return view('formation_membre',compact('datas','membre','vote','supports','formationId'));
         }
         else{
             $formateur= Formateur::where('iduser', Auth::id())->first();
-        $supports = DB::select("select supports.*,formations.titre as formation from supports,formations where supports.id_formation=formations.id
-        and formations.id=$formationId");
-        $session=Session::where('id_formation',$formationId)->first();
+            $supports = DB::select("select supports.*,sessions.date_fun from supports,sessions where supports.id_session=sessions.id
+            and sessions.id=$sessionId");
         return view('formation_membre',compact('datas','formateur','supports','formationId','session'));
         }
        

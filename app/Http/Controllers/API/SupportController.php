@@ -14,7 +14,9 @@ class SupportController extends Controller
      */
     public function index()
     {
-        $data=DB::select("select supports.*,formations.titre as formation from supports,formations where supports.id_formation=formations.id");
+        $data=DB::select("select supports.*,formations.titre as formation from sessions,supports,formations where supports.id_session=sessions.id
+        AND
+        sessions.id_formation=formations.id");
         return response()->json($data);
     }
 
@@ -31,7 +33,7 @@ class SupportController extends Controller
             $fichier->move(public_path('/Support'), $fileName);
             $support->fichier = $fileName;
         }
-        $support->id_formation=$request->id_formation;
+        $support->id_session=$request->id_formation;
         $support->save();
 
     }
