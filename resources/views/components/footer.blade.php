@@ -29,10 +29,12 @@ $ecole = App\Models\Ecole::first();
         <div class="col-lg-3">
           <h3 class="footer-heading"><span>Contact</span></h3>
           <ul class="list-unstyled">
+            @if(!empty($ecole->facebook))
             <li><a href="{{$ecole->facebook}}">Facebook</a></li>
             <li><a href="{{$ecole->whatsapp}}">Whatsapp</a></li>
             <li><a href="{{$ecole->instagram}}"">Instagram</a></li>
             <li><a href="{{$ecole->email}}">{{$ecole->email}}</a></li>
+            @endif
             
           </ul>
         </div>

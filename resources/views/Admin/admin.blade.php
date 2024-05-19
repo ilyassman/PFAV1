@@ -51,8 +51,10 @@
       >
         <img
           class="animation__shake"
+          @if(!empty($ecole->logo))
           src="/Ecolelogo/{{$ecole->logo}}"
-          alt="AdminLTELogo"
+          @endif
+          alt="EcoleLogo"
           height="60"
           width="60"
         />

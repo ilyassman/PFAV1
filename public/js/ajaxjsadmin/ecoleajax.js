@@ -87,7 +87,7 @@ document.getElementById("logo").addEventListener('change', function(event) {
 
 document.getElementById("btnecole").onclick=function (e){
     e.preventDefault();
-    console.log(numero_whatsapp.value)
+    
     addecole(nom.value, logo, video, propos.value, numero_whatsapp.value,facebook.value,instagram.value,twitter.value,email.value);
     const modalElement = document.getElementById('modifierEcoleModal');
     $(modalElement).modal('hide');

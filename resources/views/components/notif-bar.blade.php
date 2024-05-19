@@ -29,7 +29,7 @@
                     @foreach ($notifs as $notif)
                     <tr>
                       <td>{{$notif->nom}}</td>
-                      <td>{{$notif->nom}}</td>
+                      <td>{{$notif->prenom}}</td>
                       <td>{{$notif->titre}}</td>
                       <td>{{$notif->created_at}}</td>
                       <td>

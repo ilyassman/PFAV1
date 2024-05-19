@@ -135,12 +135,8 @@
               <div class="feature-1-content">
                 <h2>Personnaliser l'apprentissage</h2>
                 <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                  morbi hendrerit elit
-                </p>
-                <p>
-                  <a href="#" class="btn btn-primary px-4 rounded-0">En savoir plus</a>
-                </p>
+                  Nous offrons des parcours d'apprentissage sur mesure, permettant à chaque étudiant de progresser à son propre rythme et d'atteindre ses objectifs académiques.                </p>
+                
               </div>
             </div>
           </div>
@@ -152,12 +148,9 @@
               <div class="feature-1-content">
                 <h2>Cours de confiance</h2>
                 <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                  morbi hendrerit elit
+                  Nos cours sont créés par des experts, garantissant un contenu de haute qualité et actualisé, assurant ainsi une préparation rigoureuse et fiable.
                 </p>
-                <p>
-                  <a href="#" class="btn btn-primary px-4 rounded-0">En savoir plus</a>
-                </p>
+               
               </div>
             </div>
           </div>
@@ -169,12 +162,9 @@
               <div class="feature-1-content">
                 <h2>Outils pour les étudiants</h2>
                 <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                  morbi hendrerit elit
+                  Nous fournissons une variété d'outils numériques innovants pour enrichir l'expérience d'apprentissage et encourager l'engagement et la collaboration des étudiants.
                 </p>
-                <p>
-                  <a href="#" class="btn btn-primary px-4 rounded-0">En savoir plus</a>
-                </p>
+                
               </div>
             </div>
           </div>
@@ -266,21 +256,21 @@
           </div>
           <div class="col-lg-8">
             <p class="lead">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Rem
-              nesciunt quaerat ad reiciendis perferendis voluptate fugiat sunt
-              fuga error totam.
+             @if(!empty($ecole->propos)) 
+            {{$ecole->propos}}
+            @else
+            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            Voluptatibus assumenda omnis tempora ullam alias amet eveniet
+            voluptas, incidunt quasi aut officiis porro ad, expedita saepe
+            necessitatibus rem debitis architecto dolore? Nam omnis sapiente
+            placeat blanditiis voluptas dignissimos, itaque fugit a
+            laudantium adipisci dolorem enim ipsum cum molestias? Quod quae
+            molestias modi fugiat quisquam. Eligendi recusandae officiis
+            debitis quas beatae aliquam?
+            @endif
             </p>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Voluptatibus assumenda omnis tempora ullam alias amet eveniet
-              voluptas, incidunt quasi aut officiis porro ad, expedita saepe
-              necessitatibus rem debitis architecto dolore? Nam omnis sapiente
-              placeat blanditiis voluptas dignissimos, itaque fugit a
-              laudantium adipisci dolorem enim ipsum cum molestias? Quod quae
-              molestias modi fugiat quisquam. Eligendi recusandae officiis
-              debitis quas beatae aliquam?
-            </p>
-            <p><a href="#">Lire Toutes les Actualités</a></p>
+           
+           
           </div>
         </div>
       </div>
