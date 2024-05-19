@@ -36,6 +36,9 @@
     }
     .support {
       margin-top: 70px;
+      display: flex ;
+      flex-direction: column;
+      align-items: center
     }
     .comment {
       padding: 30px 0;
@@ -84,6 +87,7 @@
         display: flex ;
         flex-wrap: wrap ;
         justify-content: space-between ;
+        width: 70%;
     }
     .card{
         width : 300px;
