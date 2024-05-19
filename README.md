@@ -131,7 +131,7 @@ volumes:
     driver: local
   sail-meilisearch:
     driver: local
-
+```
 ## Installation
 
 ### Commandes Docker :
