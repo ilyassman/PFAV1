@@ -36,6 +36,9 @@
     }
     .support {
       margin-top: 70px;
+      display: flex ;
+      flex-direction: column;
+      align-items: center
     }
     .comment {
       padding: 30px 0;
@@ -84,6 +87,7 @@
         display: flex ;
         flex-wrap: wrap ;
         justify-content: space-between ;
+        width: 70%;
     }
     .card{
         width : 300px;
@@ -131,7 +135,21 @@
                 $extension = pathinfo($file_path, PATHINFO_EXTENSION);
                 @endphp
                 @if($extension == 'pdf')
-                <button class="btn btn-primary" onclick="showPdf('{{$file_path}}')">Voir PDF</button>
+                <button class="btn btn-primary" onclick="showPdfModal('{{$file_path}}')">Voir PDF</button>
+                <div class="modal fade" id="pdfModal" tabindex="-1" aria-labelledby="pdfModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-lg">
+                      <div class="modal-content">
+                          <div class="modal-header">
+                              <h5 class="modal-title" id="pdfModalLabel">PDF Viewer</h5>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body">
+                              <embed id="pdfEmbed" src="" type="application/pdf" width="100%" height="600px" />
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              
                 @elseif(in_array($extension, ['mp4', 'webm', 'ogg']))
                 <button class="btn btn-primary" onclick="showVideo('{{$file_path}}')">Voir Vidéo</button>
                 @else
@@ -240,8 +258,10 @@
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="js/main.js"></script>
   <script>
-    function showPdf(pdfPath) {
-      window.open(pdfPath, '_blank');
+     function showPdfModal(pdfPath) {
+        var pdfEmbed = document.getElementById('pdfEmbed');
+        pdfEmbed.setAttribute('src', pdfPath+"#toolbar=0");
+        $('#pdfModal').modal('show');
     }
 
     function showVideo(videoPath) {
