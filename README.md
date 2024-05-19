@@ -99,8 +99,8 @@
   - Email : ilyassmandour2002@gmail.com
   - Mot de passe : ilyass123
 - **Pour s'authentifier en tant que formateur :**
-  - Email : [email]
-  - Mot de passe : [password]
+  - Email : abdo@gmail.com
+  - Mot de passe : ilyass123
 
 ### Comment utiliser l'application :
 - **En tant qu'administrateur :**
