@@ -126,9 +126,10 @@
             @else
             <div class="card-container">
                 @foreach($supports as $support)
-
+@if($support->date_fun != date('Y-m-d'))
             <div class="card mb-3">
               <div class="card-body">
+                
                 <h5 class="card-title">{{$support->titre}}</h5>
                 @php
                 $file_path = "Support/{$support->fichier}";
@@ -140,7 +141,7 @@
                   <div class="modal-dialog modal-lg">
                       <div class="modal-content">
                           <div class="modal-header">
-                              <h5 class="modal-title" id="pdfModalLabel">PDF Viewer</h5>
+                              <h5 class="modal-title" id="pdfModalLabel">{{$support->titre}}</h5>
                               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                           </div>
                           <div class="modal-body">
@@ -157,6 +158,11 @@
                 @endif
               </div>
             </div>
+            @else
+            <h2 class="mt-2 mx-auto" style="font-size:15px;color:red;">Pas de support pour le moment</h2>
+            @break
+            @endif
+
             @endforeach</div>
 
             @endif
@@ -166,7 +172,7 @@
             @if (isset($support->date_fun) && $support->date_fun == date('Y-m-d'))
               <div class="col-md-12 text-center support">
                 <h2 class="title mt-4 mx-auto" style="display: inline-block;">Certificat</h2>
-                <a href="{{ route('Certifgenerat', ['id' => $formationId]) }}">Télécharger vos certificats</a>
+                <a href="{{ route('Certifgenerat', ['id' => $formationId]) }}">Télécharger votre certificat</a>
               </div>
             @endif
           @endif
